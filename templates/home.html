@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O Berlo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" href="../static/ico.png" type="image/gif" />
+    <link rel="stylesheet" href="../static/home.css" />
+  </head>
+
+  <body>
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h4>Kione Hardware</h4>
+        <p>Inventory Management System</p>
+      </div>
+      <ul style="list-style: none; padding-left: 0">
+        <li class="nav-item">
+          <a class="nav-link" href="home.html">
+            <i class="fas fa-home"></i> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard.html">
+            <i class="fas fa-chart-line"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="products.html">
+            <i class="fas fa-box"></i> Products
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="purchases.html">
+            <i class="fas fa-shopping-cart"></i> Purchases
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sales.html">
+            <i class="fas fa-dollar-sign"></i> Sales
+          </a>
+        </li>
+        <li class="nav-item logout-btn">
+          <a class="nav-link" href="#" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <nav class="top-navbar">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <a class="navbar-brand" href="#">OBerlo</a>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link-top" href="#">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link-top" href="#">MODELS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link-top" href="#">ABOUT</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link-top" href="#">PRICE</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link-top" href="#">BLOG</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link-top" href="#">CONTACT</a>
+              </li>
+            </ul>
+            <input
+              type="text"
+              class="search-box"
+              placeholder="Search here..."
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-content">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="badge-new">New</div>
+              <h1>Model <span>Cars</span></h1>
+              <p>
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris.
+              </p>
+              <div>
+                <a href="#" class="btn-custom"
+                  >Shop Now <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <img
+                src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600"
+                alt="Luxury Car"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container py-5">
+        <div class="text-center mb-5">
+          <h2>Featured Models</h2>
+          <p>Discover our most popular luxury vehicles</p>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="car-card">
+              <div class="car-image">
+                <img
+                  src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=400"
+                  alt="Lamborghini"
+                />
+              </div>
+              <div class="p-3">
+                <h4>Lamborghini Aventador</h4>
+                <p class="text-warning fw-bold">$350,000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="car-card">
+              <div class="car-image">
+                <img
+                  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400"
+                  alt="Porsche"
+                />
+              </div>
+              <div class="p-3">
+                <h4>Porsche 911 Turbo</h4>
+                <p class="text-warning fw-bold">$180,000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="car-card">
+              <div class="car-image">
+                <img
+                  src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=400"
+                  alt="Ferrari"
+                />
+              </div>
+              <div class="p-3">
+                <h4>Ferrari SF90</h4>
+                <p class="text-warning fw-bold">$420,000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="copyright">
+          <p>&copy; 2025 OBerlo. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+
+    <script>
+      axios.defaults.withCredentials = true;
+
+      const sidebar = document.getElementById("sidebar");
+      const toggleBtn = document.getElementById("sidebarToggle");
+      const overlay = document.getElementById("overlay");
+
+      function openSidebar() {
+        sidebar.classList.add("show");
+        overlay.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeSidebar() {
+        sidebar.classList.remove("show");
+        overlay.classList.remove("show");
+        document.body.style.overflow = "";
+      }
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener("click", openSidebar);
+      }
+
+      if (overlay) {
+        overlay.addEventListener("click", closeSidebar);
+      }
+
+      const sidebarLinks = document.querySelectorAll(".sidebar .nav-link");
+      sidebarLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          if (window.innerWidth < 992) {
+            closeSidebar();
+          }
+        });
+      });
+
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".top-navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", async function (e) {
+          e.preventDefault();
+          try {
+            await axios.post(
+              "http://127.0.0.1:8000/logout",
+              {},
+              { withCredentials: true },
+            );
+          } catch (error) {
+            console.error("Logout error:", error);
+          }
+          window.location.href = "login.html";
+        });
+      }
+    </script>
+  </body>
+</html>

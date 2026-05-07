@@ -1,265 +1,447 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O Berlo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" href="../static/ico.png" type="image/gif" />
+    <link rel="stylesheet" href="../static/purchases.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purchases - Kione Hardware</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="icon" href="ico.png" type="image/gif" />
-  <link rel="stylesheet" href="sty.css">
-</head>
+  <body>
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="overlay" id="overlay"></div>
 
-<body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiar">
-    <div class="container-fluid">
-      <a class="navbar-brand text-warning fw-bold" href="#">Auto Dealers</a>
-      <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle">
-        ☰
-      </button>
-    </div>
-  </nav>
-  <nav class="navbar  flex-column p-3 sidebar" id="sidebar">
-    <a class="navbar-brand mb-4" href="index.html">Home</a>
-    <ul class="navbar-nav flex-column w-100 main-links">
-      <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
-      <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-      <li class="nav-item"><a class="nav-link" href="purchases.html">Purchases</a></li>
-      <li class="nav-item"><a class="nav-link" href="sales.html">Sales</a></li>
-    </ul>
-    <ul class="navbar-nav flex-column w-100 logout-link">
-      <li class="nav-item mt-auto"><a class=""> <button id="logoutBtn" class="btn btn-outline-danger" type="submit">Logout</button></a></li>
-    </ul>
-  </nav>
-  <main>
-    <div id="app" class="container text-center mt-5">
-      <h1 class="text-white">Purchases Page</h1>
-      
-      <div v-if="loading" class="text-center">
-        <div class="spinner-border text-warning"></div>
-        <p class="text-white">Loading purchases...</p>
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h4>Kione Hardware</h4>
+        <p>Inventory Management System</p>
       </div>
-      
-      <div v-else>
-        <button type="button" class="btn btn-outline-warning mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Purchase Car
-        </button>
-        
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Car Details</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <ul style="list-style: none; padding-left: 0">
+        <li class="nav-item">
+          <a class="nav-link" href="home.html"
+            ><i class="fas fa-home"></i> Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard.html"
+            ><i class="fas fa-chart-line"></i> Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="products.html"
+            ><i class="fas fa-box"></i> Products</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="purchases.html"
+            ><i class="fas fa-shopping-cart"></i> Purchases</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sales.html"
+            ><i class="fas fa-dollar-sign"></i> Sales</a
+          >
+        </li>
+        <li class="nav-item logout-btn">
+          <a class="nav-link" href="#" id="logoutBtn"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <nav class="top-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="home.html">OBerlo</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="container mt-4">
+        <div id="app">
+          <div class="page-header">
+            <h1>
+              <i class="fas fa-shopping-cart me-2"></i>Purchases Management
+            </h1>
+            <p>Record and manage your product purchases</p>
+          </div>
+
+          <div v-if="loading" class="text-center py-5">
+            <div
+              class="spinner-border text-warning"
+              style="width: 3rem; height: 3rem"
+            ></div>
+            <p class="text-white mt-3">Loading purchases...</p>
+          </div>
+
+          <div v-else>
+            <div class="row g-4 mb-4">
+              <div class="col-md-4">
+                <div class="stat-card">
+                  <i class="fas fa-truck"></i>
+                  <h3>{{ purchases.length }}</h3>
+                  <p>Total Purchases</p>
+                </div>
               </div>
-              <div class="modal-body">
-                <form @submit.prevent="addPurchase">
-                  <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01">Car Name</label>
-                    <select class="form-select" id="inputGroupSelect01" v-model="purchaseData.product_id" required>
-                      <option disabled value="">Select</option>
-                      <option v-for="z in products" :key="z.id" :value="z.id">{{z.name}}</option>
-                    </select>
-                  </div>
-                  <input type="number" v-model="purchaseData.quantity" class="form-control mb-3" placeholder="Quantity" required>
-                  <button type="submit" class="btn btn-outline-primary" :disabled="isSubmitting">
-                    <span v-if="isSubmitting" class="spinner-border spinner-border-sm me-2"></span>
-                    {{ isSubmitting ? 'Processing...' : 'Purchase' }}
-                  </button>
-                </form>
+              <div class="col-md-4">
+                <div class="stat-card">
+                  <i class="fas fa-boxes"></i>
+                  <h3>{{ totalItemsPurchased }}</h3>
+                  <p>Items Purchased</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="stat-card">
+                  <i class="fas fa-wallet"></i>
+                  <h3>KSh {{ totalSpent }}</h3>
+                  <p>Total Spent</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-end mb-3">
+              <button
+                type="button"
+                class="btn-add"
+                data-bs-toggle="modal"
+                data-bs-target="#addPurchaseModal"
+              >
+                <i class="fas fa-plus me-2"></i>New Purchase
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table purchase-table">
+                <thead>
+                  <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Purchased On</th>
+                    <th>Updated At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="purs in purchases" :key="purs.id">
+                    <td>{{ purs.product_id }}</td>
+                    <td>
+                      <strong>{{ getProductName(purs.product_id) }}</strong>
+                    </td>
+                    <td>{{ purs.quantity }}</td>
+                    <td>{{ formatDate(purs.created_at) }}</td>
+                    <td>{{ formatDate(purs.updated_at) }}</td>
+                  </tr>
+                  <tr v-if="purchases.length === 0">
+                    <td colspan="5" class="text-center">
+                      No purchases found.持lase
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Add Purchase Modal -->
+          <div
+            class="modal fade"
+            id="addPurchaseModal"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5">
+                    <i class="fas fa-truck me-2"></i>Record New Purchase
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form @submit.prevent="addPurchase">
+                    <div class="mb-3">
+                      <label class="form-label text-white"
+                        >Select Product</label
+                      >
+                      <select
+                        class="form-select-custom w-100"
+                        v-model="purchaseData.product_id"
+                        required
+                      >
+                        <option disabled value="">
+                          -- Select a product --
+                        </option>
+                        <option
+                          v-for="product in products"
+                          :key="product.id"
+                          :value="product.id"
+                        >
+                          {{ product.name }} - KSh {{
+                          formatNumber(product.selling_price) }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label text-white">Quantity</label>
+                      <input
+                        type="number"
+                        v-model.number="purchaseData.quantity"
+                        class="form-control-custom w-100"
+                        placeholder="Enter quantity"
+                        min="1"
+                        required
+                      />
+                    </div>
+
+                    <div
+                      class="alert alert-info mt-3"
+                      v-if="selectedProduct"
+                      style="
+                        background: rgba(23, 162, 184, 0.2);
+                        border-color: #17a2b8;
+                        color: #17a2b8;
+                      "
+                    >
+                      <i class="fas fa-info-circle me-2"></i>
+                      <strong>Product Info:</strong><br />
+                      Current Stock: {{ selectedProduct.quantity || 0 }}
+                      units<br />
+                      Buying Price: KSh {{
+                      formatNumber(selectedProduct.buying_price) }}<br />
+                      Selling Price: KSh {{
+                      formatNumber(selectedProduct.selling_price) }}
+                    </div>
+
+                    <div
+                      class="alert alert-success mt-3"
+                      v-if="purchaseData.quantity && selectedProduct"
+                      style="
+                        background: rgba(40, 167, 69, 0.2);
+                        border-color: #28a745;
+                        color: #28a745;
+                      "
+                    >
+                      <i class="fas fa-calculator me-2"></i>
+                      <strong>Total Cost:</strong> KSh {{
+                      formatNumber(selectedProduct.buying_price *
+                      purchaseData.quantity) }}
+                    </div>
+
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn-modal-submit"
+                        :disabled="isSubmitting"
+                      >
+                        <span
+                          v-if="isSubmitting"
+                          class="spinner-border spinner-border-sm me-2"
+                        ></span>
+                        {{ isSubmitting ? 'Processing...' : 'Confirm Purchase'
+                        }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        
-        <table class="table table-hover mt-5">
-          <thead>
-            <tr>
-              <th>Product Id</th>
-              <th>Product Name</th>
-              <th>Quantity</th>
-              <th>Purchased On</th>
-              <th>Updated At</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="purs in purchases" :key="purs.id">
-              <td>{{purs.product_id}}</td>
-              <td>{{ getProductName(purs.product_id) }}</td>
-              <td>{{purs.quantity}}</td>
-              <td>{{ formatDate(purs.created_at) }}</td>
-              <td>{{ formatDate(purs.updated_at) }}</td>
-            </tr>
-            <tr v-if="purchases.length === 0">
-              <td colspan="5" class="text-center">No purchases found</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-    </div>
-  </main>
-  <footer>
-    <p class="mb-0">&copy; 2025 The Mall</p>
-  </footer>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.0/axios.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
-  
-  <script>
-    axios.defaults.withCredentials = true;
-    
-    new Vue({
-      el: "#app",
-      data: {
-        products: [],
-        purchases: [],
-        loading: true,
-        isSubmitting: false,
-        purchaseData: {
-          product_id: "",
-          quantity: ""
-        }
-      },
-      methods: {
-        formatDate(dateString) {
-          if (!dateString) return "N/A";
-          const date = new Date(dateString);
-          return date.toLocaleString();
-        },
-        
-        getProductName(productId) {
-          const product = this.products.find(p => p.id === productId);
-          return product ? product.name : `Product #${productId}`;
-        },
-        
-        async getProducts() {
-          try {
-            const response = await axios.get("http://127.0.0.1:8000/products", {
-              withCredentials: true
-            });
-            this.products = response.data;
-          } catch (error) {
-            console.error("Error fetching products:", error);
-            if (error.response && error.response.status === 401) {
-              window.location.href = "login.html";
-            }
-          }
-        },
-        
-        async getPurchases() {
-          try {
-            const response = await axios.get("http://127.0.0.1:8000/purchase", {
-              withCredentials: true
-            });
-            this.purchases = response.data;
-            this.loading = false;
-          } catch (error) {
-            console.error("Error fetching purchases:", error);
-            this.loading = false;
-            if (error.response && error.response.status === 401) {
-              window.location.href = "login.html";
-            }
-          }
-        },
-        
-        async addPurchase() {
-          if (!this.purchaseData.product_id || !this.purchaseData.quantity) {
-            alert("Please select a product and enter quantity");
-            return;
-          }
-          
-          if (this.purchaseData.quantity <= 0) {
-            alert("Quantity must be greater than 0");
-            return;
-          }
-          
-          this.isSubmitting = true;
-          
-          try {
-            const newPurchase = {
-              product_id: Number(this.purchaseData.product_id),
-              quantity: Number(this.purchaseData.quantity)
-            };
-            
-            await axios.post("http://127.0.0.1:8000/purchase", newPurchase, {
-              withCredentials: true
-            });
-            
-            alert("Purchase added successfully!");
-            
-            this.purchaseData = {
-              product_id: "",
-              quantity: ""
-            };
-            
-            const modalElement = document.getElementById('exampleModal');
-            const modal = bootstrap.Modal.getInstance(modalElement);
-            if (modal) modal.hide();
-            
-            await this.getPurchases();
-            await this.getProducts();
-            
-          } catch (error) {
-            console.error("Error adding purchase:", error);
-            alert("Failed to add purchase: " + (error.response?.data?.detail || "Unknown error"));
-          } finally {
-            this.isSubmitting = false;
-          }
-        },
-        
-        async logout() {
-          try {
-            await axios.post("http://127.0.0.1:8000/logout", {}, { withCredentials: true });
-          } catch (error) {
-            console.error("Logout error:", error);
-          } finally {
-            window.location.href = "login.html";
-          }
-        },
-        
-        async loadData() {
-          this.loading = true;
-          await Promise.all([this.getProducts(), this.getPurchases()]);
-        }
-      },
-      mounted() {
-        this.loadData();
-      }
-    });
-  </script>
-  
-  <script>
-    axios.defaults.withCredentials = true;
-    
-    const logoutBtn = document.getElementById('logoutBtn');
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('sidebarToggle');
-    
-    if(toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('show');
-      });
-    }
-    
-    if(logoutBtn) {
-      logoutBtn.addEventListener('click', () => {
-        const app = document.getElementById('app').__vue__;
-        if(app && app.logout) {
-          app.logout();
-        } else {
-          window.location.href = "login.html";
-        }
-      });
-    }
-    
-    window.addEventListener('scroll', function () {
-      const scrollTop = window.pageYOffset;
-      document.body.style.backgroundPosition = `center ${scrollTop * 0.5}px`;
-    });
-  </script>
-</body>
+    </main>
 
+    <footer>
+      <p class="mb-0">&copy; 2025 O Berlo. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      axios.defaults.withCredentials = true;
+
+      new Vue({
+        el: "#app",
+        data: {
+          products: [],
+          purchases: [],
+          loading: true,
+          isSubmitting: false,
+          purchaseData: { product_id: "", quantity: "" },
+        },
+        computed: {
+          totalItemsPurchased: function () {
+            let total = 0;
+            for (let i = 0; i < this.purchases.length; i++)
+              total += this.purchases[i].quantity || 0;
+            return total;
+          },
+          totalSpent: function () {
+            let total = 0;
+            for (let i = 0; i < this.purchases.length; i++) {
+              const product = this.getProductObject(
+                this.purchases[i].product_id,
+              );
+              if (product?.buying_price)
+                total += product.buying_price * this.purchases[i].quantity;
+            }
+            return total.toLocaleString();
+          },
+          selectedProduct: function () {
+            if (!this.purchaseData.product_id) return null;
+            return this.products.find(
+              (p) => p.id === this.purchaseData.product_id,
+            );
+          },
+        },
+        methods: {
+          formatNumber: function (num) {
+            return num ? Number(num).toLocaleString() : "0";
+          },
+          formatDate: function (ts) {
+            return ts ? new Date(ts).toLocaleString() : "N/A";
+          },
+          getProductName: function (id) {
+            const p = this.products.find((p) => p.id === id);
+            return p ? p.name : `Product #${id}`;
+          },
+          getProductObject: function (id) {
+            return this.products.find((p) => p.id === id);
+          },
+
+          async getProducts() {
+            try {
+              const r = await axios.get("http://127.0.0.1:8000/products", {
+                withCredentials: true,
+              });
+              this.products = r.data;
+            } catch (e) {
+              if (e.response?.status === 401)
+                window.location.href = "login.html";
+            }
+          },
+
+          async getPurchases() {
+            try {
+              const r = await axios.get("http://127.0.0.1:8000/purchase", {
+                withCredentials: true,
+              });
+              this.purchases = r.data;
+              this.loading = false;
+            } catch (e) {
+              this.loading = false;
+              if (e.response?.status === 401)
+                window.location.href = "login.html";
+            }
+          },
+
+          async addPurchase() {
+            if (!this.purchaseData.product_id || !this.purchaseData.quantity) {
+              alert("Please select a product and enter quantity");
+              return;
+            }
+            if (this.purchaseData.quantity <= 0) {
+              alert("Quantity must be greater than 0");
+              return;
+            }
+
+            this.isSubmitting = true;
+            try {
+              await axios.post(
+                "http://127.0.0.1:8000/purchase",
+                {
+                  product_id: Number(this.purchaseData.product_id),
+                  quantity: Number(this.purchaseData.quantity),
+                },
+                { withCredentials: true },
+              );
+
+              alert("Purchase recorded successfully!");
+              this.purchaseData = { product_id: "", quantity: "" };
+
+              const modal = bootstrap.Modal.getInstance(
+                document.getElementById("addPurchaseModal"),
+              );
+              if (modal) modal.hide();
+
+              await this.getPurchases();
+              await this.getProducts();
+            } catch (e) {
+              alert("Failed: " + (e.response?.data?.detail || e.message));
+            } finally {
+              this.isSubmitting = false;
+            }
+          },
+
+          async logout() {
+            await axios.post(
+              "http://127.0.0.1:8000/logout",
+              {},
+              { withCredentials: true },
+            );
+            window.location.href = "login.html";
+          },
+
+          async loadData() {
+            this.loading = true;
+            await Promise.all([this.getProducts(), this.getPurchases()]);
+          },
+        },
+        mounted() {
+          this.loadData();
+        },
+      });
+    </script>
+
+    <script>
+      const sidebar = document.getElementById("sidebar"),
+        toggleBtn = document.getElementById("sidebarToggle"),
+        overlay = document.getElementById("overlay");
+      function openSidebar() {
+        sidebar.classList.add("show");
+        overlay.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+      function closeSidebar() {
+        sidebar.classList.remove("show");
+        overlay.classList.remove("show");
+        document.body.style.overflow = "";
+      }
+      toggleBtn?.addEventListener("click", openSidebar);
+      overlay?.addEventListener("click", closeSidebar);
+      document.querySelectorAll(".sidebar .nav-link").forEach((link) =>
+        link.addEventListener("click", () => {
+          if (window.innerWidth < 992) closeSidebar();
+        }),
+      );
+      document.getElementById("logoutBtn")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.getElementById("app").__vue__?.logout() ||
+          (window.location.href = "login.html");
+      });
+    </script>
+  </body>
 </html>
