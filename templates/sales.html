@@ -13,7 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="icon" href="../static/ico.png" type="image/gif" />
-    <link rel="stylesheet" href="../static/sales.css" />
+    <link rel="stylesheet" href="../static/sales.css">
   </head>
 
   <body>
@@ -133,8 +133,9 @@
                     <th>Sale ID</th>
                     <th>Sold On</th>
                     <th>Total Items</th>
-                    <th>View Details</th>
-                    <th>View Payments</th>
+                    <th>Total Amount</th>
+                    <!-- <th>Status</th> -->
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -142,9 +143,18 @@
                     <td>{{ sale.id }}</td>
                     <td>{{ formatDate(sale.created_at) }}</td>
                     <td>{{ sale.details ? sale.details.length : 0 }} items</td>
+                    <td class="text-success fw-bold">
+                      KSh {{ getSaleTotal(sale) }}
+                    </td>
+                    <!-- <td>
+                      <span
+                        class="status-badge"
+                        :class="getPaymentStatusClass(sale)"
+                        >{{ getPaymentStatusText(sale) }}</span
+                      >
+                    </td> -->
                     <td>
                       <button
-                        type="button"
                         class="btn-view"
                         data-bs-toggle="modal"
                         data-bs-target="#viewModal"
@@ -152,101 +162,17 @@
                       >
                         <i class="fas fa-eye me-1"></i>View
                       </button>
-                    </td>
-                    <td>
-                      <!-- Button trigger modal -->
                       <button
-                        type="button"
-                        class="btn btn-primary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
+                        class="btn-pay"
+                        @click="openPaymentModal(sale)"
+                        :disabled="isSalePaid(sale)"
                       >
-                        View Payments
+                        <i class="fas fa-credit-card me-1"></i>Pay
                       </button>
-
-                      <!-- Modal -->
-                      <div
-                        class="modal fade"
-                        id="exampleModal"
-                        tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                      >
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1
-                                class="modal-title fs-5"
-                                id="exampleModalLabel"
-                              >
-                                Modal title
-                              </h1>
-                              <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                              ></button>
-                            </div>
-                            <div class="modal-body">
-                              <form>
-                                <form>
-                                  <div class="mb-3">
-                                    <label
-                                      for="exampleInputEmail1"
-                                      class="form-label"
-                                      >Phone Number</label
-                                    >
-                                    <input
-                                      type="number"
-                                      name="phone_number"
-                                      class="form-control"
-                                      id="exampleInputEmail1"
-                                      aria-describedby="emailHelp"
-                                    />
-                                    <!-- <div id="emailHelp" class="form-text">
-                                      We'll never share your email with anyone
-                                      else.
-                                    </div> -->
-                                  </div>
-                                  <!-- <div class="mb-3">
-                                    <label
-                                      for="exampleInputPassword1"
-                                      class="form-label"
-                                      >Password</label
-                                    >
-                                    <input
-                                      type="password"
-                                      class="form-control"
-                                      id="exampleInputPassword1"
-                                    />
-                                  </div> -->
-                                  <!-- <div class="mb-3 form-check"></div> -->
-                                  <button type="submit" class="btn btn-primary">
-                                    Submit
-                                  </button>
-                                </form>
-                              </form>
-                            </div>
-                            <div class="modal-footer">
-                              <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                              >
-                                Close
-                              </button>
-                              <button type="button" class="btn btn-primary">
-                                Save
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </td>
                   </tr>
                   <tr v-if="sales.length === 0">
-                    <td colspan="4" class="text-center">No sales found.lase</td>
+                    <td colspan="6" class="text-center">No sales found.</td>
                   </tr>
                 </tbody>
               </table>
@@ -383,6 +309,86 @@
             </div>
           </div>
 
+          <!-- Payment Modal -->
+          <div
+            class="modal fade"
+            id="paymentModal"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5">
+                    <i class="fas fa-credit-card me-2"></i>Make Payment
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="text-center mb-3">
+                    <i
+                      class="fas fa-receipt"
+                      style="font-size: 48px; color: #ffc107"
+                    ></i>
+                  </div>
+                  <p><strong>Sale ID:</strong> {{ paymentSale.id }}</p>
+                  <p>
+                    <strong>Total Amount:</strong>
+                    <span class="text-success fw-bold"
+                      >KSh {{ formatNumber(paymentSale.total) }}</span
+                    >
+                  </p>
+                  <hr />
+                  <div class="mb-3">
+                    <label class="form-label text-white"
+                      >Phone Number (M-Pesa)</label
+                    >
+                    <input
+                      type="tel"
+                      v-model="phoneNumber"
+                      class="form-control-custom"
+                      placeholder="0712345678"
+                    />
+                    <small class="text-muted">Format: 0712345678</small>
+                  </div>
+                  <div class="alert alert-info mt-2">
+                    <i class="fas fa-info-circle me-2"></i>You will receive an
+                    STK push on your phone. Enter your M-Pesa PIN to complete
+                    payment.
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-modal-submit"
+                    @click="processPayment"
+                    :disabled="isPaying"
+                    style="background: #28a745; color: white"
+                  >
+                    <span
+                      v-if="isPaying"
+                      class="spinner-border spinner-border-sm me-2"
+                    ></span>
+                    <i class="fas fa-credit-card me-1"></i>
+                    {{ isPaying ? 'Processing...' : 'Pay KSh ' +
+                    formatNumber(paymentSale.total) }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- View Details Modal -->
           <div
             class="modal fade"
@@ -491,15 +497,16 @@
         data: {
           products: [],
           sales: [],
+          payments: [],
           salesList: [],
           loading: true,
           isSubmitting: false,
-          saleItem:{product_id:"",quantity:""},
-          currentSale:{id:null,details:[],created_at:null},
-          paymentSale:{id:null,total:0},
-          phoneNumber:"",
+          isPaying: false,
           saleItem: { product_id: "", quantity: "" },
           currentSale: { id: null, details: [], created_at: null },
+          paymentSale: { id: null, total: 0 },
+          phoneNumber: "",
+          pollingInterval: null,
         },
         computed: {
           totalItemsSold: function () {
@@ -561,6 +568,34 @@
             return this.getSaleTotalNum(sale).toLocaleString();
           },
 
+          getPaymentStatusText: function (sale) {
+            const paidPayment = this.payments.find(
+              (p) => p.sale_id == sale.id && p.status === "Success",
+            );
+            if (paidPayment) return "Paid";
+            const pendingPayment = this.payments.find(
+              (p) => p.sale_id == sale.id,
+            );
+            if (pendingPayment) return "Processing";
+            return "Pending";
+          },
+          getPaymentStatusClass: function (sale) {
+            const paidPayment = this.payments.find(
+              (p) => p.sale_id == sale.id && p.status === "Success",
+            );
+            if (paidPayment) return "status-paid";
+            const pendingPayment = this.payments.find(
+              (p) => p.sale_id == sale.id,
+            );
+            if (pendingPayment) return "status-processing";
+            return "status-pending";
+          },
+          isSalePaid: function (sale) {
+            return this.payments.some(
+              (p) => p.sale_id == sale.id && p.status === "Success",
+            );
+          },
+
           async getProducts() {
             try {
               const r = await axios.get("http://127.0.0.1:8000/products", {
@@ -572,6 +607,7 @@
                 window.location.href = "login.html";
             }
           },
+
           async getSales() {
             try {
               const r = await axios.get("http://127.0.0.1:8000/sales", {
@@ -585,6 +621,30 @@
                 window.location.href = "login.html";
             }
           },
+
+          async getPayments() {
+            try {
+              const r = await axios.get("http://127.0.0.1:8000/payments", {
+                withCredentials: true,
+              });
+              this.payments = r.data;
+            } catch (e) {
+              console.error("Error fetching payments:", e);
+            }
+          },
+
+          openPaymentModal: function (sale) {
+            this.paymentSale = {
+              id: sale.id,
+              total: this.getSaleTotalNum(sale),
+            };
+            this.phoneNumber = "";
+            const modal = new bootstrap.Modal(
+              document.getElementById("paymentModal"),
+            );
+            modal.show();
+          },
+
           addToSaleList: function () {
             if (!this.saleItem.product_id || !this.saleItem.quantity) {
               alert("Please select a product and enter quantity");
@@ -607,9 +667,11 @@
             });
             this.saleItem = { product_id: "", quantity: "" };
           },
+
           removeFromList: function (idx) {
             this.salesList.splice(idx, 1);
           },
+
           async makeSale() {
             if (this.salesList.length === 0) {
               alert("Add at least one product before submitting!");
@@ -636,38 +698,95 @@
               this.isSubmitting = false;
             }
           },
+
           viewSaleDetails: function (sale) {
             this.currentSale = sale;
           },
 
-          processPayment: async function(){
-            if (!this.phoneNumber){
-              alert("Please enter Mpesa number");
+          checkPaymentStatus: async function (saleId) {
+            try {
+              await this.getPayments();
+              await this.getSales();
+              return true;
+            } catch (e) {
+              console.error("Error checking payment:", e);
+              return false;
+            }
+          },
+
+          processPayment: async function () {
+            if (!this.phoneNumber) {
+              alert("Please enter M-Pesa phone number");
               return;
             }
-            this.isPaying=true;
-            try{
-              const paymentData = {
-                sale_id:this.paymentsale.id,
-                amount:this.paymentSale.total,
-                phone_number:this.phoneNumber
-              };
-               const response = await axios.post("http://127.0.0.1:8000/stk-push");
-                 if (response.data.ResponseCode==="0"){
-                  alert("payment initiated!");
-                  const sale=this.sales.find(s=>s.id===this.paymentsale.id);
-                  if (sale) sale.payment_status = "Paid";
-                  const modal = bootstrap.Modal.getInstance(document.getElementById("paymentmodal;"));
-                  modal.hide();
-                 }else{
-                  alert ("payment failed: "+response.data.ResponseDescription);
-                 }
-                }catch(e){
-                  alert("Payment error: "+(e.response?.data?.detail||e.message));
-                }finally{
-                  this.isPaying=false;
-                },
 
+            let formattedPhone = this.phoneNumber.replace(/\s/g, "");
+            if (formattedPhone.startsWith("0")) {
+              formattedPhone = "254" + formattedPhone.substring(1);
+            } else if (formattedPhone.startsWith("+")) {
+              formattedPhone = formattedPhone.substring(1);
+            }
+
+            this.isPaying = true;
+            try {
+              const paymentData = {
+                sale_id: this.paymentSale.id,
+                amount: this.paymentSale.total,
+                phone_number: formattedPhone,
+              };
+
+              const response = await axios.post(
+                "http://127.0.0.1:8000/stk-push",
+                paymentData,
+                { withCredentials: true },
+              );
+
+              if (response.data && response.data.ResponseCode === "0") {
+                alert(
+                  "Payment initiated! Check your phone for M-Pesa prompt.\n" +
+                    (response.data.CustomerMessage ||
+                      "Please enter your PIN to complete payment"),
+                );
+
+                const modal = bootstrap.Modal.getInstance(
+                  document.getElementById("paymentModal"),
+                );
+                modal.hide();
+
+                if (this.pollingInterval) {
+                  clearInterval(this.pollingInterval);
+                }
+
+                this.pollingInterval = setInterval(async () => {
+                  await this.getPayments();
+                  await this.getSales();
+                  const payment = this.payments.find(
+                    (p) =>
+                      p.sale_id == this.paymentSale.id &&
+                      p.status === "Success",
+                  );
+                  if (payment) {
+                    clearInterval(this.pollingInterval);
+                    this.pollingInterval = null;
+                    alert(
+                      `Payment successful! Transaction Code: ${payment.trans_code}`,
+                    );
+                  }
+                }, 3000);
+              } else {
+                alert(
+                  "Payment failed: " +
+                    (response.data?.ResponseDescription || "Unknown error"),
+                );
+              }
+            } catch (e) {
+              alert(
+                "Payment error: " + (e.response?.data?.detail || e.message),
+              );
+            } finally {
+              this.isPaying = false;
+            }
+          },
 
           async logout() {
             await axios.post(
@@ -677,13 +796,23 @@
             );
             window.location.href = "login.html";
           },
+
           async loadData() {
             this.loading = true;
-            await Promise.all([this.getProducts(), this.getSales()]);
+            await Promise.all([
+              this.getProducts(),
+              this.getSales(),
+              this.getPayments(),
+            ]);
           },
         },
         mounted() {
           this.loadData();
+        },
+        beforeDestroy() {
+          if (this.pollingInterval) {
+            clearInterval(this.pollingInterval);
+          }
         },
       });
     </script>
