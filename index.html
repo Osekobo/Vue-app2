@@ -239,12 +239,12 @@
         logoutBtn.addEventListener("click", async function (e) {
           e.preventDefault();
           try {
-            // await axios.post(
-            //   "http://127.0.0.1:8000/logout",
-            //   {},
-            //   { withCredentials: true },
-            // );
-            await axios.post("/api/logout", {}, { withCredentials: true });
+            await axios.post(
+              "http://127.0.0.1:8000/logout",
+              {},
+              { withCredentials: true },
+            );
+            // await axios.post("/api/logout", {}, { withCredentials: true });
           } catch (error) {
             console.error("Logout error:", error);
           }

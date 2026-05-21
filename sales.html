@@ -332,7 +332,7 @@
 
         async getProducts() {
           try {
-            const r = await axios.get("http://fastapi-app:8000/products", { withCredentials: true });
+            const r = await axios.get("http://127.0.0.1:8000/products", { withCredentials: true });
             this.products = r.data;
           } catch (e) {
             if (e.response?.status === 401) window.location.href = "login.html";
@@ -340,7 +340,7 @@
         },
         async getSales() {
           try {
-            const r = await axios.get("http://fastapi-app:8000/sales", { withCredentials: true });
+            const r = await axios.get("http://127.0.0.1:8000/sales", { withCredentials: true });
             this.sales = r.data;
             this.loading = false;
           } catch (e) {
@@ -350,7 +350,7 @@
         },
         async getPayments() {
           try {
-            const r = await axios.get("http://fastapi-app:8000/payments", { withCredentials: true });
+            const r = await axios.get("http://127.0.0.1:8000/payments", { withCredentials: true });
             this.payments = r.data;
           } catch (e) {
             console.error("Error fetching payments:", e);
@@ -393,7 +393,7 @@
           }
           this.isSubmitting = true;
           try {
-            await axios.post("http://fastapi-app:8000/sales", { details: this.salesList }, { withCredentials: true });
+            await axios.post("http://127.0.0.1:8000/sales", { details: this.salesList }, { withCredentials: true });
             alert("Sale completed successfully!");
             this.salesList = [];
             const modal = bootstrap.Modal.getInstance(document.getElementById("saleModal"));
@@ -429,7 +429,7 @@
               phone_number: formattedPhone,
             };
 
-            const response = await axios.post("http://fastapi-app:8000/stk-push", paymentData, { withCredentials: true });
+            const response = await axios.post("http://127.0.0.1:8000/stk-push", paymentData, { withCredentials: true });
 
             if (response.data && response.data.ResponseCode === "0") {
               alert("Payment initiated! Check your phone for M-Pesa prompt.\n" + (response.data.CustomerMessage || "Please enter your PIN to complete payment"));
@@ -460,7 +460,7 @@
         },
 
         async logout() {
-          await axios.post("http://fastapi-app:8000/logout", {}, { withCredentials: true });
+          await axios.post("http://127.0.0.1:8000/logout", {}, { withCredentials: true });
           window.location.href = "login.html";
         },
 

@@ -295,7 +295,7 @@
           async getProducts() {
             try {
               const response = await axios.get(
-                "http://fastapi-app:8000/products",
+                "http://127.0.0.1:8000/products",
                 { withCredentials: true },
               );
               this.products = response.data;
@@ -308,7 +308,7 @@
           },
           async logout() {
             await axios.post(
-              "http://fastapi-app:8000/logout",
+              "http://127.0.0.1:8000/logout",
               {},
               { withCredentials: true },
             );
@@ -349,7 +349,7 @@
           }
 
           try {
-            await axios.post("http://fastapi-app:8000/products", productData, {
+            await axios.post("http://127.0.0.1:8000/products", productData, {
               withCredentials: true,
             });
             alert("Product added successfully!");
