@@ -31,7 +31,7 @@
       </div>
       <ul style="list-style: none; padding-left: 0">
         <li class="nav-item">
-          <a class="nav-link" href="home.html">
+          <a class="nav-link" href="index.html">
             <i class="fas fa-home"></i> Home
           </a>
         </li>
@@ -65,7 +65,7 @@
 
     <nav class="top-navbar">
       <div class="container">
-        <a class="navbar-brand" href="home.html">OBerlo</a>
+        <a class="navbar-brand" href="index.html">OBerlo</a>
       </div>
     </nav>
 
@@ -193,7 +193,7 @@
                         </tr>
                         <tr v-if="spp.length === 0">
                           <td colspan="3" class="text-center">
-                            No sales data available持lase
+                            No sales data available
                           </td>
                         </tr>
                       </tbody>
@@ -253,16 +253,16 @@
               this.loading = true;
 
               const [sppRes, rppRes, pppRes, ppdRes] = await Promise.all([
-                axios.get("http://127.0.0.1:8000/dashboard/spp", {
+                axios.get("http://fastapi-app:8000/dashboard/spp", {
                   withCredentials: true,
                 }),
-                axios.get("http://127.0.0.1:8000/dashboard/rpp", {
+                axios.get("http://fastapi-app:8000/dashboard/rpp", {
                   withCredentials: true,
                 }),
-                axios.get("http://127.0.0.1:8000/dashboard/ppp", {
+                axios.get("http://fastapi-app:8000/dashboard/ppp", {
                   withCredentials: true,
                 }),
-                axios.get("http://127.0.0.1:8000/dashboard/ppd", {
+                axios.get("http://fastapi-app:8000/dashboard/ppd", {
                   withCredentials: true,
                 }),
               ]);
@@ -452,7 +452,7 @@
 
           async logout() {
             await axios.post(
-              "http://127.0.0.1:8000/logout",
+              "http://fastapi-app:8000/logout",
               {},
               { withCredentials: true },
             );

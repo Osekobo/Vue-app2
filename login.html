@@ -19,7 +19,7 @@
   <body>
     <nav class="navbar">
       <div class="container">
-        <a class="navbar-brand" href="home.html">OBerlo</a>
+        <a class="navbar-brand" href="index.html">OBerlo</a>
       </div>
     </nav>
 
@@ -79,7 +79,8 @@
             </div>
 
             <!-- <div class="register-link mt-2">
-              <a href="home.html">
+              <a href="index
+              .html">
                 <i class="fas fa-arrow-left"></i> Back to Home
               </a>
             </div> -->
@@ -120,7 +121,7 @@
 
             try {
               const resp = await axios.post(
-                "http://127.0.0.1:8000/login",
+                "http://fastapi-app:8000/login",
                 {
                   email: this.email,
                   password: this.password,

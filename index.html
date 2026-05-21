@@ -12,8 +12,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="icon" href="../static/ico.png" type="image/gif" />
-    <link rel="stylesheet" href="../static/home.css" />
+    <link rel="icon" href="static/ico.png" type="image/gif" />
+    <link rel="stylesheet" href="static/home.css" />
   </head>
 
   <body>
@@ -30,7 +30,7 @@
       </div>
       <ul style="list-style: none; padding-left: 0">
         <li class="nav-item">
-          <a class="nav-link" href="home.html">
+          <a class="nav-link" href="index.html">
             <i class="fas fa-home"></i> Home
           </a>
         </li>
@@ -239,11 +239,12 @@
         logoutBtn.addEventListener("click", async function (e) {
           e.preventDefault();
           try {
-            await axios.post(
-              "http://127.0.0.1:8000/logout",
-              {},
-              { withCredentials: true },
-            );
+            // await axios.post(
+            //   "http://127.0.0.1:8000/logout",
+            //   {},
+            //   { withCredentials: true },
+            // );
+            await axios.post("/api/logout", {}, { withCredentials: true });
           } catch (error) {
             console.error("Logout error:", error);
           }

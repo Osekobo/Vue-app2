@@ -28,7 +28,7 @@
       </div>
       <ul style="list-style: none; padding-left: 0">
         <li class="nav-item">
-          <a class="nav-link" href="home.html"
+          <a class="nav-link" href="index.html"
             ><i class="fas fa-home"></i> Home</a
           >
         </li>
@@ -62,7 +62,7 @@
 
     <nav class="top-navbar">
       <div class="container">
-        <a class="navbar-brand" href="home.html">OBerlo</a>
+        <a class="navbar-brand" href="index.html">OBerlo</a>
       </div>
     </nav>
 
@@ -295,7 +295,7 @@
           async getProducts() {
             try {
               const response = await axios.get(
-                "http://127.0.0.1:8000/products",
+                "http://fastapi-app:8000/products",
                 { withCredentials: true },
               );
               this.products = response.data;
@@ -308,7 +308,7 @@
           },
           async logout() {
             await axios.post(
-              "http://127.0.0.1:8000/logout",
+              "http://fastapi-app:8000/logout",
               {},
               { withCredentials: true },
             );
@@ -349,7 +349,7 @@
           }
 
           try {
-            await axios.post("http://127.0.0.1:8000/products", productData, {
+            await axios.post("http://fastapi-app:8000/products", productData, {
               withCredentials: true,
             });
             alert("Product added successfully!");
