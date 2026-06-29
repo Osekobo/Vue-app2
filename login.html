@@ -121,17 +121,18 @@
 
             try {
               const resp = await axios.post(
-                "http://127.0.0.1:8000/login",
+                "http://localhost:8000/login",
                 {
                   email: this.email,
                   password: this.password,
                 },
                 {
-                  withCredentials: true,
+                  withCredentials: true, // Important for cookies!
                 },
               );
 
               if (resp.data.message === "Login successful") {
+                // Store user info (but NOT token since it's in HTTP-only cookie)
                 if (resp.data.user) {
                   localStorage.setItem("user", JSON.stringify(resp.data.user));
                 }

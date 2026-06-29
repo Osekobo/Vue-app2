@@ -295,7 +295,7 @@
           async getProducts() {
             try {
               const response = await axios.get(
-                "http://127.0.0.1:8000/products",
+                "http://164.90.221.47:8000/products",
                 { withCredentials: true },
               );
               this.products = response.data;
@@ -308,7 +308,7 @@
           },
           async logout() {
             await axios.post(
-              "http://127.0.0.1:8000/logout",
+              "http://164.90.221.47:8000/logout",
               {},
               { withCredentials: true },
             );
@@ -349,9 +349,13 @@
           }
 
           try {
-            await axios.post("http://127.0.0.1:8000/products", productData, {
-              withCredentials: true,
-            });
+            await axios.post(
+              "http://164.90.221.47:8000/products",
+              productData,
+              {
+                withCredentials: true,
+              },
+            );
             alert("Product added successfully!");
 
             // Clear form

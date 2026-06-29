@@ -253,20 +253,19 @@
               this.loading = true;
 
               const [sppRes, rppRes, pppRes, ppdRes] = await Promise.all([
-                axios.get("http://127.0.0.1:8000/dashboard/spp", {
+                axios.get("http://164.90.221.47:8000/dashboard/spp", {
                   withCredentials: true,
                 }),
-                axios.get("http://127.0.0.1:8000/dashboard/rpp", {
+                axios.get("http://164.90.221.47:8000/dashboard/rpp", {
                   withCredentials: true,
                 }),
-                axios.get("http://127.0.0.1:8000/dashboard/ppp", {
+                axios.get("http://164.90.221.47:8000/dashboard/ppp", {
                   withCredentials: true,
                 }),
-                axios.get("http://127.0.0.1:8000/dashboard/ppd", {
+                axios.get("http://164.90.221.47:8000/dashboard/ppd", {
                   withCredentials: true,
                 }),
               ]);
-
               this.spp = sppRes.data || [];
               this.rpp = rppRes.data || [];
               this.ppp = pppRes.data || [];
@@ -452,7 +451,7 @@
 
           async logout() {
             await axios.post(
-              "http://127.0.0.1:8000/logout",
+              "http://164.90.221.47:8000/logout",
               {},
               { withCredentials: true },
             );
