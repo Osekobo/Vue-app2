@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OBerlo — FAQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="icon" href="static/ico.png" type="image/gif" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+        .top-navbar {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .top-navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.98);
+        }
+        .top-navbar .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffc107 !important;
+            letter-spacing: 2px;
+        }
+        .top-navbar .nav-link-top {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 6px;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .top-navbar .nav-link-top:hover {
+            color: #ffc107 !important;
+        }
+        .top-navbar .nav-link-top.active {
+            color: #ffc107 !important;
+            border-bottom: 2px solid #ffc107;
+        }
+        @media (max-width: 991px) {
+            .top-navbar .nav-link-top {
+                font-size: 11px;
+                margin: 0 4px;
+            }
+        }
+        .sidebar {
+            position: fixed;
+            left: -280px;
+            top: 0;
+            bottom: 0;
+            width: 280px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            transition: 0.3s ease-in-out;
+            z-index: 1001;
+            padding-top: 80px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar.show {
+            left: 0;
+        }
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        .sidebar-header h4 {
+            color: #ffc107;
+            margin: 0;
+        }
+        .sidebar-header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            margin: 5px 0 0;
+        }
+        .sidebar .nav-item {
+            margin: 5px 0;
+        }
+        .sidebar .nav-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border-radius: 8px;
+            margin: 0 10px;
+        }
+        .sidebar .nav-link i {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+        .sidebar .nav-link:hover {
+            background: #ffc107;
+            color: #000;
+            transform: translateX(5px);
+        }
+        .sidebar .logout-btn {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+        .sidebar .logout-btn .nav-link {
+            color: #ff6b6b;
+        }
+        .sidebar .logout-btn .nav-link:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+        .sidebar-toggle {
+            position: fixed;
+            left: 20px;
+            top: 80px;
+            z-index: 1002;
+            background: #ffc107;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .sidebar-toggle:hover {
+            background: #ffca2c;
+            transform: scale(1.05);
+        }
+        .sidebar-toggle i {
+            font-size: 20px;
+            color: #000;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+        .overlay.show {
+            display: block;
+        }
+        main {
+            padding-top: 80px;
+        }
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 8px 20px;
+            color: white;
+            width: 200px;
+            transition: all 0.3s;
+        }
+        .search-box:focus {
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            width: 250px;
+        }
+        @media (max-width: 768px) {
+            .search-box {
+                width: 100px;
+            }
+            .search-box:focus {
+                width: 140px;
+            }
+            .sidebar-toggle {
+                top: 70px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            .top-navbar .navbar-brand {
+                font-size: 20px;
+            }
+        }
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 40px;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Page Specific */
+        .faq-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 60px 0 40px;
+            color: white;
+            text-align: center;
+        }
+        .faq-hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+        }
+        .faq-hero h1 span {
+            color: #ffc107;
+        }
+        .faq-section {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .accordion-item {
+            border: none;
+            background: white;
+            border-radius: 16px !important;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+        .accordion-button {
+            padding: 20px 25px;
+            font-weight: 700;
+            color: #1a1a2e;
+            background: white;
+            border-radius: 16px !important;
+            box-shadow: none !important;
+            border: none;
+            font-size: 17px;
+        }
+        .accordion-button:not(.collapsed) {
+            color: #ffc107;
+            background: white;
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+        .accordion-button::after {
+            filter: none;
+        }
+        .accordion-body {
+            padding: 0 25px 25px 25px;
+            color: #555;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+    <div class="overlay" id="overlay"></div>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header"><h4>OBerlo</h4><p>Inventory Management System</p></div>
+        <ul style="list-style: none; padding-left: 0">
+            <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="products.html"><i class="fas fa-box"></i> Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="purchases.html"><i class="fas fa-shopping-cart"></i> Purchases</a></li>
+            <li class="nav-item"><a class="nav-link" href="sales.html"><i class="fas fa-dollar-sign"></i> Sales</a></li>
+            <li class="nav-item logout-btn"><a class="nav-link" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+    <nav class="top-navbar" id="topNavbar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <a class="navbar-brand" href="index.html">OBerlo</a>
+                <div class="d-flex align-items-center flex-wrap" style="gap: 2px;">
+                    <a class="nav-link-top" href="car-details.html">Car Details</a>
+                    <a class="nav-link-top" href="test-drive.html">Test Drive</a>
+                    <a class="nav-link-top" href="financing.html">Finance</a>
+                    <a class="nav-link-top" href="blog.html">Blog</a>
+                    <a class="nav-link-top" href="trade-in.html">Trade-In</a>
+                    <a class="nav-link-top active" href="faq.html">FAQ</a>
+                    <a class="nav-link-top" href="about.html">About</a>
+                    <a class="nav-link-top" href="contact.html">Contact</a>
+                </div>
+                <input type="text" class="search-box" placeholder="Search..." />
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="faq-hero">
+            <div class="container">
+                <h1>Frequently Asked <span>Questions</span></h1>
+                <p class="text-white-50">Find answers to the most common inquiries about buying, selling, and financing.</p>
+            </div>
+        </section>
+
+        <section class="container py-5 faq-section">
+            <div class="accordion" id="faqAccordion">
+                <!-- Q1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">Do you offer warranties on your vehicles?</button></h2>
+                    <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes! Every vehicle sold through OBerlo comes with a comprehensive 12-month / 12,000-mile warranty. Extended warranties are also available for purchase.</div>
+                    </div>
+                </div>
+                <!-- Q2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">Can I trade in my current vehicle?</button></h2>
+                    <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Absolutely! We accept trade-ins of all makes and models. Use our <a href="trade-in.html">Trade-In page</a> to get an instant estimate, and we'll deduct the value from your new purchase.</div>
+                    </div>
+                </div>
+                <!-- Q3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3">What financing options are available?</button></h2>
+                    <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">We offer flexible financing through our partner lenders with rates starting at 2.9% APR. You can also lease or pay in full. Visit our <a href="financing.html">Financing page</a> to calculate your monthly payments.</div>
+                    </div>
+                </div>
+                <!-- Q4 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4">Do you ship vehicles internationally?</button></h2>
+                    <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes, we ship worldwide. We handle all logistics, customs, and insurance. Shipping costs vary by destination—contact our team for a personalized quote.</div>
+                    </div>
+                </div>
+                <!-- Q5 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5">Can I return a car after purchase?</button></h2>
+                    <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">We offer a 7-day, 500-mile money-back guarantee. If you're not completely satisfied, you can return the vehicle for a full refund, no questions asked.</div>
+                    </div>
+                </div>
+                <!-- Q6 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q6">How do I book a test drive?</button></h2>
+                    <div id="q6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">You can book a test drive directly through our <a href="test-drive.html">Test Drive page</a>. Choose your preferred vehicle, date, and time, and our concierge team will confirm your slot within 24 hours.</div>
+                    </div>
+                </div>
+                <!-- Q7 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q7">Are your vehicles inspected and certified?</button></h2>
+                    <div id="q7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes. Every car in our inventory undergoes a rigorous 150-point inspection by our master technicians. We provide a full vehicle history report with every purchase.</div>
+                    </div>
+                </div>
+                <!-- Q8 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q8">What payment methods do you accept?</button></h2>
+                    <div id="q8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">We accept wire transfers, certified bank checks, and financing through our lending partners. We also accept credit cards for deposits (up to $5,000).</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"><div class="copyright"><p>&copy; 2025 OBerlo. All rights reserved.</p></div></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sidebar logic
+        const sidebar = document.getElementById("sidebar");
+        const toggleBtn = document.getElementById("sidebarToggle");
+        const overlay = document.getElementById("overlay");
+        function openSidebar() { sidebar.classList.add("show");
+            overlay.classList.add("show");
+            document.body.style.overflow = "hidden"; }
+        function closeSidebar() { sidebar.classList.remove("show");
+            overlay.classList.remove("show");
+            document.body.style.overflow = ""; }
+        toggleBtn?.addEventListener("click", openSidebar);
+        overlay?.addEventListener("click", closeSidebar);
+        document.querySelectorAll(".sidebar .nav-link").forEach(l => l.addEventListener("click", () => { if (window.innerWidth < 992) closeSidebar(); }));
+        window.addEventListener("scroll", () => { document.querySelector(".top-navbar").classList.toggle("scrolled", window.scrollY > 50); });
+        document.getElementById("logoutBtn")?.addEventListener("click", async (e) => { e.preventDefault();
+            window.location.href = "login.html"; });
+    </script>
+</body>
+</html>

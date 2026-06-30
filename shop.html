@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O Berlo — Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="icon" href="static/ico.png" type="image/gif" />
+
+    <style>
+        /* ── shared CSS (same as home) ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .top-navbar {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .top-navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.98);
+        }
+
+        .top-navbar .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffc107 !important;
+            letter-spacing: 2px;
+        }
+
+        .top-navbar .nav-link-top {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 6px;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 4px 0;
+        }
+
+        .top-navbar .nav-link-top:hover {
+            color: #ffc107 !important;
+        }
+
+        .top-navbar .nav-link-top.active {
+            color: #ffc107 !important;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        @media (max-width: 991px) {
+            .top-navbar .nav-link-top {
+                font-size: 11px;
+                margin: 0 4px;
+            }
+        }
+
+        .sidebar {
+            position: fixed;
+            left: -280px;
+            top: 0;
+            bottom: 0;
+            width: 280px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            transition: 0.3s ease-in-out;
+            z-index: 1001;
+            padding-top: 80px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.show {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h4 {
+            color: #ffc107;
+            margin: 0;
+        }
+
+        .sidebar-header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            margin: 5px 0 0;
+        }
+
+        .sidebar .nav-item {
+            margin: 5px 0;
+        }
+
+        .sidebar .nav-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border-radius: 8px;
+            margin: 0 10px;
+        }
+
+        .sidebar .nav-link i {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .sidebar .nav-link:hover {
+            background: #ffc107;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link:hover i {
+            color: #000;
+        }
+
+        .sidebar .logout-btn {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .sidebar .logout-btn .nav-link {
+            color: #ff6b6b;
+        }
+
+        .sidebar .logout-btn .nav-link:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            left: 20px;
+            top: 80px;
+            z-index: 1002;
+            background: #ffc107;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-toggle:hover {
+            background: #ffca2c;
+            transform: scale(1.05);
+        }
+
+        .sidebar-toggle i {
+            font-size: 20px;
+            color: #000;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        main {
+            margin-left: 0;
+            transition: 0.3s;
+            padding-top: 80px;
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 8px 20px;
+            color: white;
+            width: 250px;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            width: 300px;
+        }
+
+        @media (max-width: 768px) {
+            .search-box {
+                width: 140px;
+            }
+            .search-box:focus {
+                width: 180px;
+            }
+            .sidebar-toggle {
+                top: 70px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            .top-navbar .navbar-brand {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .search-box {
+                width: 100px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .search-box:focus {
+                width: 130px;
+            }
+        }
+
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 40px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ── shop-specific ── */
+        .shop-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 60px 0 50px;
+            color: white;
+            text-align: center;
+        }
+
+        .shop-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+        }
+
+        .shop-hero h1 span {
+            color: #ffc107;
+        }
+
+        .shop-hero p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 30px;
+        }
+
+        .filter-section .form-select,
+        .filter-section .form-control {
+            border-radius: 30px;
+            border: 1px solid #e0e0e0;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .filter-section .form-select:focus,
+        .filter-section .form-control:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
+        }
+
+        .shop-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shop-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .shop-card .card-img-wrap {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .shop-card .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .shop-card:hover .card-img-wrap img {
+            transform: scale(1.05);
+        }
+
+        .shop-card .card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ffc107;
+            color: #000;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 14px;
+            border-radius: 30px;
+        }
+
+        .shop-card .card-body {
+            padding: 18px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shop-card .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 4px;
+        }
+
+        .shop-card .card-subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .shop-card .card-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffc107;
+            margin: 6px 0 12px;
+        }
+
+        .shop-card .card-text {
+            font-size: 14px;
+            color: #666;
+            flex: 1;
+            margin-bottom: 14px;
+        }
+
+        .btn-shop {
+            background: #1a1a2e;
+            color: white;
+            border: none;
+            padding: 10px 0;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-shop:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .btn-shop i {
+            margin-left: 8px;
+            transition: transform 0.2s;
+        }
+
+        .btn-shop:hover i {
+            transform: translateX(4px);
+        }
+
+        .pagination-custom .page-link {
+            color: #1a1a2e;
+            border-radius: 30px;
+            margin: 0 4px;
+            border: none;
+            padding: 8px 18px;
+            font-weight: 500;
+        }
+
+        .pagination-custom .page-link:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .pagination-custom .page-item.active .page-link {
+            background: #ffc107;
+            color: #000;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR TOGGLE ===== -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- ===== OVERLAY ===== -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>OBerlo</h4>
+            <p>Inventory Management System</p>
+        </div>
+        <ul style="list-style: none; padding-left: 0">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="products.html">
+                    <i class="fas fa-box"></i> Products
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="purchases.html">
+                    <i class="fas fa-shopping-cart"></i> Purchases
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sales.html">
+                    <i class="fas fa-dollar-sign"></i> Sales
+                </a>
+            </li>
+            <li class="nav-item logout-btn">
+                <a class="nav-link" href="#" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ===== TOP HORIZONTAL NAVBAR (UPDATED) ===== -->
+    <nav class="top-navbar" id="topNavbar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <a class="navbar-brand" href="index.html">OBerlo</a>
+                <div class="d-flex align-items-center flex-wrap" style="gap: 2px;">
+                    <a class="nav-link-top active" href="shop.html">Shop</a>
+                    <a class="nav-link-top" href="car-details.html">Car Details</a>
+                    <a class="nav-link-top" href="test-drive.html">Test Drive</a>
+                    <a class="nav-link-top" href="financing.html">Finance</a>
+                    <a class="nav-link-top" href="blog.html">Blog</a>
+                    <a class="nav-link-top" href="trade-in.html">Trade-In</a>
+                    <a class="nav-link-top" href="faq.html">FAQ</a>
+                    <a class="nav-link-top" href="about.html">About</a>
+                    <a class="nav-link-top" href="contact.html">Contact</a>
+                </div>
+                <input type="text" class="search-box" placeholder="Search cars..." />
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+
+        <!-- Shop Hero -->
+        <section class="shop-hero">
+            <div class="container">
+                <h1>Our <span>Collection</span></h1>
+                <p>Explore our curated selection of premium luxury vehicles</p>
+            </div>
+        </section>
+
+        <!-- Filter + Products -->
+        <section class="container py-4">
+            <!-- Filter Bar -->
+            <div class="filter-section">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold" style="font-size: 13px; color: #666;">CATEGORY</label>
+                        <select class="form-select">
+                            <option>All Vehicles</option>
+                            <option>Sports Cars</option>
+                            <option>Luxury Sedans</option>
+                            <option>SUVs</option>
+                            <option>Electric</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold" style="font-size: 13px; color: #666;">PRICE RANGE</label>
+                        <select class="form-select">
+                            <option>Any Price</option>
+                            <option>Under $100k</option>
+                            <option>$100k – $250k</option>
+                            <option>$250k – $500k</option>
+                            <option>$500k+</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold" style="font-size: 13px; color: #666;">SORT BY</label>
+                        <select class="form-select">
+                            <option>Featured</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-shop" style="background: #ffc107; color: #000; padding: 10px 0; border-radius: 40px; font-weight: 600; width: 100%; border: none;">
+                            <i class="fas fa-sliders-h me-2"></i> Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="shop-card">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=400" alt="Lamborghini" />
+                            <span class="card-badge">New</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Lamborghini Aventador</h5>
+                            <div class="card-subtitle">V12 · 759 hp</div>
+                            <div class="card-price">$350,000</div>
+                            <p class="card-text">Carbon fiber monocoque, 0–60 in 2.8s.</p>
+                            <button class="btn-shop">View Details <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="shop-card">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" alt="Porsche" />
+                            <span class="card-badge">Featured</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Porsche 911 Turbo S</h5>
+                            <div class="card-subtitle">Flat-6 · 640 hp</div>
+                            <div class="card-price">$180,000</div>
+                            <p class="card-text">AWD, active aero, 0–60 in 2.6s.</p>
+                            <button class="btn-shop">View Details <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="shop-card">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=400" alt="Ferrari" />
+                            <span class="card-badge">Hybrid</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Ferrari SF90 Stradale</h5>
+                            <div class="card-subtitle">V8 Hybrid · 986 hp</div>
+                            <div class="card-price">$420,000</div>
+                            <p class="card-text">Plug-in hybrid, 0–60 in 2.5s.</p>
+                            <button class="btn-shop">View Details <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="shop-card">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=400" alt="McLaren" />
+                            <span class="card-badge">New</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">McLaren 750S</h5>
+                            <div class="card-subtitle">V8 · 740 hp</div>
+                            <div class="card-price">$330,000</div>
+                            <p class="card-text">Lightweight, 0–60 in 2.7s.</p>
+                            <button class="btn-shop">View Details <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="shop-card">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=400" alt="Bentley" />
+                            <span class="card-badge">Luxury</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Bentley Continental GT</h5>
+                            <div class="card-subtitle">W12 · 650 hp</div>
+                            <div class="card-price">$220,000</div>
+                            <p class="card-text">Handcrafted interior, AWD.</p>
+                            <button class="btn-shop">View Details <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="shop-card">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400" alt="Audi" />
+                            <span class="card-badge">Electric</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Audi RS e-tron GT</h5>
+                            <div class="card-subtitle">Electric · 637 hp</div>
+                            <div class="card-price">$145,000</div>
+                            <p class="card-text">0–60 in 3.1s, 238 mi range.</p>
+                            <button class="btn-shop">View Details <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="shop-card">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400" alt="Mercedes" />
+                            <span class="card-badge">AMG</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Mercedes-AMG GT 63</h5>
+                            <div class="card-subtitle">V8 · 577 hp</div>
+                            <div class="card-price">$175,000</div>
+                            <p class="card-text">4-door coupe, 0–60 in 3.2s.</p>
+                            <button class="btn-shop">View Details <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="shop-card">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?w=400" alt="BMW" />
+                            <span class="card-badge">M Series</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">BMW M8 Competition</h5>
+                            <div class="card-subtitle">V8 · 617 hp</div>
+                            <div class="card-price">$130,000</div>
+                            <p class="card-text">0–60 in 3.0s, M xDrive.</p>
+                            <button class="btn-shop">View Details <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center mt-5">
+                <nav>
+                    <ul class="pagination pagination-custom">
+                        <li class="page-item disabled">
+                            <span class="page-link"><i class="fas fa-chevron-left"></i></span>
+                        </li>
+                        <li class="page-item active"><span class="page-link">1</span></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 OBerlo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js">
+    </script>
+
+    <script>
+        axios.defaults.withCredentials = true;
+
+        // ── Sidebar toggle ──
+        const sidebar = document.getElementById("sidebar");
+        const toggleBtn = document.getElementById("sidebarToggle");
+        const overlay = document.getElementById("overlay");
+
+        function openSidebar() {
+            sidebar.classList.add("show");
+            overlay.classList.add("show");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove("show");
+            overlay.classList.remove("show");
+            document.body.style.overflow = "";
+        }
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener("click", openSidebar);
+        }
+        if (overlay) {
+            overlay.addEventListener("click", closeSidebar);
+        }
+
+        document.querySelectorAll(".sidebar .nav-link").forEach((link) => {
+            link.addEventListener("click", function() {
+                if (window.innerWidth < 992) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        // ── Navbar scroll effect ──
+        window.addEventListener("scroll", function() {
+            const navbar = document.querySelector(".top-navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+
+        // ── Logout ──
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", async function(e) {
+                e.preventDefault();
+                try {
+                    await axios.post("http://164.90.221.47:8000/logout", {}, { withCredentials: true });
+                } catch (error) {
+                    console.error("Logout error:", error);
+                }
+                window.location.href = "login.html";
+            });
+        }
+
+        // ── "View Details" button alert (demo) ──
+        document.querySelectorAll(".btn-shop").forEach((btn) => {
+            btn.addEventListener("click", function(e) {
+                e.preventDefault();
+                const title = this.closest(".card-body").querySelector(".card-title").textContent;
+                alert(`🔍 Viewing details for: ${title}`);
+            });
+        });
+    </script>
+
+</body>
+</html>
