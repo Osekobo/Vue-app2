@@ -35,6 +35,7 @@
             font-weight: bold;
             color: #ffc107 !important;
             letter-spacing: 2px;
+            text-decoration: none;
         }
         .top-navbar .nav-link-top {
             color: white !important;
@@ -44,6 +45,7 @@
             text-decoration: none;
             font-size: 13px;
             padding: 4px 0;
+            white-space: nowrap;
         }
         .top-navbar .nav-link-top:hover {
             color: #ffc107 !important;
@@ -56,6 +58,47 @@
             .top-navbar .nav-link-top {
                 font-size: 11px;
                 margin: 0 4px;
+            }
+        }
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 8px 20px;
+            color: white;
+            width: 250px;
+            transition: all 0.3s;
+        }
+        .search-box:focus {
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            width: 300px;
+        }
+        @media (max-width: 768px) {
+            .search-box {
+                width: 140px;
+            }
+            .search-box:focus {
+                width: 180px;
+            }
+            .sidebar-toggle {
+                top: 70px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            .top-navbar .navbar-brand {
+                font-size: 20px;
+            }
+        }
+        @media (max-width: 576px) {
+            .search-box {
+                width: 100px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .search-box:focus {
+                width: 130px;
             }
         }
         .sidebar {
@@ -161,37 +204,6 @@
         main {
             padding-top: 80px;
         }
-        .search-box {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            padding: 8px 20px;
-            color: white;
-            width: 200px;
-            transition: all 0.3s;
-        }
-        .search-box:focus {
-            background: rgba(255, 255, 255, 0.2);
-            outline: none;
-            width: 250px;
-        }
-        @media (max-width: 768px) {
-            .search-box {
-                width: 100px;
-            }
-            .search-box:focus {
-                width: 140px;
-            }
-            .sidebar-toggle {
-                top: 70px;
-                left: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            .top-navbar .navbar-brand {
-                font-size: 20px;
-            }
-        }
         footer {
             background: #1a1a2e;
             color: white;
@@ -224,6 +236,7 @@
             font-weight: 600;
             display: inline-block;
         }
+
         .spec-item {
             background: white;
             border-radius: 12px;
@@ -231,18 +244,29 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
             text-align: center;
             height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .spec-item:hover {
+            transform: translateY(-4px);
+        }
+        .spec-item .icon {
+            font-size: 22px;
+            color: #ffc107;
+            display: block;
+            margin-bottom: 4px;
         }
         .spec-item .label {
-            font-size: 13px;
-            color: #888;
+            font-size: 11px;
+            color: #999;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         .spec-item .value {
             font-size: 20px;
             font-weight: 700;
             color: #1a1a2e;
         }
+
         .btn-gold {
             background: #ffc107;
             color: #000;
@@ -252,6 +276,8 @@
             border: none;
             transition: all 0.3s;
             font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-gold:hover {
             background: #ffca2c;
@@ -266,20 +292,70 @@
             border-radius: 40px;
             font-weight: 600;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-outline-gold:hover {
             background: #ffc107;
             color: #000;
         }
+        .car-not-found {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .btn-back-shop {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+        .btn-back-shop:hover {
+            background: rgba(255, 193, 7, 0.12);
+            color: #ffc107;
+            border-color: rgba(255, 193, 7, 0.2);
+            transform: translateX(-4px);
+        }
+        .btn-back-shop i {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+        .btn-back-shop:hover i {
+            transform: translateX(-4px);
+        }
+
+        @media (max-width: 576px) {
+            .btn-back-shop {
+                font-size: 0.78rem;
+                padding: 6px 14px;
+            }
+            .spec-item .value {
+                font-size: 16px;
+            }
+            .spec-item .icon {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Sidebar Toggle -->
     <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
     <div class="overlay" id="overlay"></div>
 
-    <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h4>OBerlo</h4>
@@ -295,100 +371,88 @@
         </ul>
     </nav>
 
-    <!-- Top Navbar -->
     <nav class="top-navbar" id="topNavbar">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center w-100">
                 <a class="navbar-brand" href="index.html">OBerlo</a>
-                <div class="d-flex align-items-center flex-wrap" style="gap: 2px;">
-                    <a class="nav-link-top active" href="car-details.html">Car Details</a>
-                    <a class="nav-link-top" href="test-drive.html">Test Drive</a>
-                    <a class="nav-link-top" href="financing.html">Finance</a>
-                    <a class="nav-link-top" href="blog.html">Blog</a>
-                    <a class="nav-link-top" href="trade-in.html">Trade-In</a>
-                    <a class="nav-link-top" href="faq.html">FAQ</a>
-                    <a class="nav-link-top" href="about.html">About</a>
-                    <a class="nav-link-top" href="contact.html">Contact</a>
-                </div>
-                <input type="text" class="search-box" placeholder="Search..." />
+                <div id="navbar-links"></div>
+                <!-- <input type="text" class="search-box" placeholder="Search..." /> -->
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- Detail Hero -->
-        <section class="detail-hero">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-lg-7">
-                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800" alt="Lamborghini" />
-                    </div>
-                    <div class="col-lg-5 text-white">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <span class="spec-badge">2025 Model</span>
-                                <h1 class="display-5 fw-bold mt-2">Lamborghini Aventador</h1>
-                                <p class="text-warning display-6 fw-bold">$350,000</p>
-                            </div>
-                            <span class="badge bg-warning text-dark p-2">In Stock</span>
-                        </div>
-                        <p class="text-white-50">V12 · 759 hp · 0-60 in 2.8s</p>
-                        <div class="d-flex gap-3 mt-3">
-                            <a href="test-drive.html" class="btn-gold"><i class="fas fa-calendar-check me-2"></i>Book Test Drive</a>
-                            <a href="financing.html" class="btn-outline-gold">Finance Options</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Dynamic Detail Hero -->
+        <section class="detail-hero" id="detailHero">
+            <!-- Content will be rendered by JavaScript -->
         </section>
 
-        <!-- Specs & Description -->
-        <section class="container py-5">
-            <div class="row g-4">
-                <div class="col-lg-8">
-                    <h3 class="fw-bold">Overview</h3>
-                    <p class="text-secondary">The Lamborghini Aventador is the ultimate expression of Italian engineering. Featuring a naturally aspirated 6.5L V12 engine producing 759 horsepower, it delivers breathtaking performance. The carbon fiber monocoque ensures exceptional rigidity while keeping weight low. This is a car built for those who demand the extraordinary.</p>
-                    <div class="row g-3 mt-3">
-                        <div class="col-4 col-md-2"><div class="spec-item"><div class="label">Engine</div><div class="value">V12</div></div></div>
-                        <div class="col-4 col-md-2"><div class="spec-item"><div class="label">Horsepower</div><div class="value">759 hp</div></div></div>
-                        <div class="col-4 col-md-2"><div class="spec-item"><div class="label">0-60 mph</div><div class="value">2.8s</div></div></div>
-                        <div class="col-4 col-md-2"><div class="spec-item"><div class="label">Top Speed</div><div class="value">220 mph</div></div></div>
-                        <div class="col-4 col-md-2"><div class="spec-item"><div class="label">Trans.</div><div class="value">7-Speed</div></div></div>
-                        <div class="col-4 col-md-2"><div class="spec-item"><div class="label">Drivetrain</div><div class="value">AWD</div></div></div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="bg-white p-4 rounded-4 shadow-sm">
-                        <h5 class="fw-bold">Why Buy From OBerlo?</h5>
-                        <ul class="list-unstyled mt-3">
-                            <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> Full Service History</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> 12-Month Warranty</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> Free Nationwide Delivery</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> 7-Day Money-Back Guarantee</li>
-                        </ul>
-                        <hr />
-                        <p class="mb-0"><i class="fas fa-phone-alt me-2"></i> Call us: +1 (800) 555-0199</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Dynamic Specs & Description -->
+        <section class="container py-5" id="detailBody">
+            <!-- Content will be rendered by JavaScript -->
         </section>
     </main>
 
-    <footer>
-        <div class="container"><div class="copyright"><p>&copy; 2025 OBerlo. All rights reserved.</p></div></div>
-    </footer>
+    <div id="footer"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Sidebar logic
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar-links").innerHTML = data;
+
+                const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+                document.querySelectorAll("#navbar-links a").forEach(link => {
+                    if (link.getAttribute("href") === currentPage) {
+                        link.classList.add("active");
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading navbar:", err));
+    </script>
+
+    <script>
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            })
+            .catch(error => console.error("Error loading footer:", error));
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js">
+    </script>
+    <script src="config.js">
+    </script>
+
+    <script>
+        axios.defaults.withCredentials = true;
+
+        // ── Sidebar logic ──
         const sidebar = document.getElementById("sidebar");
         const toggleBtn = document.getElementById("sidebarToggle");
         const overlay = document.getElementById("overlay");
-        function openSidebar() { sidebar.classList.add("show"); overlay.classList.add("show"); document.body.style.overflow = "hidden"; }
-        function closeSidebar() { sidebar.classList.remove("show"); overlay.classList.remove("show"); document.body.style.overflow = ""; }
+
+        function openSidebar() {
+            sidebar.classList.add("show");
+            overlay.classList.add("show");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove("show");
+            overlay.classList.remove("show");
+            document.body.style.overflow = "";
+        }
+
         toggleBtn?.addEventListener("click", openSidebar);
         overlay?.addEventListener("click", closeSidebar);
-        document.querySelectorAll(".sidebar .nav-link").forEach(l => l.addEventListener("click", () => { if (window.innerWidth < 992) closeSidebar(); }));
+        document.querySelectorAll(".sidebar .nav-link").forEach(l => l.addEventListener("click", () => {
+            if (window.innerWidth < 992) closeSidebar();
+        }));
 
         window.addEventListener("scroll", () => {
             document.querySelector(".top-navbar").classList.toggle("scrolled", window.scrollY > 50);
@@ -396,8 +460,178 @@
 
         document.getElementById("logoutBtn")?.addEventListener("click", async (e) => {
             e.preventDefault();
+            try {
+                await axios.post(`${CONFIG.API_BASE_URL}/logout`, {}, { withCredentials: true });
+            } catch (error) {
+                console.error("Logout error:", error);
+            }
             window.location.href = "login.html";
         });
+
+        // ── Render Car Details from API ──
+        async function renderCarDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            const heroSection = document.getElementById('detailHero');
+            const bodySection = document.getElementById('detailBody');
+
+            // If no id, show error
+            if (!id) {
+                heroSection.innerHTML = `
+                    <div class="container car-not-found">
+                        <h1 class="text-white">🚗 No Car Specified</h1>
+                        <p class="text-white-50">Please select a vehicle from our collection.</p>
+                        <a href="shop.html" class="btn-gold mt-3">Browse Our Collection</a>
+                    </div>
+                `;
+                bodySection.innerHTML = '';
+                return;
+            }
+
+            try {
+                // Fetch product by id
+                const response = await axios.get(`${CONFIG.API_BASE_URL}/products/${id}`, { withCredentials: true });
+                const car = response.data;
+
+                // ── Hero Section ──
+                // Use display_price or format selling_price
+                const priceDisplay = car.display_price || ('$' + Number(car.selling_price).toLocaleString());
+                const badge = car.badge || 'Featured';
+                const subtitle = car.subtitle || car.engine || '';
+                const description = car.description || '';
+                const features = car.features || [];
+
+                heroSection.innerHTML = `
+                    <div class="container">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-lg-7">
+                                <img src="${car.hero_image || car.image || ''}" alt="${car.name}" id="carHeroImage" />
+                            </div>
+                            <div class="col-lg-5 text-white">
+                                <!-- Back to Shop Button -->
+                                <a href="shop.html" class="btn-back-shop">
+                                    <i class="fas fa-arrow-left"></i> Back to Shop
+                                </a>
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <span class="spec-badge" id="carBadge">${badge}</span>
+                                        <h1 class="display-5 fw-bold mt-2" id="carName">${car.name}</h1>
+                                        <p class="text-warning display-6 fw-bold" id="carPrice">${priceDisplay}</p>
+                                    </div>
+                                    <span class="badge bg-warning text-dark p-2">In Stock</span>
+                                </div>
+                                <p class="text-white-50" id="carSubtitle">${subtitle}</p>
+                                <div class="d-flex flex-wrap gap-3 mt-3">
+                                    <a href="test-drive.html" class="btn-gold"><i class="fas fa-calendar-check me-2"></i>Book Test Drive</a>
+                                    <a href="financing.html" class="btn-outline-gold">Finance Options</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // ── Specs & Description Section ──
+                bodySection.innerHTML = `
+                    <div class="row g-4">
+                        <div class="col-lg-8">
+                            <h3 class="fw-bold">Overview</h3>
+                            <p class="text-secondary" id="carDescription">${description}</p>
+                            <div class="row g-3 mt-3">
+                                <div class="col-4 col-md-2">
+                                    <div class="spec-item">
+                                        <span class="icon"><i class="fa-solid fa-gear"></i></span>
+                                        <div class="label">Engine</div>
+                                        <div class="value" id="specEngine">${car.engine || '—'}</div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="spec-item">
+                                        <span class="icon"><i class="fa-solid fa-horse-head"></i></span>
+                                        <div class="label">Horsepower</div>
+                                        <div class="value" id="specHp">${car.horsepower || '—'}</div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="spec-item">
+                                        <span class="icon"><i class="fa-solid fa-clock"></i></span>
+                                        <div class="label">0-60 mph</div>
+                                        <div class="value" id="specZeroSixty">${car.zero_to_sixty || '—'}</div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="spec-item">
+                                        <span class="icon"><i class="fa-solid fa-gauge-high"></i></span>
+                                        <div class="label">Top Speed</div>
+                                        <div class="value" id="specTopSpeed">${car.top_speed || '—'}</div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="spec-item">
+                                        <span class="icon"><i class="fa-solid fa-gears"></i></span>
+                                        <div class="label">Transmission</div>
+                                        <div class="value" id="specTrans">${car.transmission || '—'}</div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="spec-item">
+                                        <span class="icon"><i class="fa-solid fa-road"></i></span>
+                                        <div class="label">Drivetrain</div>
+                                        <div class="value" id="specDrivetrain">${car.drivetrain || '—'}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="bg-white p-4 rounded-4 shadow-sm">
+                                <h5 class="fw-bold">Why Buy From OBerlo?</h5>
+                                <ul class="list-unstyled mt-3" id="featuresList">
+                                    ${features.length > 0 ? features.map(f => `<li class="mb-2"><i class="fa-solid fa-check-circle text-warning me-2"></i> ${f}</li>`).join('') : '<li class="text-muted">No features listed</li>'}
+                                </ul>
+                                <hr />
+                                <p class="mb-0"><i class="fa-solid fa-phone-alt me-2"></i> Call us: +1 (800) 555-0199</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error("Error fetching product:", error);
+                if (error.response?.status === 404) {
+                    heroSection.innerHTML = `
+                        <div class="container car-not-found">
+                            <h1 class="text-white">🚗 Car Not Found</h1>
+                            <p class="text-white-50">Sorry, we couldn't find the vehicle you're looking for.</p>
+                            <a href="shop.html" class="btn-gold mt-3">Browse Our Collection</a>
+                        </div>
+                    `;
+                    bodySection.innerHTML = '';
+                } else {
+                    heroSection.innerHTML = `
+                        <div class="container car-not-found">
+                            <h1 class="text-white">⚠️ Error</h1>
+                            <p class="text-white-50">${error.message}</p>
+                            <a href="shop.html" class="btn-gold mt-3">Back to Shop</a>
+                        </div>
+                    `;
+                    bodySection.innerHTML = '';
+                }
+            }
+        }
+
+        // ── Load details ──
+        if (typeof CONFIG !== 'undefined' && CONFIG.API_BASE_URL) {
+            renderCarDetails();
+        } else {
+            console.error("config.js not loaded or missing API_BASE_URL.");
+            document.getElementById('detailHero').innerHTML = `
+                <div class="container car-not-found">
+                    <h1 class="text-white">⚠️ Configuration Error</h1>
+                    <p class="text-white-50">Please ensure config.js is present and defines CONFIG.API_BASE_URL.</p>
+                </div>
+            `;
+        }
     </script>
+
 </body>
 </html>

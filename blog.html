@@ -263,6 +263,22 @@
         .blog-card .read-more:hover {
             color: #ffc107;
         }
+
+        /* ── Responsive tweaks for 2-col mobile ── */
+        @media (max-width: 576px) {
+            .blog-card img {
+                height: 150px;
+            }
+            .blog-card .body {
+                padding: 14px 16px 18px;
+            }
+            .blog-card h5 {
+                font-size: 16px;
+            }
+            .blog-card p {
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -283,17 +299,8 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center w-100">
                 <a class="navbar-brand" href="index.html">OBerlo</a>
-                <div class="d-flex align-items-center flex-wrap" style="gap: 2px;">
-                    <a class="nav-link-top" href="car-details.html">Car Details</a>
-                    <a class="nav-link-top" href="test-drive.html">Test Drive</a>
-                    <a class="nav-link-top" href="financing.html">Finance</a>
-                    <a class="nav-link-top active" href="blog.html">Blog</a>
-                    <a class="nav-link-top" href="trade-in.html">Trade-In</a>
-                    <a class="nav-link-top" href="faq.html">FAQ</a>
-                    <a class="nav-link-top" href="about.html">About</a>
-                    <a class="nav-link-top" href="contact.html">Contact</a>
-                </div>
-                <input type="text" class="search-box" placeholder="Search..." />
+                <div id="navbar-links"></div>
+                <!-- <input type="text" class="search-box" placeholder="Search..." /> -->
             </div>
         </div>
     </nav>
@@ -309,7 +316,8 @@
         <section class="container py-5">
             <div class="row g-4">
                 <!-- Post 1 -->
-                <div class="col-md-6 col-lg-4">
+                <!-- ✅ Added col-6 for 2 columns on mobile -->
+                <div class="col-6 col-md-6 col-lg-4">
                     <div class="blog-card">
                         <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600" alt="Luxury Car" />
                         <div class="body">
@@ -321,7 +329,7 @@
                     </div>
                 </div>
                 <!-- Post 2 -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-6 col-md-6 col-lg-4">
                     <div class="blog-card">
                         <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600" alt="EV" />
                         <div class="body">
@@ -333,7 +341,7 @@
                     </div>
                 </div>
                 <!-- Post 3 -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-6 col-md-6 col-lg-4">
                     <div class="blog-card">
                         <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=600" alt="Maintenance" />
                         <div class="body">
@@ -345,7 +353,7 @@
                     </div>
                 </div>
                 <!-- Post 4 -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-6 col-md-6 col-lg-4">
                     <div class="blog-card">
                         <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600" alt="Porsche" />
                         <div class="body">
@@ -357,7 +365,7 @@
                     </div>
                 </div>
                 <!-- Post 5 -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-6 col-md-6 col-lg-4">
                     <div class="blog-card">
                         <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600" alt="Mercedes" />
                         <div class="body">
@@ -369,7 +377,7 @@
                     </div>
                 </div>
                 <!-- Post 6 -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-6 col-md-6 col-lg-4">
                     <div class="blog-card">
                         <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600" alt="Bentley" />
                         <div class="body">
@@ -383,10 +391,29 @@
             </div>
         </section>
     </main>
-
-    <footer>
-        <div class="container"><div class="copyright"><p>&copy; 2025 OBerlo. All rights reserved.</p></div></div>
-    </footer>
+    <div id="footer"></div>
+    <script>
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar-links").innerHTML = data;
+                const currentPage = window.location.pathname.split("/").pop() || "index.html";
+                document.querySelectorAll("#navbar-links a").forEach(link => {
+                    if (link.getAttribute("href") === currentPage) {
+                        link.classList.add("active");
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading navbar:", err));
+    </script>
+    <script>
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            })
+            .catch(error => console.error("Error loading footer:", error));
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script>

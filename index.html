@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>O Berlo</title>
+    <title>OBerlo — Luxury Car Dealership</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="icon" href="static/ico.png" type="image/gif" />
-
     <style>
         /* ── Global reset & shared styles ── */
         * {
@@ -15,7 +14,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             background: #f8f9fa;
@@ -31,12 +29,10 @@
             width: 100%;
             z-index: 1000;
         }
-
         .top-navbar.scrolled {
             padding: 10px 0;
             background: rgba(0, 0, 0, 0.98);
         }
-
         .top-navbar .navbar-brand {
             font-size: 28px;
             font-weight: bold;
@@ -44,8 +40,6 @@
             letter-spacing: 2px;
             text-decoration: none;
         }
-
-        /* ── Nav links ── */
         .top-navbar .nav-link-top {
             color: white !important;
             font-weight: 500;
@@ -56,24 +50,19 @@
             padding: 4px 0;
             white-space: nowrap;
         }
-
         .top-navbar .nav-link-top:hover {
             color: #ffc107 !important;
         }
-
         .top-navbar .nav-link-top.active {
             color: #ffc107 !important;
             border-bottom: 2px solid #ffc107;
         }
-
         @media (max-width: 991px) {
             .top-navbar .nav-link-top {
                 font-size: 11px;
                 margin: 0 4px;
             }
         }
-
-        /* ── Search Box ── */
         .search-box {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -83,13 +72,11 @@
             width: 250px;
             transition: all 0.3s;
         }
-
         .search-box:focus {
             background: rgba(255, 255, 255, 0.2);
             outline: none;
             width: 300px;
         }
-
         @media (max-width: 768px) {
             .search-box {
                 width: 140px;
@@ -98,7 +85,6 @@
                 width: 180px;
             }
         }
-
         @media (max-width: 576px) {
             .search-box {
                 width: 100px;
@@ -123,32 +109,26 @@
             padding-top: 80px;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
-
         .sidebar.show {
             left: 0;
         }
-
         .sidebar-header {
             padding: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 20px;
         }
-
         .sidebar-header h4 {
             color: #ffc107;
             margin: 0;
         }
-
         .sidebar-header p {
             color: rgba(255, 255, 255, 0.6);
             font-size: 12px;
             margin: 5px 0 0;
         }
-
         .sidebar .nav-item {
             margin: 5px 0;
         }
-
         .sidebar .nav-link {
             color: white;
             text-decoration: none;
@@ -160,39 +140,31 @@
             border-radius: 8px;
             margin: 0 10px;
         }
-
         .sidebar .nav-link i {
             width: 25px;
             margin-right: 15px;
             font-size: 18px;
         }
-
         .sidebar .nav-link:hover {
             background: #ffc107;
             color: #000;
             transform: translateX(5px);
         }
-
         .sidebar .nav-link:hover i {
             color: #000;
         }
-
         .sidebar .logout-btn {
             margin-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 20px;
         }
-
         .sidebar .logout-btn .nav-link {
             color: #ff6b6b;
         }
-
         .sidebar .logout-btn .nav-link:hover {
             background: #ff6b6b;
             color: white;
         }
-
-        /* ── Sidebar Toggle Button ── */
         .sidebar-toggle {
             position: fixed;
             left: 20px;
@@ -207,18 +179,14 @@
             transition: all 0.3s;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
-
         .sidebar-toggle:hover {
             background: #ffca2c;
             transform: scale(1.05);
         }
-
         .sidebar-toggle i {
             font-size: 20px;
             color: #000;
         }
-
-        /* ── Overlay ── */
         .overlay {
             position: fixed;
             top: 0;
@@ -229,26 +197,22 @@
             z-index: 1000;
             display: none;
         }
-
         .overlay.show {
             display: block;
         }
-
-        /* ── Main content ── */
         main {
             margin-left: 0;
             transition: 0.3s;
             padding-top: 80px;
         }
 
-        /* ── Hero Section ── */
+        /* ── Hero ── */
         .hero {
             min-height: 90vh;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             position: relative;
             overflow: hidden;
         }
-
         .hero::before {
             content: "";
             position: absolute;
@@ -259,14 +223,12 @@
             background: url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1920") center/cover;
             opacity: 0.15;
         }
-
         .hero-content {
             position: relative;
             z-index: 1;
             padding: 100px 0;
         }
-
-        .badge-new {
+        .hero .badge-new {
             background: #ffc107;
             color: #000;
             padding: 5px 15px;
@@ -276,23 +238,19 @@
             display: inline-block;
             margin-bottom: 20px;
         }
-
         .hero h1 {
             font-size: 68px;
             font-weight: 800;
             color: white;
         }
-
         .hero h1 span {
             color: #ffc107;
         }
-
         .hero p {
             font-size: 18px;
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
         }
-
         .btn-custom {
             background: #ffc107;
             color: #000;
@@ -303,15 +261,37 @@
             text-decoration: none;
             display: inline-block;
         }
-
         .btn-custom:hover {
             background: #ffca2c;
             transform: translateY(-3px);
         }
-
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .hero-stats .stat-item {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .hero-stats .stat-item .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffc107;
+        }
+        .hero-stats .stat-item .label {
+            font-size: 14px;
+            opacity: 0.7;
+        }
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 40px;
+            }
+            .hero-stats {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            .hero-stats .stat-item .number {
+                font-size: 22px;
             }
             .sidebar-toggle {
                 top: 70px;
@@ -321,29 +301,222 @@
             }
         }
 
-        /* ── Car Cards ── */
+        /* ── Car Cards (Home Featured) ── */
         .car-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s;
-            margin-bottom: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
-
         .car-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
         }
-
-        .car-image {
-            height: 250px;
+        .car-card .car-image {
+            height: 220px;
             overflow: hidden;
         }
-
-        .car-image img {
+        .car-card .car-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .car-card:hover .car-image img {
+            transform: scale(1.05);
+        }
+        .car-card .card-body {
+            padding: 18px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .car-card .card-body h5 {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .car-card .card-body .subtitle {
+            font-size: 14px;
+            color: #888;
+        }
+        .car-card .card-body .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffc107;
+            margin-top: 6px;
+        }
+        /* ── Spec grid inside home card ── */
+        .spec-grid-home {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin: 10px 0 12px;
+        }
+        .spec-grid-home .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            padding: 2px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .spec-grid-home .spec-item:last-child,
+        .spec-grid-home .spec-item:nth-last-child(2) {
+            border-bottom: none;
+        }
+        .spec-grid-home .spec-item .label {
+            color: #999;
+            font-weight: 400;
+            font-size: 12px;
+            width: 22px;
+            text-align: left;
+        }
+        .spec-grid-home .spec-item .value {
+            color: #1a1a2e;
+            font-weight: 600;
+            font-size: 11px;
+            text-align: right;
+        }
+
+        /* ── Smaller "View Details" button for home cards ── */
+        .btn-outline-gold-sm {
+            background: transparent;
+            color: #ffc107;
+            border: 2px solid #ffc107;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-outline-gold-sm:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* ── Standard "View Details" button ── */
+        .btn-outline-gold {
+            background: transparent;
+            color: #ffc107;
+            border: 2px solid #ffc107;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-outline-gold:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* ── Services Section ── */
+        .service-box {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .service-box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+        }
+        .service-box i {
+            font-size: 42px;
+            color: #ffc107;
+            margin-bottom: 16px;
+        }
+        .service-box h5 {
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        .service-box p {
+            font-size: 14px;
+            color: #777;
+            margin: 0;
+        }
+
+        /* ── Testimonials ── */
+        .testimonial-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s;
+            height: 100%;
+            text-align: center;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+        }
+        .testimonial-card .stars {
+            color: #ffc107;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .testimonial-card .client {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .testimonial-card .client img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffc107;
+        }
+        .testimonial-card .client .name {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .testimonial-card .client .role {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* ── Brands / Partners ── */
+        .brand-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            align-items: center;
+        }
+        .brand-grid .brand-item {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a2e;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+            letter-spacing: 1px;
+        }
+        .brand-grid .brand-item:hover {
+            opacity: 0.8;
         }
 
         /* ── Footer ── */
@@ -352,109 +525,94 @@
             color: white;
             padding: 50px 0 20px;
         }
-
         .copyright {
             text-align: center;
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* ── Responsive tweaks for home cards ── */
+        @media (max-width: 576px) {
+            .spec-grid-home {
+                padding: 6px 10px;
+                gap: 2px 8px;
+            }
+            .spec-grid-home .spec-item {
+                font-size: 10px;
+            }
+            .spec-grid-home .spec-item .label {
+                font-size: 11px;
+                width: 18px;
+            }
+            .spec-grid-home .spec-item .value {
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 
 <body>
-
-    <!-- ===== SIDEBAR TOGGLE ===== -->
     <button class="sidebar-toggle" id="sidebarToggle">
         <i class="fas fa-bars"></i>
     </button>
-
-    <!-- ===== OVERLAY ===== -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- ===== SIDEBAR ===== -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h4>OBerlo</h4>
             <p>Inventory Management System</p>
         </div>
         <ul style="list-style: none; padding-left: 0">
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-home"></i> Home
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="dashboard.html">
-                    <i class="fas fa-chart-line"></i> Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="products.html">
-                    <i class="fas fa-box"></i> Products
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="purchases.html">
-                    <i class="fas fa-shopping-cart"></i> Purchases
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="sales.html">
-                    <i class="fas fa-dollar-sign"></i> Sales
-                </a>
-            </li>
-            <li class="nav-item logout-btn">
-                <a class="nav-link" href="#" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="products.html"><i class="fas fa-box"></i> Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="purchases.html"><i class="fas fa-shopping-cart"></i> Purchases</a></li>
+            <li class="nav-item"><a class="nav-link" href="sales.html"><i class="fas fa-dollar-sign"></i> Sales</a></li>
+            <li class="nav-item logout-btn"><a class="nav-link" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </nav>
 
-    <!-- ===== TOP HORIZONTAL NAVBAR (EXPANDED) ===== -->
+    <!-- TOP NAVBAR -->
     <nav class="top-navbar" id="topNavbar">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center w-100">
-                <!-- Brand (links to home) -->
                 <a class="navbar-brand" href="index.html">OBerlo</a>
-
-                <!-- All page links -->
-                <div class="d-flex align-items-center flex-wrap" style="gap: 2px;">
-                    <a class="nav-link-top active" href="shop.html">Shop</a>
-                    <a class="nav-link-top" href="car-details.html">Car Details</a>
-                    <a class="nav-link-top" href="test-drive.html">Test Drive</a>
-                    <a class="nav-link-top" href="financing.html">Finance</a>
-                    <a class="nav-link-top" href="blog.html">Blog</a>
-                    <a class="nav-link-top" href="trade-in.html">Trade-In</a>
-                    <a class="nav-link-top" href="faq.html">FAQ</a>
-                    <a class="nav-link-top" href="about.html">About</a>
-                    <a class="nav-link-top" href="contact.html">Contact</a>
-                </div>
-
-                <!-- Search Box -->
-                <input type="text" class="search-box" placeholder="Search here..." />
+                <div id="navbar-links"></div>
+                <!-- <input type="text" class="search-box" placeholder="Search here..." /> -->
             </div>
         </div>
     </nav>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main>
-        <!-- Hero Section -->
+        <!-- ===== HERO ===== -->
         <section class="hero">
             <div class="container hero-content">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
-                        <div class="badge-new">New</div>
-                        <h1>Model <span>Cars</span></h1>
+                        <div class="badge-new">Luxury Car Dealer</div>
+                        <h1>Discover Your <span>Dream Car</span></h1>
                         <p>
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris.
+                            Explore our handpicked collection of the world's finest luxury, sports, and hypercars.
+                            From classic elegance to cutting-edge electric performance, we bring you the best of the automotive world.
                         </p>
                         <div>
-                            <a href="#" class="btn-custom">
-                                Shop Now <i class="fas fa-arrow-right"></i>
+                            <a href="shop.html" class="btn-custom">
+                                Browse Collection <i class="fas fa-arrow-right"></i>
                             </a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="number">500+</div>
+                                <div class="label">Vehicles Sold</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="number">98%</div>
+                                <div class="label">Client Satisfaction</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="number">12</div>
+                                <div class="label">Years of Excellence</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -464,69 +622,200 @@
             </div>
         </section>
 
-        <!-- Featured Models -->
-        <section class="container py-5">
+        <!-- ===== FEATURED MODELS (DYNAMIC) ===== -->
+        <section class="container py-5" id="featuredSection">
             <div class="text-center mb-5">
                 <h2>Featured Models</h2>
                 <p>Discover our most popular luxury vehicles</p>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="car-card">
-                        <div class="car-image">
-                            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=400" alt="Lamborghini" />
-                        </div>
-                        <div class="p-3">
-                            <h4>Lamborghini Aventador</h4>
-                            <p class="text-warning fw-bold">$350,000</p>
-                        </div>
+            <div class="row g-4" id="featuredGrid">
+                <!-- Will be injected by JavaScript -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="shop.html" class="btn-outline-gold">View All Vehicles <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </section>
+
+        <!-- ===== WHY CHOOSE US (2 cards per row on mobile) ===== -->
+        <section class="container py-5">
+            <div class="text-center mb-5">
+                <h2>Why Choose OBerlo</h2>
+                <p>Experience automotive excellence like never before</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <div class="service-box">
+                        <i class="fas fa-shield-alt"></i>
+                        <h5>Certified Quality</h5>
+                        <p>Every vehicle undergoes a 150-point inspection and comes with a full service history.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="car-card">
-                        <div class="car-image">
-                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" alt="Porsche" />
-                        </div>
-                        <div class="p-3">
-                            <h4>Porsche 911 Turbo</h4>
-                            <p class="text-warning fw-bold">$180,000</p>
-                        </div>
+                <div class="col-6 col-md-3">
+                    <div class="service-box">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h5>Flexible Financing</h5>
+                        <p>Tailored loans, leases, and payment plans with competitive rates to suit your budget.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="car-card">
-                        <div class="car-image">
-                            <img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=400" alt="Ferrari" />
+                <div class="col-6 col-md-3">
+                    <div class="service-box">
+                        <i class="fas fa-truck"></i>
+                        <h5>Free Nationwide Delivery</h5>
+                        <p>We deliver your dream car to your doorstep with full insurance and transparent tracking.</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="service-box">
+                        <i class="fas fa-headset"></i>
+                        <h5>24/7 Concierge Support</h5>
+                        <p>Our dedicated team is always ready to assist you with any query or request.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== OUR SERVICES (2 cards per row on mobile) ===== -->
+        <section class="py-5" style="background: #f0f2f5;">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Our Premium Services</h2>
+                    <p>Beyond just selling cars – we deliver experiences</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-6 col-md-4">
+                        <div class="service-box">
+                            <i class="fas fa-calendar-check"></i>
+                            <h5>Test Drive</h5>
+                            <p>Book a personalized test drive at your convenience. Experience the thrill before you buy.</p>
+                            <a href="test-drive.html" class="btn-outline-gold mt-2" style="font-size:14px; padding:6px 20px;">Book Now</a>
                         </div>
-                        <div class="p-3">
-                            <h4>Ferrari SF90</h4>
-                            <p class="text-warning fw-bold">$420,000</p>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="service-box">
+                            <i class="fas fa-exchange-alt"></i>
+                            <h5>Trade-In Program</h5>
+                            <p>Get a fair, instant estimate for your current vehicle and upgrade to your dream car today.</p>
+                            <a href="trade-in.html" class="btn-outline-gold mt-2" style="font-size:14px; padding:6px 20px;">Get Quote</a>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="service-box">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <h5>Financing Solutions</h5>
+                            <p>We work with top lenders to offer you the best rates and flexible terms for your next purchase.</p>
+                            <a href="financing.html" class="btn-outline-gold mt-2" style="font-size:14px; padding:6px 20px;">Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- ===== TESTIMONIALS (2 cards per row on mobile) ===== -->
+        <section class="container py-5">
+            <div class="text-center mb-5">
+                <h2>What Our Clients Say</h2>
+                <p>Real stories from real customers</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-6 col-md-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>"The experience was flawless. The team found me the exact spec I wanted and delivered the car to my home. Absolutely thrilled!"</p>
+                        <div class="client">
+                            <img src="https://ui-avatars.com/api/?name=James+Mitchell&size=50&background=ffc107&color=000&bold=true" alt="Client" />
+                            <div>
+                                <div class="name">James Mitchell</div>
+                                <div class="role">CEO, TechCorp</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>"I traded in my old Porsche and upgraded to a Ferrari SF90. The trade-in valuation was fair and the entire process was smooth. Highly recommend!"</p>
+                        <div class="client">
+                            <img src="https://ui-avatars.com/api/?name=Sarah+Chen&size=50&background=ffc107&color=000&bold=true" alt="Client" />
+                            <div>
+                                <div class="name">Sarah Chen</div>
+                                <div class="role">Entrepreneur</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>"The financing options made it possible for me to own my dream car. The team walked me through every step and I couldn't be happier."</p>
+                        <div class="client">
+                            <img src="https://ui-avatars.com/api/?name=Marcus+Wright&size=50&background=ffc107&color=000&bold=true" alt="Client" />
+                            <div>
+                                <div class="name">Marcus Wright</div>
+                                <div class="role">Tech Executive</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== BRANDS / PARTNERS ===== -->
+        <section class="py-5" style="background: #f8f9fa;">
+            <div class="container">
+                <div class="text-center mb-4">
+                    <h5 style="color: #888; font-weight: 300; letter-spacing: 2px;">TRUSTED BY LEADING BRANDS</h5>
+                </div>
+                <div class="brand-grid">
+                    <span class="brand-item">Lamborghini</span>
+                    <span class="brand-item">Porsche</span>
+                    <span class="brand-item">Ferrari</span>
+                    <span class="brand-item">McLaren</span>
+                    <span class="brand-item">Bentley</span>
+                    <span class="brand-item">Audi</span>
+                    <span class="brand-item">Mercedes-AMG</span>
+                    <span class="brand-item">BMW M</span>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        <div class="container">
-            <div class="copyright">
-                <p>&copy; 2025 OBerlo. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer"></div>
 
     <!-- ===== SCRIPTS ===== -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+    <script src="config.js"></script>
 
     <script>
-        axios.defaults.withCredentials = true;
+        // ── Load navbar ──
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar-links").innerHTML = data;
+                const currentPage = window.location.pathname.split("/").pop() || "index.html";
+                document.querySelectorAll("#navbar-links a").forEach(link => {
+                    if (link.getAttribute("href") === currentPage) {
+                        link.classList.add("active");
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading navbar:", err));
 
-        // ── Sidebar toggle ──
+        // ── Load footer ──
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            })
+            .catch(error => console.error("Error loading footer:", error));
+
+        // ── Sidebar logic ──
         const sidebar = document.getElementById("sidebar");
         const toggleBtn = document.getElementById("sidebarToggle");
         const overlay = document.getElementById("overlay");
@@ -546,7 +835,6 @@
         if (toggleBtn) {
             toggleBtn.addEventListener("click", openSidebar);
         }
-
         if (overlay) {
             overlay.addEventListener("click", closeSidebar);
         }
@@ -559,7 +847,6 @@
             });
         });
 
-        // ── Navbar scroll effect ──
         window.addEventListener("scroll", function() {
             const navbar = document.querySelector(".top-navbar");
             if (window.scrollY > 50) {
@@ -575,14 +862,114 @@
             logoutBtn.addEventListener("click", async function(e) {
                 e.preventDefault();
                 try {
-                    await axios.post("http://164.90.221.47:8000/logout", {}, { withCredentials: true });
+                    await axios.post(`${CONFIG.API_BASE_URL}/logout`, {}, { withCredentials: true });
                 } catch (error) {
                     console.error("Logout error:", error);
                 }
                 window.location.href = "login.html";
             });
         }
-    </script>
 
+        // ── Render featured cars from API ──
+        async function renderFeaturedCars() {
+            const grid = document.getElementById('featuredGrid');
+            if (!grid) return;
+
+            try {
+                const response = await axios.get(`${CONFIG.API_BASE_URL}/products`, { withCredentials: true });
+                const allProducts = response.data;
+                // Get first 6 products as featured
+                const featured = allProducts.slice(0, 6);
+
+                grid.innerHTML = '';
+                featured.forEach(product => {
+                    // Map backend fields to display
+                    const priceDisplay = product.display_price || ('$' + Number(product.selling_price).toLocaleString());
+                    const imageUrl = product.image || '';
+                    const badge = product.badge || 'Featured';
+                    const subtitle = product.subtitle || product.engine || '';
+
+                    const col = document.createElement('div');
+                    col.className = 'col-6 col-md-4 col-lg-4';
+                    col.innerHTML = `
+                        <div class="car-card">
+                            <div class="car-image">
+                                <img src="${imageUrl}" alt="${product.name}" loading="lazy" />
+                            </div>
+                            <div class="card-body">
+                                <h5>${product.name}</h5>
+                                <div class="subtitle">${subtitle}</div>
+                                <div class="price">${priceDisplay}</div>
+
+                                <!-- Spec grid with icons -->
+                                <div class="spec-grid-home">
+                                    <div class="spec-item">
+                                        <span class="label"><i class="fa-solid fa-gear" title="Engine"></i></span>
+                                        <span class="value">${product.engine || '—'}</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="label"><i class="fa-solid fa-horse-head" title="Horsepower"></i></span>
+                                        <span class="value">${product.horsepower || '—'}</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="label"><i class="fa-solid fa-clock" title="0-60 mph"></i></span>
+                                        <span class="value">${product.zero_to_sixty || '—'}</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="label"><i class="fa-solid fa-gauge-high" title="Top Speed"></i></span>
+                                        <span class="value">${product.top_speed || '—'}</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="label"><i class="fa-solid fa-gears" title="Transmission"></i></span>
+                                        <span class="value">${product.transmission || '—'}</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="label"><i class="fa-solid fa-road" title="Drivetrain"></i></span>
+                                        <span class="value">${product.drivetrain || '—'}</span>
+                                    </div>
+                                </div>
+
+                                <a href="car-details.html?id=${product.id}" class="btn-outline-gold-sm mt-2" style="align-self:flex-start;">
+                                    View Details <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(col);
+                });
+            } catch (error) {
+                console.error("Error fetching products:", error);
+                if (error.response?.status === 401) {
+                    window.location.href = "login.html";
+                } else {
+                    grid.innerHTML = `
+                        <div class="col-12">
+                            <div class="no-results">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h4>Error loading vehicles</h4>
+                                <p>${error.message}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // Check config and load
+        if (typeof CONFIG !== 'undefined' && CONFIG.API_BASE_URL) {
+            renderFeaturedCars();
+        } else {
+            console.error("config.js not loaded or missing API_BASE_URL.");
+            document.getElementById('featuredGrid').innerHTML = `
+                <div class="col-12">
+                    <div class="no-results">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Configuration Error</h4>
+                        <p>Please ensure config.js is present and defines CONFIG.API_BASE_URL.</p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
 </body>
 </html>

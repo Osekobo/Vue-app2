@@ -444,6 +444,26 @@
             color: #000;
             transform: translateY(-3px);
         }
+
+        /* ── Responsive adjustments for contact info cards ── */
+        @media (max-width: 576px) {
+            .contact-info-card {
+                padding: 20px 18px;
+            }
+            .contact-info-card .icon-wrap {
+                width: 48px;
+                height: 48px;
+            }
+            .contact-info-card .icon-wrap i {
+                font-size: 20px;
+            }
+            .contact-info-card h5 {
+                font-size: 15px;
+            }
+            .contact-info-card p {
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
@@ -502,18 +522,8 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center w-100">
                 <a class="navbar-brand" href="index.html">OBerlo</a>
-                <div class="d-flex align-items-center flex-wrap" style="gap: 2px;">
-                    <a class="nav-link-top" href="shop.html">Shop</a>
-                    <a class="nav-link-top" href="car-details.html">Car Details</a>
-                    <a class="nav-link-top" href="test-drive.html">Test Drive</a>
-                    <a class="nav-link-top" href="financing.html">Finance</a>
-                    <a class="nav-link-top" href="blog.html">Blog</a>
-                    <a class="nav-link-top" href="trade-in.html">Trade-In</a>
-                    <a class="nav-link-top" href="faq.html">FAQ</a>
-                    <a class="nav-link-top" href="about.html">About</a>
-                    <a class="nav-link-top active" href="contact.html">Contact</a>
-                </div>
-                <input type="text" class="search-box" placeholder="Search..." />
+                <div id="navbar-links"></div>
+                <!-- <input type="text" class="search-box" placeholder="Search..." /> -->
             </div>
         </div>
     </nav>
@@ -563,56 +573,63 @@
                         </div>
                     </div>
 
-                    <!-- Right: Contact Info Cards -->
+                    <!-- Right: Contact Info Cards (2 per row on mobile, 1 per row on tablet+) -->
                     <div class="col-lg-5">
-                        <div class="d-flex flex-column gap-3">
-
-                            <div class="contact-info-card">
-                                <div class="icon-wrap">
-                                    <i class="fas fa-location-dot"></i>
-                                </div>
-                                <h5>Visit Us</h5>
-                                <p>450 Park Avenue, Suite 1200<br />New York, NY 10022</p>
-                            </div>
-
-                            <div class="contact-info-card">
-                                <div class="icon-wrap">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <h5>Call Us</h5>
-                                <p>+1 (800) 555‑0199</p>
-                            </div>
-
-                            <div class="contact-info-card">
-                                <div class="icon-wrap">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <h5>Email Us</h5>
-                                <p>concierge@oberlo.com</p>
-                            </div>
-
-                            <div class="contact-info-card">
-                                <div class="icon-wrap">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <h5>Working Hours</h5>
-                                <p>Mon–Sat: 9:00 AM – 7:00 PM<br />Sunday: Closed</p>
-                            </div>
-
-                            <!-- Social Links -->
-                            <div class="contact-info-card" style="flex-direction: row; align-items: center; gap: 12px; flex-wrap: wrap;">
-                                <span style="font-weight: 600; color: #1a1a2e; margin-right: 8px;">Follow us:</span>
-                                <div class="social-links">
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-youtube"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                        <div class="row g-3">
+                            <!-- Card 1: Visit Us -->
+                            <div class="col-6 col-md-12">
+                                <div class="contact-info-card">
+                                    <div class="icon-wrap">
+                                        <i class="fas fa-location-dot"></i>
+                                    </div>
+                                    <h5>Visit Us</h5>
+                                    <p>450 Park Avenue, Suite 1200<br />New York, NY 10022</p>
                                 </div>
                             </div>
-
+                            <!-- Card 2: Call Us -->
+                            <div class="col-6 col-md-12">
+                                <div class="contact-info-card">
+                                    <div class="icon-wrap">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <h5>Call Us</h5>
+                                    <p>+1 (800) 555‑0199</p>
+                                </div>
+                            </div>
+                            <!-- Card 3: Email Us -->
+                            <div class="col-6 col-md-12">
+                                <div class="contact-info-card">
+                                    <div class="icon-wrap">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <h5>Email Us</h5>
+                                    <p>concierge@oberlo.com</p>
+                                </div>
+                            </div>
+                            <!-- Card 4: Working Hours -->
+                            <div class="col-6 col-md-12">
+                                <div class="contact-info-card">
+                                    <div class="icon-wrap">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <h5>Working Hours</h5>
+                                    <p>Mon–Sat: 9:00 AM – 7:00 PM<br />Sunday: Closed</p>
+                                </div>
+                            </div>
+                            <!-- Card 5: Social Links (full width) -->
+                            <div class="col-12">
+                                <div class="contact-info-card" style="flex-direction: row; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                    <span style="font-weight: 600; color: #1a1a2e; margin-right: 8px;">Follow us:</span>
+                                    <div class="social-links">
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-youtube"></i></a>
+                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Map Placeholder -->
@@ -628,15 +645,26 @@
     </main>
 
     <!-- ===== FOOTER ===== -->
-    <footer>
-        <div class="container">
-            <div class="copyright">
-                <p>&copy; 2025 OBerlo. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer"></div>
 
     <!-- ===== SCRIPTS ===== -->
+    <script>
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar-links").innerHTML = data;
+
+                // Highlight current page
+                const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+                document.querySelectorAll("#navbar-links a").forEach(link => {
+                    if (link.getAttribute("href") === currentPage) {
+                        link.classList.add("active");
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading navbar:", err));
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js">
@@ -708,6 +736,13 @@
             this.reset();
         });
     </script>
-
+    <script>
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            })
+            .catch(error => console.error("Error loading footer:", error));
+    </script>
 </body>
 </html>

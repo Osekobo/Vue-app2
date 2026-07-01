@@ -206,11 +206,20 @@
         </div>
       </div>
     </main>
-
-    <footer>
+    <div id="footer"></div>
+    <!-- <footer>
       <p class="mb-0">&copy; 2025 O Berlo. All rights reserved.</p>
-    </footer>
-
+    </footer> -->
+    <script>
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        })
+        .catch((error) => console.error("Error loading footer:", error));
+    </script>
+    <script src="config.js"></script>
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
     <script>
@@ -253,16 +262,16 @@
               this.loading = true;
 
               const [sppRes, rppRes, pppRes, ppdRes] = await Promise.all([
-                axios.get("http://164.90.221.47:8000/dashboard/spp", {
+                axios.get(`${CONFIG.API_BASE_URL}/dashboard/spp`, {
                   withCredentials: true,
                 }),
-                axios.get("http://164.90.221.47:8000/dashboard/rpp", {
+                axios.get(`${CONFIG.API_BASE_URL}/dashboard/rpp`, {
                   withCredentials: true,
                 }),
-                axios.get("http://164.90.221.47:8000/dashboard/ppp", {
+                axios.get(`${CONFIG.API_BASE_URL}/dashboard/ppp`, {
                   withCredentials: true,
                 }),
-                axios.get("http://164.90.221.47:8000/dashboard/ppd", {
+                axios.get(`${CONFIG.API_BASE_URL}/dashboard/ppd`, {
                   withCredentials: true,
                 }),
               ]);
