@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OBerlo — Products Management</title>
+    <title>OBerlo — Inventory Management</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,7 +14,7 @@
     />
     <link rel="icon" href="../static/ico.png" type="image/gif" />
     <style>
-      /* ── Global & shared styles ── */
+      /* ── Global & shared styles (unchanged) ── */
       * {
         margin: 0;
         padding: 0;
@@ -431,6 +431,10 @@
         .form-section-title {
           font-size: 14px;
         }
+        #imagePreviewRow .col-4 {
+          flex: 0 0 auto;
+          width: 33.333%;
+        }
       }
     </style>
   </head>
@@ -461,17 +465,17 @@
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="products.html"
-            ><i class="fas fa-box"></i> Products</a
+            ><i class="fas fa-car"></i> Inventory</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" href="purchases.html"
-            ><i class="fas fa-shopping-cart"></i> Purchases</a
+            ><i class="fas fa-truck"></i> Purchase Orders</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" href="sales.html"
-            ><i class="fas fa-dollar-sign"></i> Sales</a
+            ><i class="fas fa-dollar-sign"></i> Vehicle Sales</a
           >
         </li>
         <li class="nav-item logout-btn">
@@ -498,15 +502,15 @@
             class="page-header d-flex justify-content-between align-items-center flex-wrap"
           >
             <div>
-              <h1><i class="fas fa-box me-2"></i>Products Management</h1>
-              <p>Complete CRUD for your car inventory – all fields included</p>
+              <h1><i class="fas fa-car me-2"></i>Vehicle Inventory</h1>
+              <p>Complete management for your car yard – all fields included</p>
             </div>
             <button
               type="button"
               class="btn-add mt-2 mt-md-0"
               @click="openAddModal"
             >
-              <i class="fas fa-plus me-2"></i>Add New Product
+              <i class="fas fa-plus me-2"></i>Add New Vehicle
             </button>
           </div>
 
@@ -516,7 +520,7 @@
               class="spinner-border text-warning"
               style="width: 3rem; height: 3rem"
             ></div>
-            <p class="text-muted mt-3">Loading products...</p>
+            <p class="text-muted mt-3">Loading inventory...</p>
           </div>
 
           <div v-else>
@@ -526,7 +530,7 @@
                 <div class="stat-card">
                   <i class="fas fa-car"></i>
                   <h3>{{ products.length }}</h3>
-                  <p>Total Products</p>
+                  <p>Total Vehicles</p>
                 </div>
               </div>
               <div class="col-md-3 col-6">
@@ -559,7 +563,7 @@
                   <tr>
                     <th>ID</th>
                     <th>Image</th>
-                    <th>Name</th>
+                    <th>Vehicle Name</th>
                     <th>Model</th>
                     <th>Year</th>
                     <th>Condition</th>
@@ -578,7 +582,7 @@
                       <img
                         v-if="prod.image"
                         :src="prod.image"
-                        alt="Product"
+                        alt="Vehicle"
                         class="product-img"
                       />
                       <span v-else class="text-muted">—</span>
@@ -622,7 +626,7 @@
                   </tr>
                   <tr v-if="products.length === 0">
                     <td colspan="12" class="text-center text-muted py-4">
-                      No products found. Click "Add New Product" to get started.
+                      No vehicles found. Click "Add New Vehicle" to get started.
                     </td>
                   </tr>
                 </tbody>
@@ -632,7 +636,7 @@
         </div>
       </div>
 
-      <!-- ===== ADD / EDIT PRODUCT MODAL (ALL FIELDS, REUSABLE) ===== -->
+      <!-- ===== ADD / EDIT VEHICLE MODAL ===== -->
       <div
         class="modal fade"
         id="productModal"
@@ -643,7 +647,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="modalTitle">
-                <i class="fas fa-plus-circle me-2"></i>Add New Product
+                <i class="fas fa-plus-circle me-2"></i>Add New Vehicle
               </h1>
               <button
                 type="button"
@@ -660,7 +664,7 @@
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label class="form-label"
-                      >Car Name <span class="text-danger">*</span></label
+                      >Vehicle Name <span class="text-danger">*</span></label
                     >
                     <input
                       type="text"
@@ -804,23 +808,27 @@
                   <i class="fas fa-image me-2"></i>Images
                 </div>
                 <div class="row g-3">
-                  <div class="col-md-6">
-                    <label class="form-label">Image URL (thumbnail)</label>
+                  <div class="col-12">
+                    <label class="form-label">Upload Images (select multiple)</label>
                     <input
-                      type="text"
-                      id="prodImage"
+                      type="file"
+                      id="prodImageFile"
                       class="form-control form-control-custom"
-                      placeholder="https://images.unsplash.com/..."
+                      accept="image/*"
+                      multiple
                     />
+                    <small class="text-muted" style="color: rgba(255,255,255,0.5) !important;"
+                      >Select one or more images. The first will be used as main thumbnail, the second as hero image.</small
+                    >
                   </div>
-                  <div class="col-md-6">
-                    <label class="form-label">Hero Image URL (large)</label>
-                    <input
-                      type="text"
-                      id="prodHero"
-                      class="form-control form-control-custom"
-                      placeholder="https://images.unsplash.com/..."
-                    />
+                  <!-- Preview container -->
+                  <div class="col-12" id="imagePreviewContainer">
+                    <div class="row g-2" id="imagePreviewRow"></div>
+                  </div>
+                  <!-- Hidden fallback inputs -->
+                  <div style="display: none;">
+                    <input type="text" id="prodImage" class="form-control form-control-custom" />
+                    <input type="text" id="prodHero" class="form-control form-control-custom" />
                   </div>
                 </div>
 
@@ -936,7 +944,7 @@
                 id="saveProductBtn"
               >
                 <i class="fas fa-save me-2"></i
-                ><span id="saveBtnText">Add Product</span>
+                ><span id="saveBtnText">Add Vehicle</span>
               </button>
             </div>
           </div>
@@ -972,6 +980,7 @@
           loading: true,
           editingId: null,
           modalInstance: null,
+          selectedImages: [],
         },
         computed: {
           totalValue: function () {
@@ -1028,8 +1037,8 @@
           openAddModal() {
             this.editingId = null;
             document.getElementById("modalTitle").innerHTML =
-              '<i class="fas fa-plus-circle me-2"></i>Add New Product';
-            document.getElementById("saveBtnText").innerText = "Add Product";
+              '<i class="fas fa-plus-circle me-2"></i>Add New Vehicle';
+            document.getElementById("saveBtnText").innerText = "Add Vehicle";
             this.resetForm();
             this.modalInstance = new bootstrap.Modal(
               document.getElementById("productModal"),
@@ -1044,8 +1053,8 @@
 
             this.editingId = id;
             document.getElementById("modalTitle").innerHTML =
-              '<i class="fas fa-edit me-2"></i>Edit Product';
-            document.getElementById("saveBtnText").innerText = "Update Product";
+              '<i class="fas fa-edit me-2"></i>Edit Vehicle';
+            document.getElementById("saveBtnText").innerText = "Update Vehicle";
 
             // Populate all fields
             document.getElementById("prodName").value = product.name || "";
@@ -1064,6 +1073,8 @@
             document.getElementById("prodImage").value = product.image || "";
             document.getElementById("prodHero").value =
               product.hero_image || "";
+            this.showExistingImagePreview(product.image, product.hero_image);
+
             document.getElementById("prodEngine").value = product.engine || "";
             document.getElementById("prodHp").value = product.horsepower || "";
             document.getElementById("prodTopSpeed").value =
@@ -1088,6 +1099,56 @@
             this.modalInstance.show();
           },
 
+          // ── Show existing images in preview ──
+          showExistingImagePreview(imageUrl, heroUrl) {
+            const previewRow = document.getElementById("imagePreviewRow");
+            previewRow.innerHTML = "";
+            if (imageUrl) {
+              this.addPreview(imageUrl, "Main");
+            }
+            if (heroUrl) {
+              this.addPreview(heroUrl, "Hero");
+            }
+          },
+
+          // ── Helper to add a preview image ──
+          addPreview(src, label) {
+            const previewRow = document.getElementById("imagePreviewRow");
+            const col = document.createElement("div");
+            col.className = "col-4 col-md-2";
+            col.innerHTML = `
+              <div class="position-relative">
+                <img src="${src}" class="img-fluid rounded" style="height:80px;object-fit:cover;width:100%;" />
+                <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-1" style="font-size:10px;">
+                  ${label}
+                </span>
+              </div>
+            `;
+            previewRow.appendChild(col);
+          },
+
+          // ── Handle file selection ──
+          handleImageFiles(files) {
+            const previewRow = document.getElementById("imagePreviewRow");
+            previewRow.innerHTML = "";
+            const fileArray = Array.from(files).slice(0, 2);
+
+            fileArray.forEach((file, index) => {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                const dataUrl = e.target.result;
+                if (index === 0) {
+                  document.getElementById("prodImage").value = dataUrl;
+                } else if (index === 1) {
+                  document.getElementById("prodHero").value = dataUrl;
+                }
+                const label = index === 0 ? "Main" : "Hero";
+                this.addPreview(dataUrl, label);
+              };
+              reader.readAsDataURL(file);
+            });
+          },
+
           // ── Reset Form ──
           resetForm() {
             document.getElementById("prodName").value = "";
@@ -1110,9 +1171,11 @@
             document.getElementById("prodSubtitle").value = "";
             document.getElementById("prodDescription").value = "";
             document.getElementById("prodFeatures").value = "";
+            document.getElementById("prodImageFile").value = "";
+            document.getElementById("imagePreviewRow").innerHTML = "";
           },
 
-          // ── Save Product (Add or Update) ──
+          // ── Save Vehicle ──
           async saveProduct() {
             const data = {
               name: document.getElementById("prodName").value.trim(),
@@ -1169,51 +1232,43 @@
             }
 
             try {
-              let response;
               if (this.editingId) {
-                // UPDATE
-                response = await axios.put(
+                await axios.put(
                   `${CONFIG.API_BASE_URL}/products/${this.editingId}`,
                   data,
                 );
-                alert("✅ Product updated successfully!");
+                alert("✅ Vehicle updated successfully!");
               } else {
-                // CREATE
-                response = await axios.post(
+                await axios.post(
                   `${CONFIG.API_BASE_URL}/products`,
                   data,
                 );
-                alert("✅ Product added successfully!");
+                alert("✅ Vehicle added successfully!");
               }
 
-              // Close modal
               this.modalInstance?.hide();
-
-              // Reset form
               this.resetForm();
               this.editingId = null;
-
-              // Refresh list
               await this.getProducts();
             } catch (error) {
               alert(
-                "❌ Failed to save product:\n" +
+                "❌ Failed to save vehicle:\n" +
                   (error.response?.data?.detail || error.message),
               );
             }
           },
 
-          // ── Delete Product ──
+          // ── Delete Vehicle ──
           async deleteProduct(id) {
-            if (!confirm("Are you sure you want to delete this product?"))
+            if (!confirm("Are you sure you want to delete this vehicle?"))
               return;
             try {
               await axios.delete(`${CONFIG.API_BASE_URL}/products/${id}`);
-              alert("✅ Product deleted successfully!");
+              alert("✅ Vehicle deleted successfully!");
               await this.getProducts();
             } catch (error) {
               alert(
-                "❌ Failed to delete product:\n" +
+                "❌ Failed to delete vehicle:\n" +
                   (error.response?.data?.detail || error.message),
               );
             }
@@ -1222,14 +1277,12 @@
         mounted() {
           this.getProducts();
 
-          // ── Save button listener ──
           document
             .getElementById("saveProductBtn")
             .addEventListener("click", () => {
               this.saveProduct();
             });
 
-          // ── Fix accessibility warning on modal close ──
           document.querySelectorAll(".modal").forEach(function (modal) {
             modal.addEventListener("hide.bs.modal", function () {
               var focusedElement = document.activeElement;
@@ -1237,6 +1290,14 @@
                 focusedElement.blur();
               }
             });
+          });
+
+          const fileInput = document.getElementById("prodImageFile");
+          const app = this;
+          fileInput.addEventListener("change", function (e) {
+            if (this.files.length) {
+              app.handleImageFiles(this.files);
+            }
           });
         },
       });

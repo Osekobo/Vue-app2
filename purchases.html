@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OBerlo — Purchases Management</title>
+    <title>OBerlo — Purchase Orders</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -235,7 +235,7 @@
         border-color: #ffc107;
         box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.10);
       }
-      .btn-add-cart {
+      .btn-add-order {
         background: #ffc107;
         color: #000;
         border: none;
@@ -244,11 +244,11 @@
         font-weight: 600;
         transition: all 0.3s;
       }
-      .btn-add-cart:hover {
+      .btn-add-order:hover {
         background: #ffca2c;
         transform: scale(1.02);
       }
-      .btn-purchase {
+      .btn-place-order {
         background: #28a745;
         color: #fff;
         border: none;
@@ -259,17 +259,17 @@
         font-size: 15px;
         width: 100%;
       }
-      .btn-purchase:hover {
+      .btn-place-order:hover {
         background: #218838;
         transform: translateY(-2px);
         box-shadow: 0 8px 24px rgba(40, 167, 69, 0.25);
       }
-      .btn-purchase:disabled {
+      .btn-place-order:disabled {
         opacity: 0.6;
         cursor: not-allowed;
         transform: none;
       }
-      .cart-item-remove {
+      .order-item-remove {
         color: #dc3545;
         cursor: pointer;
         transition: all 0.2s;
@@ -277,14 +277,14 @@
         border: none;
         padding: 4px 8px;
       }
-      .cart-item-remove:hover {
+      .order-item-remove:hover {
         color: #c82333;
         transform: scale(1.2);
       }
-      .cart-table td {
+      .order-table td {
         vertical-align: middle;
       }
-      .cart-total {
+      .order-total {
         font-weight: 700;
         font-size: 1.1rem;
       }
@@ -312,8 +312,8 @@
         .form-card {
           padding: 16px;
         }
-        .btn-add-cart,
-        .btn-purchase {
+        .btn-add-order,
+        .btn-place-order {
           width: 100%;
         }
       }
@@ -346,17 +346,17 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="products.html"
-            ><i class="fas fa-box"></i> Products</a
+            ><i class="fas fa-car"></i> Inventory</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="purchases.html"
-            ><i class="fas fa-shopping-cart"></i> Purchases</a
+            ><i class="fas fa-truck"></i> Purchase Orders</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" href="sales.html"
-            ><i class="fas fa-dollar-sign"></i> Sales</a
+            ><i class="fas fa-dollar-sign"></i> Vehicle Sales</a
           >
         </li>
         <li class="nav-item logout-btn">
@@ -380,8 +380,8 @@
         <div id="app">
           <!-- Page Header -->
           <div class="page-header">
-            <h1><i class="fas fa-shopping-cart me-2"></i>Purchases Management</h1>
-            <p>Build a purchase order with multiple cars and record them together</p>
+            <h1><i class="fas fa-truck me-2"></i>Purchase Orders</h1>
+            <p>Record incoming vehicle purchases from suppliers to add to your yard inventory.</p>
           </div>
 
           <!-- Loading -->
@@ -398,16 +398,16 @@
             <div class="row g-4 mb-4">
               <div class="col-md-3 col-6">
                 <div class="stat-card">
-                  <i class="fas fa-shopping-cart"></i>
+                  <i class="fas fa-file-invoice"></i>
                   <h3>{{ purchases.length }}</h3>
-                  <p>Total Purchases</p>
+                  <p>Total Orders</p>
                 </div>
               </div>
               <div class="col-md-3 col-6">
                 <div class="stat-card">
-                  <i class="fas fa-boxes"></i>
+                  <i class="fas fa-car"></i>
                   <h3>{{ totalQuantity }}</h3>
-                  <p>Total Items</p>
+                  <p>Vehicles Purchased</p>
                 </div>
               </div>
               <div class="col-md-3 col-6">
@@ -419,39 +419,38 @@
               </div>
               <div class="col-md-3 col-6">
                 <div class="stat-card">
-                  <i class="fas fa-car"></i>
+                  <i class="fas fa-tags"></i>
                   <h3>{{ uniqueProducts }}</h3>
-                  <p>Unique Products</p>
+                  <p>Unique Models</p>
                 </div>
               </div>
             </div>
 
-            <!-- Purchase Builder (Cart) -->
+            <!-- Purchase Order Builder -->
             <div class="row g-4 mb-4">
-              <!-- Add to Cart Section -->
+              <!-- Add Vehicle Section -->
               <div class="col-lg-5">
                 <div class="form-card">
                   <h5 class="mb-3">
-                    <i class="fas fa-plus-circle text-warning me-2"></i>Add to
-                    Cart
+                    <i class="fas fa-plus-circle text-warning me-2"></i>Add Vehicle to Order
                   </h5>
                   <div class="mb-3">
                     <label class="form-label"
-                      >Select Product <span class="text-danger">*</span></label
+                      >Select Vehicle <span class="text-danger">*</span></label
                     >
                     <select
                       class="form-select"
                       v-model="selectedProductId"
                       required
                     >
-                      <option value="">Choose a car...</option>
+                      <option value="">Choose a vehicle...</option>
                       <option
                         v-for="prod in products"
                         :key="prod.id"
                         :value="prod.id"
                       >
-                        {{ prod.name }} — KSh
-                        {{ formatNumber(prod.selling_price) }}
+                        {{ prod.name }} ({{ prod.model }}) — KSh
+                        {{ formatNumber(prod.buying_price) }}
                       </option>
                     </select>
                   </div>
@@ -463,48 +462,48 @@
                       type="number"
                       class="form-control"
                       v-model="quantity"
-                      placeholder="Enter quantity"
+                      placeholder="Number of units"
                       min="1"
                       required
                     />
                   </div>
-                  <button class="btn-add-cart w-100" @click="addToCart">
-                    <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                  <button class="btn-add-order w-100" @click="addToOrder">
+                    <i class="fas fa-plus me-2"></i>Add Vehicle
                   </button>
                 </div>
               </div>
 
-              <!-- Cart Summary -->
+              <!-- Current Order Summary -->
               <div class="col-lg-7">
                 <div class="form-card">
                   <div
                     class="d-flex justify-content-between align-items-center mb-3"
                   >
                     <h5 class="mb-0">
-                      <i class="fas fa-shopping-cart text-warning me-2"></i
-                      >Current Cart
+                      <i class="fas fa-clipboard-list text-warning me-2"></i
+                      >Current Order
                     </h5>
                     <span class="badge bg-warning text-dark"
-                      >{{ cart.length }} items</span
+                      >{{ orderItems.length }} items</span
                     >
                   </div>
-                  <div v-if="cart.length === 0" class="text-center py-4">
-                    <p class="text-muted mb-0">Cart is empty</p>
+                  <div v-if="orderItems.length === 0" class="text-center py-4">
+                    <p class="text-muted mb-0">Order is empty</p>
                   </div>
                   <div v-else>
                     <div class="table-responsive">
-                      <table class="table cart-table">
+                      <table class="table order-table">
                         <thead>
                           <tr>
-                            <th>Product</th>
+                            <th>Vehicle</th>
                             <th>Qty</th>
-                            <th>Unit Price</th>
+                            <th>Unit Cost</th>
                             <th>Subtotal</th>
                             <th></th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="(item, index) in cart" :key="index">
+                          <tr v-for="(item, index) in orderItems" :key="index">
                             <td>{{ item.name }}</td>
                             <td>
                               <input
@@ -513,7 +512,7 @@
                                 style="width: 70px"
                                 v-model="item.quantity"
                                 min="1"
-                                @change="updateCart"
+                                @change="updateOrder"
                               />
                             </td>
                             <td>KSh {{ formatNumber(item.unit_price) }}</td>
@@ -525,8 +524,8 @@
                             </td>
                             <td>
                               <button
-                                class="cart-item-remove"
-                                @click="removeFromCart(index)"
+                                class="order-item-remove"
+                                @click="removeFromOrder(index)"
                                 title="Remove"
                               >
                                 <i class="fas fa-times"></i>
@@ -536,20 +535,20 @@
                         </tbody>
                         <tfoot>
                           <tr>
-                            <th colspan="3" class="text-end cart-total">
-                              Total:
+                            <th colspan="3" class="text-end order-total">
+                              Total Cost:
                             </th>
-                            <th colspan="2" class="cart-total">
-                              KSh {{ formatNumber(cartTotal) }}
+                            <th colspan="2" class="order-total">
+                              KSh {{ formatNumber(orderTotal) }}
                             </th>
                           </tr>
                         </tfoot>
                       </table>
                     </div>
                     <button
-                      class="btn-purchase"
-                      @click="placePurchase"
-                      :disabled="cart.length === 0 || submitting"
+                      class="btn-place-order"
+                      @click="placeOrder"
+                      :disabled="orderItems.length === 0 || submitting"
                     >
                       <i class="fas fa-check me-2"></i>
                       {{
@@ -563,18 +562,18 @@
               </div>
             </div>
 
-            <!-- Purchases History Table -->
+            <!-- Purchase History Table -->
             <div class="table-responsive">
               <table class="table purchase-table">
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Product</th>
+                    <th>Order ID</th>
+                    <th>Vehicle</th>
                     <th>Model</th>
-                    <th>Quantity</th>
-                    <th>Unit Buying</th>
-                    <th>Unit Selling</th>
-                    <th>Total Cost</th>
+                    <th>Qty</th>
+                    <th>Unit Cost</th>
+                    <th>Selling Price</th>
+                    <th>Total Spent</th>
                     <th>Date</th>
                   </tr>
                 </thead>
@@ -600,7 +599,7 @@
                   </tr>
                   <tr v-if="purchases.length === 0">
                     <td colspan="8" class="text-center text-muted py-4">
-                      No purchases recorded yet.
+                      No purchase orders recorded yet.
                     </td>
                   </tr>
                 </tbody>
@@ -640,7 +639,7 @@
           loading: true,
           selectedProductId: null,
           quantity: 1,
-          cart: [],
+          orderItems: [],
           submitting: false,
         },
         computed: {
@@ -666,10 +665,10 @@
             }
             return ids.size;
           },
-          cartTotal() {
+          orderTotal() {
             let total = 0;
-            for (let i = 0; i < this.cart.length; i++) {
-              total += this.cart[i].quantity * this.cart[i].unit_price;
+            for (let i = 0; i < this.orderItems.length; i++) {
+              total += this.orderItems[i].quantity * this.orderItems[i].unit_price;
             }
             return total;
           },
@@ -706,9 +705,9 @@
               this.loading = false;
             }
           },
-          addToCart() {
+          addToOrder() {
             if (!this.selectedProductId || !this.quantity || this.quantity < 1) {
-              alert("Please select a product and enter a valid quantity.");
+              alert("Please select a vehicle and enter a valid quantity.");
               return;
             }
             const product = this.products.find(
@@ -716,14 +715,14 @@
             );
             if (!product) return;
 
-            // Check if already in cart
-            const existing = this.cart.find(
+            // Check if already in order
+            const existing = this.orderItems.find(
               (item) => item.product_id === product.id
             );
             if (existing) {
               existing.quantity += this.quantity;
             } else {
-              this.cart.push({
+              this.orderItems.push({
                 product_id: product.id,
                 name: product.name,
                 unit_price: product.buying_price,
@@ -734,26 +733,25 @@
             this.selectedProductId = null;
             this.quantity = 1;
           },
-          removeFromCart(index) {
-            this.cart.splice(index, 1);
+          removeFromOrder(index) {
+            this.orderItems.splice(index, 1);
           },
-          updateCart() {
-            // just a placeholder to trigger reactivity
-            this.cart = [...this.cart];
+          updateOrder() {
+            // trigger reactivity
+            this.orderItems = [...this.orderItems];
           },
-          async placePurchase() {
-            if (this.cart.length === 0) return;
+          async placeOrder() {
+            if (this.orderItems.length === 0) return;
             if (
               !confirm(
-                `You are about to purchase ${this.cart.length} item(s) for KSh ${this.formatNumber(this.cartTotal)}. Proceed?`
+                `You are about to purchase ${this.orderItems.length} vehicle(s) for KSh ${this.formatNumber(this.orderTotal)}. Proceed?`
               )
             )
               return;
 
             this.submitting = true;
             try {
-              // Create purchases one by one (or in parallel)
-              const requests = this.cart.map((item) =>
+              const requests = this.orderItems.map((item) =>
                 axios.post(
                   `${CONFIG.API_BASE_URL}/purchase`,
                   {
@@ -766,8 +764,8 @@
               await Promise.all(requests);
               alert("✅ Purchase order completed successfully!");
 
-              // Clear cart
-              this.cart = [];
+              // Clear order
+              this.orderItems = [];
               // Refresh history
               await this.getData();
             } catch (error) {

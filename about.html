@@ -15,7 +15,7 @@
     <link rel="icon" href="static/ico.png" type="image/gif" />
 
     <style>
-      /* ── shared CSS (consistent with shop/contact) ── */
+      /* ── Page-specific styles (no navbar overrides) ── */
       * {
         margin: 0;
         padding: 0;
@@ -27,54 +27,7 @@
         background: #f8f9fa;
       }
 
-      .top-navbar {
-        background: rgba(0, 0, 0, 0.95);
-        padding: 15px 0;
-        transition: all 0.3s ease;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-      }
-
-      .top-navbar.scrolled {
-        padding: 10px 0;
-        background: rgba(0, 0, 0, 0.98);
-      }
-
-      .top-navbar .navbar-brand {
-        font-size: 28px;
-        font-weight: bold;
-        color: #ffc107 !important;
-        letter-spacing: 2px;
-      }
-
-      .top-navbar .nav-link-top {
-        color: white !important;
-        font-weight: 500;
-        margin: 0 6px;
-        transition: all 0.3s;
-        text-decoration: none;
-        font-size: 13px;
-        padding: 4px 0;
-      }
-
-      .top-navbar .nav-link-top:hover {
-        color: #ffc107 !important;
-      }
-
-      .top-navbar .nav-link-top.active {
-        color: #ffc107 !important;
-        border-bottom: 2px solid #ffc107;
-      }
-
-      @media (max-width: 991px) {
-        .top-navbar .nav-link-top {
-          font-size: 11px;
-          margin: 0 4px;
-        }
-      }
-
+      /* ── Sidebar (unchanged, but updated links below) ── */
       .sidebar {
         position: fixed;
         left: -280px;
@@ -197,54 +150,7 @@
       }
 
       main {
-        margin-left: 0;
-        transition: 0.3s;
         padding-top: 80px;
-      }
-
-      .search-box {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 30px;
-        padding: 8px 20px;
-        color: white;
-        width: 250px;
-        transition: all 0.3s;
-      }
-
-      .search-box:focus {
-        background: rgba(255, 255, 255, 0.2);
-        outline: none;
-        width: 300px;
-      }
-
-      @media (max-width: 768px) {
-        .search-box {
-          width: 140px;
-        }
-        .search-box:focus {
-          width: 180px;
-        }
-        .sidebar-toggle {
-          top: 70px;
-          left: 10px;
-          width: 40px;
-          height: 40px;
-        }
-        .top-navbar .navbar-brand {
-          font-size: 20px;
-        }
-      }
-
-      @media (max-width: 576px) {
-        .search-box {
-          width: 100px;
-          font-size: 12px;
-          padding: 6px 12px;
-        }
-        .search-box:focus {
-          width: 130px;
-        }
       }
 
       footer {
@@ -376,6 +282,83 @@
         color: #777;
         margin: 8px 0 0;
       }
+
+      /* ── FAQ (merged) ── */
+      .faq-hero {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        padding: 60px 0 40px;
+        color: white;
+        text-align: center;
+      }
+      .faq-hero h1 {
+        font-size: 42px;
+        font-weight: 800;
+      }
+      .faq-hero h1 span {
+        color: #ffc107;
+      }
+      .faq-hero p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 18px;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .faq-section {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .accordion-item {
+        border: none;
+        background: white;
+        border-radius: 16px !important;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      }
+      .accordion-button {
+        padding: 20px 25px;
+        font-weight: 700;
+        color: #1a1a2e;
+        background: white;
+        border-radius: 16px !important;
+        box-shadow: none !important;
+        border: none;
+        font-size: 17px;
+      }
+      .accordion-button:not(.collapsed) {
+        color: #ffc107;
+        background: white;
+      }
+      .accordion-button:focus {
+        box-shadow: none;
+      }
+      .accordion-button::after {
+        filter: none;
+      }
+      .accordion-body {
+        padding: 0 25px 25px 25px;
+        color: #555;
+        line-height: 1.7;
+        font-size: 15px;
+      }
+      .accordion-body a {
+        color: #ffc107;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .accordion-body a:hover {
+        text-decoration: underline;
+      }
+
+      /* ── Responsive: sidebar toggle on small screens ── */
+      @media (max-width: 768px) {
+        .sidebar-toggle {
+          top: 70px;
+          left: 10px;
+          width: 40px;
+          height: 40px;
+        }
+      }
     </style>
   </head>
 
@@ -388,7 +371,7 @@
     <!-- ===== OVERLAY ===== -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- ===== SIDEBAR ===== -->
+    <!-- ===== SIDEBAR (car yard terminology) ===== -->
     <nav class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <h4>OBerlo</h4>
@@ -407,17 +390,17 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="products.html">
-            <i class="fas fa-box"></i> Products
+            <i class="fas fa-car"></i> Inventory
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="purchases.html">
-            <i class="fas fa-shopping-cart"></i> Purchases
+            <i class="fas fa-truck"></i> Purchase Orders
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="sales.html">
-            <i class="fas fa-dollar-sign"></i> Sales
+            <i class="fas fa-dollar-sign"></i> Vehicle Sales
           </a>
         </li>
         <li class="nav-item logout-btn">
@@ -428,13 +411,11 @@
       </ul>
     </nav>
 
-    <!-- ===== TOP HORIZONTAL NAVBAR (UPDATED) ===== -->
+    <!-- ===== TOP NAVBAR (dynamic, loaded from navbar.html) ===== -->
     <nav class="top-navbar" id="topNavbar">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center w-100">
-          <!-- <a class="navbar-brand" href="index.html">OBerlo</a> -->
           <div id="navbar-links"></div>
-          <!-- <input type="text" class="search-box" placeholder="Search..." /> -->
         </div>
       </div>
     </nav>
@@ -500,7 +481,6 @@
               Our core values drive every decision we make.
             </p>
           </div>
-          <!-- ✅ Updated: 2 cards per row on mobile (col-6), 3 on tablet+ (col-md-4) -->
           <div class="row g-4">
             <div class="col-6 col-md-4">
               <div class="about-icon-box">
@@ -545,7 +525,6 @@
               The people behind OBerlo who make the magic happen.
             </p>
           </div>
-          <!-- Team cards already use col-6 col-md-3 for 2 per row on mobile -->
           <div class="row g-4">
             <div class="col-md-3 col-6">
               <div class="team-card">
@@ -594,13 +573,143 @@
           </div>
         </div>
       </section>
+
+      <!-- ===== FAQ SECTION ===== -->
+      <section class="faq-hero">
+        <div class="container">
+          <h1>Frequently Asked <span>Questions</span></h1>
+          <p>Find answers to the most common inquiries about buying, selling, and financing.</p>
+        </div>
+      </section>
+
+      <section class="container py-5 faq-section">
+        <div class="accordion" id="faqAccordion">
+          <!-- Q1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                Do you offer warranties on your vehicles?
+              </button>
+            </h2>
+            <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Yes! Every vehicle sold through OBerlo comes with a comprehensive 12-month / 12,000-mile warranty. Extended warranties are also available for purchase.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                Can I trade in my current vehicle?
+              </button>
+            </h2>
+            <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Absolutely! We accept trade-ins of all makes and models. Contact our team for an instant estimate, and we'll deduct the value from your new purchase.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                What financing options are available?
+              </button>
+            </h2>
+            <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                We offer flexible financing through our partner lenders with rates starting at 2.9% APR. You can also lease or pay in full. Visit our <a href="financing.html">Financing page</a> to calculate your monthly payments.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                Do you ship vehicles internationally?
+              </button>
+            </h2>
+            <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Yes, we ship worldwide. We handle all logistics, customs, and insurance. Shipping costs vary by destination—contact our team for a personalized quote.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
+                Can I return a car after purchase?
+              </button>
+            </h2>
+            <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                We offer a 7-day, 500-mile money-back guarantee. If you're not completely satisfied, you can return the vehicle for a full refund, no questions asked.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q6">
+                How do I book a test drive?
+              </button>
+            </h2>
+            <div id="q6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                You can book a test drive directly through our <a href="test-drive.html">Test Drive page</a>. Choose your preferred vehicle, date, and time, and our concierge team will confirm your slot within 24 hours.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q7 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q7">
+                Are your vehicles inspected and certified?
+              </button>
+            </h2>
+            <div id="q7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Yes. Every car in our inventory undergoes a rigorous 150-point inspection by our master technicians. We provide a full vehicle history report with every purchase.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q8 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q8">
+                What payment methods do you accept?
+              </button>
+            </h2>
+            <div id="q8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                We accept wire transfers, certified bank checks, and financing through our lending partners. We also accept credit cards for deposits (up to $5,000).
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- ===== FOOTER ===== -->
     <div id="footer"></div>
 
     <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+    <script src="config.js"></script>
+    <script src="global.js"></script>
+
     <script>
+      // ── Load navbar ──
       fetch("navbar.html")
         .then((response) => response.text())
         .then((data) => {
@@ -608,27 +717,57 @@
 
           // Highlight current page
           const currentPage = window.location.pathname.split("/").pop() || "index.html";
-
           document.querySelectorAll("#navbar-links a").forEach((link) => {
             if (link.getAttribute("href") === currentPage) {
               link.classList.add("active");
             }
           });
+
+          // ── ✅ Attach search listeners (from global.js) ──
+          if (typeof attachSearchListeners === 'function') {
+            attachSearchListeners();
+          } else {
+            console.warn("attachSearchListeners not found – make sure global.js is loaded.");
+          }
+
+          // ── ✅ Attach top‑navbar hamburger toggle ──
+          const hamburgerBtn = document.getElementById('hamburgerBtn');
+          const mobileMenu = document.getElementById('mobileMenu');
+
+          if (hamburgerBtn && mobileMenu) {
+            // Remove any previous listeners (if re‑injected)
+            hamburgerBtn.replaceWith(hamburgerBtn.cloneNode(true));
+            const newHamburger = document.getElementById('hamburgerBtn');
+
+            newHamburger.addEventListener('click', function(e) {
+              e.stopPropagation();
+              mobileMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(function(link) {
+              link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+              });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+              if (!newHamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+              }
+            });
+          }
         })
         .catch((err) => console.error("Error loading navbar:", err));
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
-    <script>
+
+      // ── Load footer ──
       fetch("footer.html")
         .then((response) => response.text())
         .then((data) => {
           document.getElementById("footer").innerHTML = data;
         })
         .catch((error) => console.error("Error loading footer:", error));
-    </script>
-    <script>
-      axios.defaults.withCredentials = true;
 
       // ── Sidebar toggle ──
       const sidebar = document.getElementById("sidebar");
@@ -672,17 +811,15 @@
         }
       });
 
-      // ── Logout ──
+      // ── Logout (uses config API) ──
       const logoutBtn = document.getElementById("logoutBtn");
       if (logoutBtn) {
         logoutBtn.addEventListener("click", async function (e) {
           e.preventDefault();
           try {
-            await axios.post(
-              "http://164.90.221.47:8000/logout",
-              {},
-              { withCredentials: true },
-            );
+            if (typeof CONFIG !== 'undefined' && CONFIG.API_BASE_URL) {
+              await axios.post(`${CONFIG.API_BASE_URL}/logout`, {}, { withCredentials: true });
+            }
           } catch (error) {
             console.error("Logout error:", error);
           }

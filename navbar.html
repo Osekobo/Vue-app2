@@ -1,53 +1,63 @@
-<style>
-  /* ─── Existing styles (keep them, but we'll adjust a few) ─── */
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
+<style>
+  /* ===== RESET & BASE ===== */
   body {
     padding-top: 0 !important;
-    margin-top: 0;
+    margin: 0;
+    font-family: sans-serif;
   }
 
-  main {
-    padding-top: 0 !important;
-    margin-top: 0;
-  }
-
-  .navbar-links-row {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 6px 10px;
-    width: 100%;
-  }
-
+  /* ===== NAVBAR ===== */
   .top-navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1030;
-    background: #212529; /* match your dark bg */
+    background: #212529;
     padding: 10px 20px;
     transition: transform 0.3s ease-in-out;
     transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
 
-  /* hide when scrolling down */
   .top-navbar.navbar-hidden {
     transform: translateY(-100%);
   }
 
-  .top-navbar .navbar-brand {
+  .navbar-links-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  /* ── Brand ── */
+  .navbar-brand {
     font-size: 28px;
     font-weight: 700;
     color: #ffc107 !important;
     letter-spacing: 2px;
     text-decoration: none;
-    margin-right: 8px;
+    flex-shrink: 0;
   }
 
-  .top-navbar .nav-link-top {
+  /* ── Center Links ── */
+  .nav-links-center {
+    display: flex;
+    gap: 6px 10px;
+    justify-content: center;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    padding: 0 10px;
+  }
+
+  .nav-links-center .nav-link-top {
     color: white !important;
     font-weight: 500;
     font-size: 13px;
@@ -57,21 +67,28 @@
     transition: all 0.3s ease;
   }
 
-  .top-navbar .nav-link-top:hover,
-  .top-navbar .nav-link-top.active {
+  .nav-links-center .nav-link-top:hover,
+  .nav-links-center .nav-link-top.active {
     color: #ffc107 !important;
   }
 
-  .top-navbar .nav-link-top.active {
+  .nav-links-center .nav-link-top.active {
     border-bottom: 2px solid #ffc107;
   }
 
+  /* ── Right Side: Search + Hamburger ── */
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ── Search ── */
   .search-wrapper {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-left: auto;
-    flex-wrap: nowrap; /* keep everything in one line */
   }
 
   .search-box {
@@ -109,7 +126,7 @@
     gap: 6px;
     white-space: nowrap;
     font-size: 14px;
-    flex-shrink: 0; /* prevent shrinking */
+    flex-shrink: 0;
   }
 
   .btn-search:hover {
@@ -121,6 +138,7 @@
     font-size: 14px;
   }
 
+  /* ── Hamburger ── */
   .hamburger-menu {
     display: none;
     background: none;
@@ -128,7 +146,6 @@
     color: white;
     font-size: 24px;
     cursor: pointer;
-    margin-left: auto;
     padding: 8px 12px;
     width: 45px;
     height: 45px;
@@ -146,17 +163,20 @@
     background: rgba(255, 193, 7, 0.3);
   }
 
+  /* ===== MOBILE MENU ===== */
   .mobile-menu {
     display: none;
     position: fixed;
-    top: 50px;
+    top: 60px;
     left: 0;
     right: 0;
     background: #1a1a1a;
     flex-direction: column;
     gap: 0;
-    z-index: 1029;
+    z-index: 1031;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   .mobile-menu.active {
@@ -179,227 +199,251 @@
     color: #000;
   }
 
-  /* ─── Responsive adjustments ─── */
+  /* ============================================================
+     RESPONSIVE BREAKPOINTS
+     ============================================================ */
 
+  /* ── Medium screens (≤ 1200px): Search wraps below ── */
   @media (max-width: 1200px) {
+    .navbar-links-row {
+      justify-content: center;
+    }
+
+    .navbar-brand {
+      margin-right: auto;
+    }
+
+    .nav-links-center {
+      order: 1;
+      flex: 0 0 100%;
+      justify-content: center;
+      padding: 4px 0 0;
+    }
+
+    .navbar-right {
+      order: 2;
+      margin-left: auto;
+    }
+
     .search-wrapper {
-      margin-left: 0;
-      width: 100%;
-      order: 10;
-      margin-top: 6px;
-      justify-content: flex-start;
-      flex-wrap: nowrap; /* keep row on medium screens too */
+      width: auto;
+      flex: 0 1 auto;
     }
 
     .search-box {
-      width: min(100%, 260px);
-      flex: 1 1 auto; /* allow grow */
+      width: 200px;
+      min-width: 120px;
     }
 
     .search-box:focus {
-      width: min(100%, 320px);
-    }
-
-    .btn-search {
-      flex-shrink: 0;
+      width: 240px;
     }
   }
 
+  /* ── Small tablets / large phones (≤ 768px) ── */
   @media (max-width: 768px) {
-    .navbar-links-row {
-      gap: 6px 8px;
+    .navbar-brand {
+      font-size: 24px;
     }
 
-    .search-wrapper {
-      flex-wrap: nowrap; /* keep inline */
+    .nav-links-center .nav-link-top {
+      font-size: 12px;
+      padding: 4px 5px;
+    }
+
+    .nav-links-center {
+      gap: 4px 6px;
     }
 
     .search-box {
-      flex: 1; /* take remaining space */
-      min-width: 80px; /* prevent too small */
-      width: auto;
+      width: 140px;
+      min-width: 80px;
+      padding: 6px 12px;
+      font-size: 12px;
     }
 
     .search-box:focus {
-      width: auto;
+      width: 180px;
     }
 
     .btn-search {
-      padding: 8px 12px;
-      font-size: 13px;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .btn-search span {
+      display: inline;
     }
   }
 
+  /* ── Phones (≤ 576px) ── */
   @media (max-width: 576px) {
+    .top-navbar {
+      padding: 8px 12px;
+    }
+
+    /* Center the brand, put hamburger on the right */
     .navbar-links-row {
-      flex-wrap: nowrap;
-      gap: 0;
+      justify-content: center;
+      position: relative;
     }
 
-    .top-navbar .navbar-brand {
-      font-size: 22px;
-      margin-right: 8px;
+    .navbar-brand {
+      font-size: 20px;
+      margin: 0 auto;               /* center brand */
     }
 
-    .top-navbar .nav-link-top {
-      display: none; /* hide desktop links on mobile */
+    .nav-links-center {
+      display: none;                /* hide links – they're in mobile menu */
+    }
+
+    .navbar-right {
+      position: absolute;           /* position hamburger absolutely */
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .search-wrapper {
-      display: none; /* hide search on mobile */
+      display: none;                /* hide search on phones */
     }
 
     .hamburger-menu {
       display: block;
     }
 
-    .search-box {
-      min-width: 60px;
-      padding: 6px 12px;
-    }
-
-    .btn-search {
-      padding: 6px 10px;
-      font-size: 12px;
-    }
     .btn-search span {
-      display: none; /* hide "Search" text on very small screens, keep only icon */
+      display: none;
     }
   }
 </style>
 
+<!-- ===== NAVBAR ===== -->
 <nav class="top-navbar" id="mainNavbar">
   <div class="navbar-links-row">
+    <!-- Left: Brand -->
     <a class="navbar-brand" href="index.html">OBerlo</a>
-    <a class="nav-link-top" href="index.html">Home</a>
-    <a class="nav-link-top" href="shop.html">Shop</a>
-    <a class="nav-link-top" href="test-drive.html">Test Drive</a>
-    <a class="nav-link-top" href="financing.html">Finance</a>
-    <a class="nav-link-top" href="blog.html">Blog</a>
-    <a class="nav-link-top" href="faq.html">FAQ</a>
-    <a class="nav-link-top" href="about.html">About</a>
-    <a class="nav-link-top" href="contact.html">Contact</a>
-    <div class="search-wrapper">
-      <input
-        type="text"
-        class="search-box"
-        placeholder="Search cars..."
-        id="searchInput"
-      />
-      <button class="btn-search" id="searchButton">
-        <i class="fas fa-search"></i> <span>Search</span>
+
+    <!-- Center: Navigation links -->
+    <div class="nav-links-center">
+      <a class="nav-link-top" href="index.html">Home</a>
+      <a class="nav-link-top" href="shop.html">Shop</a>
+      <a class="nav-link-top" href="test-drive.html">Test Drive</a>
+      <a class="nav-link-top" href="financing.html">Finance</a>
+      <a class="nav-link-top" href="blog.html">Blog</a>
+      <a class="nav-link-top" href="about.html">About</a>
+      <a class="nav-link-top" href="contact.html">Contact</a>
+    </div>
+
+    <!-- Right: Search + Hamburger -->
+    <div class="navbar-right">
+      <div class="search-wrapper">
+        <input type="text" class="search-box" placeholder="Search cars..." id="searchInput" />
+        <button class="btn-search" id="searchButton">
+          <i class="fas fa-search"></i> <span>Search</span>
+        </button>
+      </div>
+      <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
       </button>
     </div>
-    <button class="hamburger-menu" id="hamburgerBtn">
-      <i class="fas fa-bars"></i>
-    </button>
   </div>
 </nav>
 
+<!-- ===== MOBILE MENU ===== -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" class="mobile-menu-link">Home</a>
-  <a href="products.html" class="mobile-menu-link">Products</a>
-  <a href="sales.html" class="mobile-menu-link">Sales</a>
-  <a href="purchases.html" class="mobile-menu-link">Purchases</a>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="test-drive.html">Test Drive</a>
+  <a href="financing.html">Finance</a>
+  <a href="blog.html">Blog</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
 </div>
 
+<!-- ===== JAVASCRIPT (unchanged) ===== -->
 <script>
-  // Scroll-aware navbar behavior & hamburger menu
-  window.navbarScrollHandler = (function () {
+  (function() {
+    // ---- Scroll hide/show ----
     let lastScrollTop = 0;
     let ticking = false;
+    const navbar = document.getElementById('mainNavbar');
 
     function updateNavbar() {
-      const navbar = document.getElementById("mainNavbar");
       if (!navbar) return;
-
-      const scrollTop =
-        window.scrollY ||
-        window.pageYOffset ||
-        document.documentElement.scrollTop;
-
-      // Always show navbar at top of page
+      const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
       if (scrollTop <= 50) {
-        navbar.classList.remove("navbar-hidden");
+        navbar.classList.remove('navbar-hidden');
+      } else if (scrollTop > lastScrollTop && scrollTop > 50) {
+        navbar.classList.add('navbar-hidden');
+      } else if (scrollTop < lastScrollTop) {
+        navbar.classList.remove('navbar-hidden');
       }
-      // Hide when scrolling down (and not at top)
-      else if (scrollTop > lastScrollTop && scrollTop > 50) {
-        navbar.classList.add("navbar-hidden");
-      }
-      // Show when scrolling up
-      else if (scrollTop < lastScrollTop) {
-        navbar.classList.remove("navbar-hidden");
-      }
-
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
       ticking = false;
     }
 
-    function initScroll() {
-      window.addEventListener(
-        "scroll",
-        function () {
-          if (!ticking) {
-            window.requestAnimationFrame(updateNavbar);
-            ticking = true;
-          }
-        },
-        false,
-      );
-      updateNavbar();
-    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking = true;
+      }
+    }, { passive: true });
 
-    // Hamburger menu functionality
-    function initHamburger() {
-      const hamburgerBtn = document.getElementById("hamburgerBtn");
-      const mobileMenu = document.getElementById("mobileMenu");
-      const menuLinks = document.querySelectorAll(".mobile-menu-link");
+    // ---- Hamburger toggle ----
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-      if (!hamburgerBtn || !mobileMenu) return;
-
-      hamburgerBtn.addEventListener("click", function () {
-        mobileMenu.classList.toggle("active");
+    if (hamburgerBtn && mobileMenu) {
+      hamburgerBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        mobileMenu.classList.toggle('active');
       });
 
-      // Close menu when a link is clicked
-      menuLinks.forEach((link) => {
-        link.addEventListener("click", function () {
-          mobileMenu.classList.remove("active");
+      mobileMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('active');
         });
       });
 
-      // Close menu when clicking outside
-      document.addEventListener("click", function (event) {
-        if (
-          !hamburgerBtn.contains(event.target) &&
-          !mobileMenu.contains(event.target)
-        ) {
-          mobileMenu.classList.remove("active");
-        }
-      });
-
-      // Set active link based on current page
-      const currentPage =
-        window.location.pathname.split("/").pop() || "index.html";
-      menuLinks.forEach((link) => {
-        if (link.getAttribute("href") === currentPage) {
-          link.classList.add("active");
+      document.addEventListener('click', function(e) {
+        if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.remove('active');
         }
       });
     }
 
-    function init() {
-      initScroll();
-      initHamburger();
+    // ---- Set active link ----
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link-top, .mobile-menu a').forEach(function(link) {
+      if (link.getAttribute('href') === currentPage) {
+        link.classList.add('active');
+      }
+    });
+
+    // ---- Search functionality ----
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+
+    function performSearch() {
+      const query = searchInput.value.trim();
+      if (query === '') {
+        window.location.href = 'shop.html';
+      } else {
+        window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+      }
     }
 
-    // If DOM already ready, init immediately; otherwise wait
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", init);
-    } else {
-      init();
+    if (searchButton) {
+      searchButton.addEventListener('click', performSearch);
     }
-
-    return { updateNavbar };
+    if (searchInput) {
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          performSearch();
+        }
+      });
+    }
   })();
 </script>
