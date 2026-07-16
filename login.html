@@ -19,7 +19,7 @@
   <body>
     <nav class="navbar">
       <div class="container">
-        <a class="navbar-brand" href="index.html">OBerlo</a>
+        <!-- <a class="navbar-brand" href="index.html">OBerlo</a> -->
       </div>
     </nav>
 
@@ -93,7 +93,7 @@
         </div>
       </div>
     </div>
-
+    <script src="config.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.0/axios.js"></script>
 
@@ -121,7 +121,7 @@
 
             try {
               const resp = await axios.post(
-                "http://164.90.221.47:8000/login",
+                `${CONFIG.API_BASE_URL}/login`,
                 {
                   email: this.email,
                   password: this.password,
@@ -140,7 +140,7 @@
 
                 this.message = "Login successful! Redirecting...";
                 setTimeout(() => {
-                  window.location.href = "dashboard.html";
+                  window.location.href = "index.html";
                 }, 1000);
               } else {
                 this.message = "Login failed";

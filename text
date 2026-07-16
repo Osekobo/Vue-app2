@@ -45,3 +45,21 @@ docker run -d --network my_net -p 8000:8000 --name backend fastapi-app
 docker run -d --network my_net -p 8080:80 --name frontend vue-app
 
 docker run -d --name backend --network my_net -p 8000:8000 -e DATABASE_URL=postgresql://postgres:12039@my-postgres:5432/vue fastapi-app uvicorn main:app --host 0.0.0.0 --port 8000
+
+
+sudo apt install nginx -y
+sudo systemctl start nginx
+sudo ln -s /etc/nginx/sites-available/amarahaus.co.ke /etc/nginx/sites-enabled/
+
+server {
+ server_name amarahaus.co.ke;
+
+ location / {
+ proxy_pass http://207.154.206.4:8080:
+ }
+}
+
+sudo systemctl reload nginx
+sudo certbot --nginx -d amarahaus.co.ke -d www.amarahaus.co.ke
+sudo apt update
+sudo apt install certbot python3-certbot-nginx -y

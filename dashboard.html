@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>O Berlo</title>
+    <title>OBerlo — Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -14,20 +14,262 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="icon" href="../static/ico.png" type="image/gif" />
-    <link rel="stylesheet" href="../static/dashboard.css" />
+    <style>
+      /* ── Shared styles (same as other pages) ── */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8f9fa;
+      }
+
+      /* ── Top Navbar ── */
+      .top-navbar {
+        background: rgba(0, 0, 0, 0.95);
+        padding: 15px 0;
+        transition: all 0.3s ease;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .top-navbar .navbar-brand {
+        font-size: 28px;
+        font-weight: bold;
+        color: #ffc107 !important;
+        letter-spacing: 2px;
+      }
+      .top-navbar.scrolled {
+        padding: 10px 0;
+        background: rgba(0, 0, 0, 0.98);
+      }
+      .top-navbar .nav-link-top {
+        color: white !important;
+        font-weight: 500;
+        margin: 0 6px;
+        transition: all 0.3s;
+        text-decoration: none;
+        font-size: 13px;
+        padding: 4px 0;
+      }
+      .top-navbar .nav-link-top:hover {
+        color: #ffc107 !important;
+      }
+      .top-navbar .nav-link-top.active {
+        color: #ffc107 !important;
+        border-bottom: 2px solid #ffc107;
+      }
+      @media (max-width: 991px) {
+        .top-navbar .nav-link-top {
+          font-size: 11px;
+          margin: 0 4px;
+        }
+      }
+
+      /* ── Sidebar ── */
+      .sidebar {
+        position: fixed;
+        left: -280px;
+        top: 0;
+        bottom: 0;
+        width: 280px;
+        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+        transition: 0.3s ease-in-out;
+        z-index: 1001;
+        padding-top: 80px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .sidebar.show {
+        left: 0;
+      }
+      .sidebar-header {
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 20px;
+      }
+      .sidebar-header h4 {
+        color: #ffc107;
+        margin: 0;
+      }
+      .sidebar-header p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 12px;
+        margin: 5px 0 0;
+      }
+      .sidebar .nav-item {
+        margin: 5px 0;
+      }
+      .sidebar .nav-link {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        transition: all 0.3s;
+        font-weight: 500;
+        border-radius: 8px;
+        margin: 0 10px;
+      }
+      .sidebar .nav-link i {
+        width: 25px;
+        margin-right: 15px;
+        font-size: 18px;
+      }
+      .sidebar .nav-link:hover {
+        background: #ffc107;
+        color: #000;
+        transform: translateX(5px);
+      }
+      .sidebar .logout-btn {
+        margin-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+      }
+      .sidebar .logout-btn .nav-link {
+        color: #ff6b6b;
+      }
+      .sidebar .logout-btn .nav-link:hover {
+        background: #ff6b6b;
+        color: white;
+      }
+      .sidebar-toggle {
+        position: fixed;
+        left: 20px;
+        top: 80px;
+        z-index: 1002;
+        background: #ffc107;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+      .sidebar-toggle:hover {
+        background: #ffca2c;
+        transform: scale(1.05);
+      }
+      .sidebar-toggle i {
+        font-size: 20px;
+        color: #000;
+      }
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+      }
+      .overlay.show {
+        display: block;
+      }
+      main {
+        padding-top: 80px;
+      }
+
+      /* ── Dashboard styles ── */
+      .dashboard-card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+      }
+      .dashboard-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+      .dashboard-card h6 {
+        color: #1a1a2e;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .dashboard-card h2 {
+        color: #1a1a2e;
+        font-weight: 800;
+      }
+
+      .chart-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+        margin-bottom: 24px;
+      }
+      .chart-card h5 {
+        color: #1a1a2e;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+      .chart-container {
+        position: relative;
+        height: 250px;
+      }
+
+      .custom-table {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .custom-table thead {
+        background: #ffc107;
+      }
+      .custom-table th {
+        color: #1a1a2e;
+        font-weight: 600;
+        border: none;
+        padding: 12px 16px;
+      }
+      .custom-table td {
+        padding: 10px 16px;
+        border-color: #f0f0f0;
+        color: #1a1a2e;
+      }
+
+      /* ── Footer ── */
+      footer {
+        background: #1a1a2e;
+        color: white;
+        padding: 50px 0 20px;
+        margin-top: 40px;
+      }
+      .copyright {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 768px) {
+        .dashboard-card {
+          padding: 16px;
+        }
+        .chart-container {
+          height: 200px;
+        }
+      }
+    </style>
   </head>
 
   <body>
+    <!-- Sidebar Toggle -->
     <button class="sidebar-toggle" id="sidebarToggle">
       <i class="fas fa-bars"></i>
     </button>
-
     <div class="overlay" id="overlay"></div>
 
+    <!-- Sidebar (Car Yard version) -->
     <nav class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <h4>Kione Hardware</h4>
-        <p>Inventory Management System</p>
+        <h4>OBerlo</h4>
+        <p>Car Yard Management System</p>
       </div>
       <ul style="list-style: none; padding-left: 0">
         <li class="nav-item">
@@ -42,17 +284,17 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="products.html">
-            <i class="fas fa-box"></i> Products
+            <i class="fas fa-car"></i> Inventory
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="purchases.html">
-            <i class="fas fa-shopping-cart"></i> Purchases
+            <i class="fas fa-truck"></i> Purchase Orders
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="sales.html">
-            <i class="fas fa-dollar-sign"></i> Sales
+            <i class="fas fa-dollar-sign"></i> Vehicle Sales
           </a>
         </li>
         <li class="nav-item logout-btn">
@@ -63,9 +305,13 @@
       </ul>
     </nav>
 
-    <nav class="top-navbar">
+    <!-- Top Navbar (dynamic, loaded from navbar.html) -->
+    <nav class="top-navbar" id="topNavbar">
       <div class="container">
-        <a class="navbar-brand" href="index.html">OBerlo</a>
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <div id="navbar-links"></div>
+          <!-- Search will be inside navbar.html -->
+        </div>
       </div>
     </nav>
 
@@ -81,25 +327,25 @@
               class="spinner-border text-warning"
               style="width: 3rem; height: 3rem"
             ></div>
-            <p class="text-white mt-3">Loading dashboard data...</p>
+            <p class="text-muted mt-3">Loading dashboard data...</p>
           </div>
 
           <div v-show="!loading">
             <div class="row g-4 mb-4">
               <div class="col-md-3">
                 <div class="dashboard-card stat-card text-center">
-                  <i class="fas fa-box fa-2x mb-2" style="color: #ffc107"></i>
-                  <h6>Total Products</h6>
+                  <i class="fas fa-car fa-2x mb-2" style="color: #ffc107"></i>
+                  <h6>Total Vehicles</h6>
                   <h2>{{ rpp.length }}</h2>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="dashboard-card stat-card text-center">
                   <i
-                    class="fas fa-chart-simple fa-2x mb-2"
+                    class="fas fa-file-invoice fa-2x mb-2"
                     style="color: #ffc107"
                   ></i>
-                  <h6>Sales Records</h6>
+                  <h6>Total Sales</h6>
                   <h2>{{ spp.length }}</h2>
                 </div>
               </div>
@@ -116,10 +362,10 @@
               <div class="col-md-3">
                 <div class="dashboard-card stat-card text-center">
                   <i
-                    class="fas fa-chart-line fa-2x mb-2"
+                    class="fas fa-car-side fa-2x mb-2"
                     style="color: #ffc107"
                   ></i>
-                  <h6>Items Sold</h6>
+                  <h6>Vehicles Sold</h6>
                   <h2>{{ totalItemsSold }}</h2>
                 </div>
               </div>
@@ -129,8 +375,7 @@
               <div class="col-lg-6">
                 <div class="chart-card">
                   <h5>
-                    <i class="fas fa-chart-bar me-2"></i>Remaining Stock Per
-                    Product
+                    <i class="fas fa-chart-bar me-2"></i>Remaining Stock Per Vehicle
                   </h5>
                   <div class="chart-container">
                     <canvas id="remaining-chart"></canvas>
@@ -141,8 +386,7 @@
               <div class="col-lg-6">
                 <div class="chart-card">
                   <h5>
-                    <i class="fas fa-chart-bar me-2"></i>Total Quantity Sold Per
-                    Product
+                    <i class="fas fa-chart-bar me-2"></i>Total Quantity Sold Per Vehicle
                   </h5>
                   <div class="chart-container">
                     <canvas id="sold-chart"></canvas>
@@ -153,8 +397,7 @@
               <div class="col-lg-6">
                 <div class="chart-card">
                   <h5>
-                    <i class="fas fa-chart-bar me-2"></i>Total Profit Per
-                    Product
+                    <i class="fas fa-chart-bar me-2"></i>Total Profit Per Vehicle
                   </h5>
                   <div class="chart-container">
                     <canvas id="profit-product-chart"></canvas>
@@ -174,13 +417,13 @@
               <div class="col-12">
                 <div class="chart-card">
                   <h5>
-                    <i class="fas fa-table me-2"></i>Sales Per Product (Details)
+                    <i class="fas fa-table me-2"></i>Sales Per Vehicle (Details)
                   </h5>
                   <div class="table-responsive">
                     <table class="table custom-table">
                       <thead>
                         <tr>
-                          <th>Product</th>
+                          <th>Vehicle</th>
                           <th>Qty Sold</th>
                           <th>Total Sales Amount (KSh)</th>
                         </tr>
@@ -207,15 +450,51 @@
       </div>
     </main>
 
-    <footer>
-      <p class="mb-0">&copy; 2025 O Berlo. All rights reserved.</p>
-    </footer>
+    <!-- Footer -->
+    <div id="footer"></div>
 
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
       axios.defaults.withCredentials = true;
 
+      // ── Load navbar ──
+      fetch("navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-links").innerHTML = data;
+
+          // Highlight current page
+          const currentPage = window.location.pathname.split("/").pop() || "index.html";
+          document.querySelectorAll("#navbar-links a").forEach((link) => {
+            if (link.getAttribute("href") === currentPage) {
+              link.classList.add("active");
+            }
+          });
+
+          // Attach search listeners (from global.js)
+          if (typeof attachSearchListeners === 'function') {
+            attachSearchListeners();
+          } else {
+            console.warn("attachSearchListeners not found – make sure global.js is loaded.");
+          }
+        })
+        .catch((err) => console.error("Error loading navbar:", err));
+
+      // ── Load footer ──
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        })
+        .catch((error) => console.error("Error loading footer:", error));
+
+      // ── Vue App ──
       new Vue({
         el: "#app",
         data: {
@@ -253,16 +532,16 @@
               this.loading = true;
 
               const [sppRes, rppRes, pppRes, ppdRes] = await Promise.all([
-                axios.get("http://164.90.221.47:8000/dashboard/spp", {
+                axios.get(`${CONFIG.API_BASE_URL}/dashboard/spp`, {
                   withCredentials: true,
                 }),
-                axios.get("http://164.90.221.47:8000/dashboard/rpp", {
+                axios.get(`${CONFIG.API_BASE_URL}/dashboard/rpp`, {
                   withCredentials: true,
                 }),
-                axios.get("http://164.90.221.47:8000/dashboard/ppp", {
+                axios.get(`${CONFIG.API_BASE_URL}/dashboard/ppp`, {
                   withCredentials: true,
                 }),
-                axios.get("http://164.90.221.47:8000/dashboard/ppd", {
+                axios.get(`${CONFIG.API_BASE_URL}/dashboard/ppd`, {
                   withCredentials: true,
                 }),
               ]);
@@ -315,14 +594,14 @@
               options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: "white" } } },
+                plugins: { legend: { labels: { color: "#1a1a2e" } } },
                 scales: {
                   y: {
                     beginAtZero: true,
-                    title: { display: true, text: "Quantity", color: "white" },
-                    ticks: { color: "white" },
+                    title: { display: true, text: "Quantity", color: "#1a1a2e" },
+                    ticks: { color: "#1a1a2e" },
                   },
-                  x: { ticks: { color: "white" } },
+                  x: { ticks: { color: "#1a1a2e" } },
                 },
               },
             });
@@ -352,14 +631,14 @@
               options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: "white" } } },
+                plugins: { legend: { labels: { color: "#1a1a2e" } } },
                 scales: {
                   y: {
                     beginAtZero: true,
-                    title: { display: true, text: "Quantity", color: "white" },
-                    ticks: { color: "white" },
+                    title: { display: true, text: "Quantity", color: "#1a1a2e" },
+                    ticks: { color: "#1a1a2e" },
                   },
-                  x: { ticks: { color: "white" } },
+                  x: { ticks: { color: "#1a1a2e" } },
                 },
               },
             });
@@ -389,18 +668,18 @@
               options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: "white" } } },
+                plugins: { legend: { labels: { color: "#1a1a2e" } } },
                 scales: {
                   y: {
                     beginAtZero: true,
                     title: {
                       display: true,
                       text: "Profit (KSh)",
-                      color: "white",
+                      color: "#1a1a2e",
                     },
-                    ticks: { color: "white" },
+                    ticks: { color: "#1a1a2e" },
                   },
-                  x: { ticks: { color: "white" } },
+                  x: { ticks: { color: "#1a1a2e" } },
                 },
               },
             });
@@ -432,29 +711,33 @@
               options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: "white" } } },
+                plugins: { legend: { labels: { color: "#1a1a2e" } } },
                 scales: {
                   y: {
                     beginAtZero: true,
                     title: {
                       display: true,
                       text: "Profit (KSh)",
-                      color: "white",
+                      color: "#1a1a2e",
                     },
-                    ticks: { color: "white" },
+                    ticks: { color: "#1a1a2e" },
                   },
-                  x: { ticks: { color: "white" } },
+                  x: { ticks: { color: "#1a1a2e" } },
                 },
               },
             });
           },
 
           async logout() {
-            await axios.post(
-              "http://164.90.221.47:8000/logout",
-              {},
-              { withCredentials: true },
-            );
+            try {
+              await axios.post(
+                `${CONFIG.API_BASE_URL}/logout`,
+                {},
+                { withCredentials: true },
+              );
+            } catch (error) {
+              console.error("Logout error:", error);
+            }
             window.location.href = "login.html";
           },
         },
@@ -465,6 +748,7 @@
       });
     </script>
 
+    <!-- ── Sidebar & logout logic ── -->
     <script>
       const sidebar = document.getElementById("sidebar");
       const toggleBtn = document.getElementById("sidebarToggle");
@@ -485,7 +769,6 @@
       if (toggleBtn) {
         toggleBtn.addEventListener("click", openSidebar);
       }
-
       if (overlay) {
         overlay.addEventListener("click", closeSidebar);
       }
@@ -499,6 +782,7 @@
         });
       });
 
+      // ── Logout (overrides default) ──
       const logoutBtn = document.getElementById("logoutBtn");
       if (logoutBtn) {
         logoutBtn.addEventListener("click", function (e) {
@@ -508,6 +792,13 @@
           else window.location.href = "login.html";
         });
       }
+
+      // ── Scroll effect ──
+      window.addEventListener("scroll", () => {
+        document
+          .querySelector(".top-navbar")
+          .classList.toggle("scrolled", window.scrollY > 50);
+      });
     </script>
   </body>
 </html>
