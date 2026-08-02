@@ -30,3 +30,9 @@ function attachSearchListeners() {
         });
     }
 }
+
+
+// docker build -t vue-frontend .
+// docker stop vue_frontend
+// docker rm vue_frontend
+// docker run -d --name vue_frontend -p 8080:80 vue-frontend
