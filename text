@@ -2,6 +2,14 @@ taskkill /F /IM "Docker Desktop.exe" 2>$null
 taskkill /F /IM "com.docker.backend.exe" 2>$null
 Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe" -Verb RunAs
 
+
+
+
+// docker build -t vue-frontend .
+// docker stop vue_frontend
+// docker rm vue_frontend
+// docker run -d --name vue_frontend -p 8080:80 vue-frontend
+
 https://www.youtube.com/watch?v=pTFZFxd4hOI&t=2s
 https://www.youtube.com/watch?v=pg19Z8LL06w
 https://github.com/Dan10532/vue-app/blob/master/Dockerfile
