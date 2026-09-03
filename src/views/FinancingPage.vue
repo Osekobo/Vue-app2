@@ -1,12 +1,20 @@
 <template>
   <div>
     <!-- Sidebar toggle button -->
-    <button class="sidebar-toggle" id="sidebarToggle" @click="sidebarOpen = true">
+    <button
+      class="sidebar-toggle"
+      id="sidebarToggle"
+      @click="sidebarOpen = true"
+    >
       <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Overlay (closes sidebar when clicked) -->
-    <div class="overlay" :class="{ show: sidebarOpen }" @click="sidebarOpen = false"></div>
+    <!-- Overlay -->
+    <div
+      class="overlay"
+      :class="{ show: sidebarOpen }"
+      @click="sidebarOpen = false"
+    ></div>
 
     <!-- Sidebar -->
     <nav class="sidebar" :class="{ show: sidebarOpen }">
@@ -14,35 +22,51 @@
         <h4>OBerlo</h4>
         <p>Inventory Management System</p>
       </div>
-      <ul style="list-style: none; padding-left: 0">
+
+      <ul class="sidebar-menu">
         <li class="nav-item">
           <router-link class="nav-link" to="/">
-            <i class="fas fa-home"></i> Home
+            <i class="fas fa-home"></i>
+            <span>Home</span>
           </router-link>
         </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/dashboard">
-            <i class="fas fa-chart-line"></i> Dashboard
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
           </router-link>
         </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/products">
-            <i class="fas fa-car"></i> Inventory
+            <i class="fas fa-car"></i>
+            <span>Inventory</span>
           </router-link>
         </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/purchases">
-            <i class="fas fa-truck"></i> Purchase Orders
+            <i class="fas fa-truck"></i>
+            <span>Purchase Orders</span>
           </router-link>
         </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/sales">
-            <i class="fas fa-dollar-sign"></i> Vehicle Sales
+            <i class="fas fa-dollar-sign"></i>
+            <span>Vehicle Sales</span>
           </router-link>
         </li>
+
         <li class="nav-item logout-btn">
-          <a class="nav-link" href="#" @click.prevent="handleLogout">
-            <i class="fas fa-sign-out-alt"></i> Logout
+          <a
+            class="nav-link"
+            href="#"
+            @click.prevent="handleLogout"
+          >
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
           </a>
         </li>
       </ul>
@@ -50,114 +74,196 @@
 
     <!-- MAIN CONTENT -->
     <main>
+      <!-- Hero -->
       <section class="finance-hero">
-        <div class="container">
-          <h1>Financing & <span>Payments</span></h1>
-          <p class="text-white-50">
+        <div class="hero-container">
+          <h1>
+            Financing &
+            <span>Payments</span>
+          </h1>
+
+          <p>
             Flexible options tailored to your budget. Drive away today.
           </p>
         </div>
       </section>
 
-      <section class="container py-5">
-        <!-- Financing Options Cards -->
-        <div class="row g-4 mb-5">
-          <div class="col-6 col-md-4">
-            <div class="finance-card">
+      <!-- Main Content -->
+      <section class="finance-content">
+
+        <!-- Financing Options -->
+        <div class="section-heading">
+          <h2>Financing Options</h2>
+          <p>Choose the payment option that works best for you.</p>
+        </div>
+
+        <div class="finance-options">
+
+          <!-- Card 1 -->
+          <div class="finance-card">
+            <div class="finance-icon">
               <i class="fas fa-hand-holding-usd"></i>
+            </div>
+
+            <div class="finance-card-content">
               <h5>Auto Loans</h5>
               <p>
-                Competitive rates from 2.9% APR. Get pre-approved in minutes.
+                Competitive rates from 2.9% APR. Get pre-approved
+                in minutes.
               </p>
             </div>
           </div>
-          <div class="col-6 col-md-4">
-            <div class="finance-card">
+
+          <!-- Card 2 -->
+          <div class="finance-card">
+            <div class="finance-icon">
               <i class="fas fa-file-signature"></i>
+            </div>
+
+            <div class="finance-card-content">
               <h5>Lease Options</h5>
               <p>
-                Flexible mileage plans with low monthly payments and easy
-                upgrades.
+                Flexible mileage plans with low monthly payments
+                and easy upgrades.
               </p>
             </div>
           </div>
-          <div class="col-6 col-md-4">
-            <div class="finance-card">
+
+          <!-- Card 3 -->
+          <div class="finance-card">
+            <div class="finance-icon">
               <i class="fas fa-coins"></i>
+            </div>
+
+            <div class="finance-card-content">
               <h5>Cash Purchase</h5>
               <p>
-                Exclusive discounts for cash buyers. Clear title and immediate
-                delivery.
+                Exclusive discounts for cash buyers. Clear title
+                and immediate delivery.
               </p>
             </div>
+          </div>
+
+        </div>
+
+        <!-- Calculator Section -->
+        <div class="calculator-section">
+
+          <div class="section-heading calculator-heading">
+            <h2>Estimate Your Monthly Payment</h2>
+            <p>
+              Enter the vehicle details below to estimate your monthly payment.
+            </p>
+          </div>
+
+          <div class="calc-box">
+
+            <div class="calculator-fields">
+
+              <!-- Vehicle Price -->
+              <div class="input-group-custom">
+                <label class="form-label">
+                  Vehicle Price ($)
+                </label>
+
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model.number="price"
+                  min="0"
+                />
+              </div>
+
+              <!-- Down Payment -->
+              <div class="input-group-custom">
+                <label class="form-label">
+                  Down Payment ($)
+                </label>
+
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model.number="downPayment"
+                  min="0"
+                />
+              </div>
+
+              <!-- Interest Rate -->
+              <div class="input-group-custom">
+                <label class="form-label">
+                  Interest Rate (%)
+                </label>
+
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model.number="rate"
+                  step="0.1"
+                  min="0"
+                />
+              </div>
+
+              <!-- Loan Term -->
+              <div class="input-group-custom">
+                <label class="form-label">
+                  Loan Term
+                </label>
+
+                <select
+                  class="form-control"
+                  v-model.number="term"
+                >
+                  <option :value="36">36 Months</option>
+                  <option :value="48">48 Months</option>
+                  <option :value="60">60 Months</option>
+                  <option :value="72">72 Months</option>
+                </select>
+              </div>
+
+              <!-- Button -->
+              <div class="calculate-button-wrapper">
+                <button
+                  class="btn-calc"
+                  @click="calculate"
+                >
+                  <i class="fas fa-calculator"></i>
+                  Calculate Payment
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Result -->
+            <div class="result-box">
+              <p class="result-label">
+                Estimated Monthly Payment
+              </p>
+
+              <div class="amount">
+                {{ formattedMonthlyPayment }}
+              </div>
+
+              <p class="result-note">
+                <i class="fas fa-info-circle"></i>
+                Rates are estimates. Final terms depend on credit approval.
+              </p>
+            </div>
+
           </div>
         </div>
 
-        <!-- Calculator -->
-        <h3 class="fw-bold text-center mb-4">Estimate Your Monthly Payment</h3>
-        <div class="calc-box">
-          <div class="row g-4">
-            <div class="col-md-4">
-              <label class="form-label fw-semibold">Vehicle Price ($)</label>
-              <input
-                type="number"
-                class="form-control"
-                v-model.number="price"
-                min="0"
-              />
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-semibold">Down Payment ($)</label>
-              <input
-                type="number"
-                class="form-control"
-                v-model.number="downPayment"
-                min="0"
-              />
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-semibold">Interest Rate (%)</label>
-              <input
-                type="number"
-                class="form-control"
-                v-model.number="rate"
-                step="0.1"
-                min="0"
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Loan Term (Months)</label>
-              <select class="form-control" v-model.number="term">
-                <option value="36">36 Months</option>
-                <option value="48">48 Months</option>
-                <option value="60">60 Months</option>
-                <option value="72">72 Months</option>
-              </select>
-            </div>
-            <div class="col-md-6 d-flex align-items-end">
-              <button class="btn-calc" @click="calculate">Calculate Payment</button>
-            </div>
-          </div>
-          <div class="result-box mt-4">
-            <p class="mb-0 text-white-50">Estimated Monthly Payment</p>
-            <div class="amount" id="monthlyResult">{{ formattedMonthlyPayment }}</div>
-            <small class="text-white-50"
-              >*Rates are estimates. Final terms depend on credit
-              approval.</small
-            >
-          </div>
-        </div>
       </section>
     </main>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import { API_BASE_URL } from '@/utils/config';
+import axios from "axios";
+import { API_BASE_URL } from "@/utils/config";
 
 export default {
-  name: 'FinancingPage',
+  name: "FinancingPage",
+
   data() {
     return {
       sidebarOpen: false,
@@ -168,49 +274,82 @@ export default {
       monthlyPayment: 0,
     };
   },
+
   computed: {
     formattedMonthlyPayment() {
       if (this.monthlyPayment === 0) {
-        // Compute on first load or when inputs change
         this.calculate();
       }
-      return '$' + this.monthlyPayment.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+      return (
+        "$" +
+        this.monthlyPayment
+          .toFixed(0)
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      );
     },
   },
+
   methods: {
     calculate() {
       const principal = this.price - this.downPayment;
+
       if (principal <= 0) {
         this.monthlyPayment = 0;
         return;
       }
+
       const monthlyRate = this.rate / 100 / 12;
+
       if (monthlyRate === 0) {
-        // If rate is 0, payment is simply principal / term
         this.monthlyPayment = principal / this.term;
         return;
       }
+
       const payment =
-        (principal * monthlyRate * Math.pow(1 + monthlyRate, this.term)) /
+        (principal *
+          monthlyRate *
+          Math.pow(1 + monthlyRate, this.term)) /
         (Math.pow(1 + monthlyRate, this.term) - 1);
+
       this.monthlyPayment = payment;
     },
+
     async handleLogout() {
       try {
-        await axios.post(`${API_BASE_URL}/logout`, {}, { withCredentials: true });
+        await axios.post(
+          `${API_BASE_URL}/logout`,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
       } catch (error) {
-        console.error('Logout error:', error);
+        console.error("Logout error:", error);
       }
-      this.$router.push('/login');
+
+      this.$router.push("/login");
     },
   },
+
   watch: {
-    // Recalculate when any input changes
-    price() { this.calculate(); },
-    downPayment() { this.calculate(); },
-    rate() { this.calculate(); },
-    term() { this.calculate(); },
+    price() {
+      this.calculate();
+    },
+
+    downPayment() {
+      this.calculate();
+    },
+
+    rate() {
+      this.calculate();
+    },
+
+    term() {
+      this.calculate();
+    },
   },
+
   mounted() {
     this.calculate();
   },
@@ -218,7 +357,10 @@ export default {
 </script>
 
 <style scoped>
-/* ── All styles from original financing.html, scoped ── */
+/* =========================================
+   GLOBAL
+========================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -227,73 +369,113 @@ export default {
 
 main {
   padding-top: 80px;
+  background: #f7f8fa;
+  min-height: 100vh;
 }
 
-/* ── Sidebar ── */
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
 .sidebar {
   position: fixed;
   left: -280px;
   top: 0;
   bottom: 0;
   width: 280px;
-  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+
+  background: linear-gradient(
+    180deg,
+    #1a1a2e 0%,
+    #16213e 100%
+  );
+
   transition: 0.3s ease-in-out;
   z-index: 1001;
+
   padding-top: 80px;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
 }
+
 .sidebar.show {
   left: 0;
 }
+
 .sidebar-header {
-  padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 22px;
   margin-bottom: 20px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .sidebar-header h4 {
   color: #ffc107;
   margin: 0;
+  font-size: 22px;
+  font-weight: 800;
 }
+
 .sidebar-header p {
   color: rgba(255, 255, 255, 0.6);
   font-size: 12px;
-  margin: 5px 0 0;
+  margin: 6px 0 0;
 }
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .sidebar .nav-item {
-  margin: 5px 0;
+  margin: 6px 0;
 }
+
 .sidebar .nav-link {
   color: white;
   text-decoration: none;
+
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+
+  padding: 13px 20px;
+
   transition: all 0.3s;
+
   font-weight: 500;
-  border-radius: 8px;
-  margin: 0 10px;
+  border-radius: 10px;
+
+  margin: 0 12px;
 }
+
 .sidebar .nav-link i {
   width: 25px;
   margin-right: 15px;
-  font-size: 18px;
+  font-size: 17px;
 }
+
 .sidebar .nav-link:hover {
   background: #ffc107;
   color: #000;
   transform: translateX(5px);
 }
+
 .sidebar .nav-link:hover i {
   color: #000;
 }
+
 .sidebar .logout-btn {
-  margin-top: 30px;
+  margin-top: 35px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 20px;
 }
+
 .sidebar .logout-btn .nav-link {
   color: #ff6b6b;
 }
+
 .sidebar .logout-btn .nav-link:hover {
   background: #ff6b6b;
   color: white;
@@ -303,20 +485,29 @@ main {
   position: fixed;
   left: 20px;
   top: 80px;
+
   z-index: 1002;
+
   background: #ffc107;
   border: none;
+
   width: 45px;
   height: 45px;
+
   border-radius: 50%;
+
   cursor: pointer;
+
   transition: all 0.3s;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+
 .sidebar-toggle:hover {
   background: #ffca2c;
   transform: scale(1.05);
 }
+
 .sidebar-toggle i {
   font-size: 20px;
   color: #000;
@@ -324,130 +515,598 @@ main {
 
 .overlay {
   position: fixed;
+
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+
   background: rgba(0, 0, 0, 0.5);
+
   z-index: 1000;
+
   display: none;
 }
+
 .overlay.show {
   display: block;
 }
 
-@media (max-width: 768px) {
-  .sidebar-toggle {
-    top: 70px;
-    left: 10px;
-    width: 40px;
-    height: 40px;
-  }
-}
 
-/* ── Finance Hero ── */
+/* =========================================
+   HERO
+========================================= */
+
 .finance-hero {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  padding: 60px 0 40px;
+  background: linear-gradient(
+    135deg,
+    #1a1a2e 0%,
+    #16213e 100%
+  );
+
+  padding: 65px 20px 60px;
+
   color: white;
   text-align: center;
 }
-.finance-hero h1 {
-  font-size: 42px;
-  font-weight: 800;
-}
-.finance-hero h1 span {
-  color: #ffc107;
-}
-.finance-hero p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 18px;
-  max-width: 600px;
+
+.hero-container {
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* ── Finance Cards ── */
-.finance-card {
-  background: white;
-  border-radius: 20px;
-  padding: 30px 25px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-  height: 100%;
-  transition: all 0.3s;
-  text-align: center;
+.finance-hero h1 {
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  line-height: 1.2;
 }
-.finance-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-}
-.finance-card i {
-  font-size: 48px;
+
+.finance-hero h1 span {
   color: #ffc107;
-  margin-bottom: 16px;
 }
+
+.finance-hero p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 18px;
+
+  max-width: 620px;
+  margin: 0 auto;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   MAIN CONTENT CONTAINER
+========================================= */
+
+.finance-content {
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  padding: 70px 35px 90px;
+}
+
+
+/* =========================================
+   SECTION HEADINGS
+========================================= */
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-heading h2 {
+  color: #1a1a2e;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.section-heading p {
+  color: #777;
+  font-size: 15px;
+  margin: 0 auto;
+
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   FINANCING CARDS
+========================================= */
+
+.finance-options {
+  display: grid;
+
+  grid-template-columns: repeat(
+    3,
+    minmax(0, 1fr)
+  );
+
+  gap: 28px;
+
+  width: 100%;
+
+  margin-bottom: 80px;
+}
+
+.finance-card {
+  background: #ffffff;
+
+  border-radius: 22px;
+
+  padding: 36px 30px;
+
+  min-height: 270px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  border: 1px solid #eeeeee;
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.finance-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 4px;
+
+  background: #ffc107;
+}
+
+.finance-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.1);
+}
+
+.finance-icon {
+  width: 78px;
+  height: 78px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 193, 7, 0.12);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 22px;
+}
+
+.finance-icon i {
+  font-size: 34px;
+  color: #ffc107;
+}
+
+.finance-card-content {
+  width: 100%;
+}
+
 .finance-card h5 {
-  font-weight: 700;
+  color: #1a1a2e;
+
+  font-size: 20px;
+  font-weight: 750;
+
+  margin-bottom: 12px;
 }
+
 .finance-card p {
   color: #666;
+
   font-size: 14px;
+  line-height: 1.7;
+
+  margin: 0 auto;
+
+  max-width: 300px;
 }
 
-/* ── Calculator ── */
+
+/* =========================================
+   CALCULATOR SECTION
+========================================= */
+
+.calculator-section {
+  width: 100%;
+}
+
+.calculator-heading {
+  margin-bottom: 35px;
+}
+
+
+/* =========================================
+   CALCULATOR CARD
+========================================= */
+
 .calc-box {
-  background: white;
+  width: 100%;
+
+  background: #ffffff;
+
   border-radius: 24px;
-  padding: 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+
+  padding: 38px;
+
+  border: 1px solid #eeeeee;
+
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.07);
 }
+
+
+/* =========================================
+   CALCULATOR INPUT GRID
+========================================= */
+
+.calculator-fields {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 26px 28px;
+}
+
+.input-group-custom {
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+
+  color: #1a1a2e;
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  margin-bottom: 10px;
+}
+
 .calc-box .form-control {
-  border-radius: 30px;
-  padding: 14px 22px;
-  border: 1px solid #e0e0e0;
+  width: 100%;
+
+  height: 52px;
+
+  border-radius: 12px;
+
+  padding: 12px 18px;
+
+  border: 1px solid #dedede;
+
+  background: #fff;
+
+  font-size: 15px;
+
+  transition: all 0.25s ease;
 }
+
 .calc-box .form-control:focus {
   border-color: #ffc107;
-  box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.12);
-}
-.result-box {
-  background: #1a1a2e;
-  border-radius: 20px;
-  padding: 30px;
-  color: white;
-  text-align: center;
-}
-.result-box .amount {
-  font-size: 48px;
-  font-weight: 800;
-  color: #ffc107;
-}
-.btn-calc {
-  background: #ffc107;
-  color: #000;
-  padding: 14px 0;
-  border-radius: 40px;
-  font-weight: 700;
-  border: none;
-  width: 100%;
-  transition: all 0.3s;
-}
-.btn-calc:hover {
-  background: #ffca2c;
+
+  box-shadow:
+    0 0 0 4px rgba(255, 193, 7, 0.12);
+
+  outline: none;
 }
 
-/* ── Responsive ── */
+
+/* =========================================
+   CALCULATE BUTTON
+========================================= */
+
+.calculate-button-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn-calc {
+  width: 100%;
+
+  height: 52px;
+
+  background: #ffc107;
+
+  color: #000;
+
+  border: none;
+
+  border-radius: 12px;
+
+  font-weight: 750;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+}
+
+.btn-calc:hover {
+  background: #ffca2c;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(255, 193, 7, 0.25);
+}
+
+
+/* =========================================
+   RESULT BOX
+========================================= */
+
+.result-box {
+  margin-top: 35px;
+
+  background: linear-gradient(
+    135deg,
+    #1a1a2e 0%,
+    #16213e 100%
+  );
+
+  border-radius: 20px;
+
+  padding: 35px 25px;
+
+  color: white;
+
+  text-align: center;
+
+  box-shadow:
+    0 10px 30px rgba(26, 26, 46, 0.15);
+}
+
+.result-label {
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 15px;
+
+  margin-bottom: 8px;
+}
+
+.result-box .amount {
+  font-size: 50px;
+
+  font-weight: 800;
+
+  color: #ffc107;
+
+  line-height: 1.2;
+
+  margin-bottom: 14px;
+}
+
+.result-note {
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 12px;
+
+  margin: 0;
+
+  line-height: 1.6;
+}
+
+.result-note i {
+  margin-right: 5px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 992px) {
+
+  .finance-content {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .finance-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+
+    margin-bottom: 65px;
+  }
+
+  .finance-card:last-child {
+    grid-column: 1 / -1;
+
+    max-width: 500px;
+    width: 100%;
+
+    margin: 0 auto;
+  }
+
+  .calc-box {
+    padding: 30px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 767px) {
+
+  main {
+    padding-top: 70px;
+  }
+
+  .sidebar-toggle {
+    top: 70px;
+    left: 12px;
+
+    width: 42px;
+    height: 42px;
+  }
+
+  .finance-hero {
+    padding: 50px 20px 45px;
+  }
+
+  .finance-hero h1 {
+    font-size: 34px;
+  }
+
+  .finance-hero p {
+    font-size: 15px;
+  }
+
+  .finance-content {
+    padding: 50px 20px 70px;
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .section-heading h2 {
+    font-size: 25px;
+  }
+
+  .section-heading p {
+    font-size: 14px;
+  }
+
+  .finance-options {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+    margin-bottom: 60px;
+  }
+
   .finance-card {
-    padding: 20px 16px;
+    min-height: 245px;
+
+    padding: 30px 24px;
   }
-  .finance-card i {
-    font-size: 36px;
+
+  .finance-card:last-child {
+    grid-column: auto;
+
+    max-width: none;
   }
+
+  .finance-icon {
+    width: 70px;
+    height: 70px;
+
+    margin-bottom: 18px;
+  }
+
+  .finance-icon i {
+    font-size: 30px;
+  }
+
   .finance-card h5 {
-    font-size: 16px;
+    font-size: 19px;
   }
+
   .finance-card p {
     font-size: 13px;
   }
+
+  .calculator-heading {
+    margin-bottom: 28px;
+  }
+
+  .calc-box {
+    padding: 25px 20px;
+
+    border-radius: 20px;
+  }
+
+  .calculator-fields {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .calculate-button-wrapper {
+    margin-top: 2px;
+  }
+
+  .result-box {
+    margin-top: 28px;
+
+    padding: 30px 18px;
+  }
+
+  .result-box .amount {
+    font-size: 40px;
+  }
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 480px) {
+
+  .finance-hero h1 {
+    font-size: 29px;
+  }
+
+  .finance-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .finance-card {
+    padding: 28px 20px;
+  }
+
+  .calc-box {
+    padding: 22px 16px;
+  }
+
+  .result-box .amount {
+    font-size: 34px;
+  }
 }
 </style>
+
+<!-- 500 lines -->

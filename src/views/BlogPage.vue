@@ -1,12 +1,20 @@
 <template>
   <div>
     <!-- Sidebar toggle button -->
-    <button class="sidebar-toggle" id="sidebarToggle" @click="sidebarOpen = true">
+    <button
+      class="sidebar-toggle"
+      id="sidebarToggle"
+      @click="sidebarOpen = true"
+    >
       <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Overlay (closes sidebar when clicked) -->
-    <div class="overlay" :class="{ show: sidebarOpen }" @click="sidebarOpen = false"></div>
+    <!-- Overlay -->
+    <div
+      class="overlay"
+      :class="{ show: sidebarOpen }"
+      @click="sidebarOpen = false"
+    ></div>
 
     <!-- Sidebar -->
     <nav class="sidebar" :class="{ show: sidebarOpen }">
@@ -14,35 +22,51 @@
         <h4>OBerlo</h4>
         <p>Inventory Management System</p>
       </div>
-      <ul style="list-style: none; padding-left: 0">
+
+      <ul class="sidebar-menu">
         <li class="nav-item">
           <router-link class="nav-link" to="/">
-            <i class="fas fa-home"></i> Home
+            <i class="fas fa-home"></i>
+            <span>Home</span>
           </router-link>
         </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/dashboard">
-            <i class="fas fa-chart-line"></i> Dashboard
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
           </router-link>
         </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/products">
-            <i class="fas fa-car"></i> Inventory
+            <i class="fas fa-car"></i>
+            <span>Inventory</span>
           </router-link>
         </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/purchases">
-            <i class="fas fa-truck"></i> Purchase Orders
+            <i class="fas fa-truck"></i>
+            <span>Purchase Orders</span>
           </router-link>
         </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/sales">
-            <i class="fas fa-dollar-sign"></i> Vehicle Sales
+            <i class="fas fa-dollar-sign"></i>
+            <span>Vehicle Sales</span>
           </router-link>
         </li>
+
         <li class="nav-item logout-btn">
-          <a class="nav-link" href="#" @click.prevent="handleLogout">
-            <i class="fas fa-sign-out-alt"></i> Logout
+          <a
+            class="nav-link"
+            href="#"
+            @click.prevent="handleLogout"
+          >
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
           </a>
         </li>
       </ul>
@@ -50,124 +74,238 @@
 
     <!-- MAIN CONTENT -->
     <main>
+
       <!-- Blog Hero -->
       <section class="blog-hero">
-        <div class="container">
-          <h1>Our <span>Blog</span></h1>
-          <p class="text-white-50">Insights, news, and stories from the world of luxury automobiles.</p>
+        <div class="hero-container">
+          <h1>
+            Our <span>Blog</span>
+          </h1>
+
+          <p>
+            Insights, news, and stories from the world of luxury
+            automobiles.
+          </p>
         </div>
       </section>
 
-      <!-- Blog Posts Grid -->
-      <section class="container py-5">
-        <div class="row g-4">
+      <!-- Blog Posts -->
+      <section class="blog-section">
+
+        <div class="section-heading">
+          <h2>Latest From OBerlo</h2>
+
+          <p>
+            Discover the latest automotive news, reviews, guides,
+            and stories from the world of luxury cars.
+          </p>
+        </div>
+
+        <div class="blog-grid">
+
           <!-- Post 1 -->
-          <div class="col-6 col-md-6 col-lg-4">
-            <div class="blog-card">
+          <article class="blog-card">
+            <div class="image-wrapper">
               <img
                 src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600"
                 alt="Luxury Car"
               />
-              <div class="body">
-                <div class="date">May 15, 2026</div>
-                <h5>Top 5 Supercars of 2026</h5>
-                <p>From hybrid hypercars to naturally aspirated V12s, here's our definitive list.</p>
-                <router-link to="#" class="read-more">
-                  Read More <i class="fas fa-arrow-right ms-1"></i>
-                </router-link>
-              </div>
+
+              <span class="category">Supercars</span>
             </div>
-          </div>
+
+            <div class="blog-body">
+              <div class="date">
+                May 15, 2026
+              </div>
+
+              <h5>Top 5 Supercars of 2026</h5>
+
+              <p>
+                From hybrid hypercars to naturally aspirated V12s,
+                here's our definitive list.
+              </p>
+
+              <router-link
+                to="#"
+                class="read-more"
+              >
+                Read More
+                <i class="fas fa-arrow-right"></i>
+              </router-link>
+            </div>
+          </article>
+
 
           <!-- Post 2 -->
-          <div class="col-6 col-md-6 col-lg-4">
-            <div class="blog-card">
+          <article class="blog-card">
+            <div class="image-wrapper">
               <img
                 src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600"
-                alt="EV"
+                alt="Electric Vehicle"
               />
-              <div class="body">
-                <div class="date">May 8, 2026</div>
-                <h5>Electric vs. Petrol: The Great Debate</h5>
-                <p>We compare performance, range, and the visceral experience of both.</p>
-                <router-link to="#" class="read-more">
-                  Read More <i class="fas fa-arrow-right ms-1"></i>
-                </router-link>
-              </div>
+
+              <span class="category">Electric</span>
             </div>
-          </div>
+
+            <div class="blog-body">
+              <div class="date">
+                May 8, 2026
+              </div>
+
+              <h5>Electric vs. Petrol: The Great Debate</h5>
+
+              <p>
+                We compare performance, range, and the visceral
+                experience of both.
+              </p>
+
+              <router-link
+                to="#"
+                class="read-more"
+              >
+                Read More
+                <i class="fas fa-arrow-right"></i>
+              </router-link>
+            </div>
+          </article>
+
 
           <!-- Post 3 -->
-          <div class="col-6 col-md-6 col-lg-4">
-            <div class="blog-card">
+          <article class="blog-card">
+            <div class="image-wrapper">
               <img
                 src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=600"
-                alt="Maintenance"
+                alt="Car Maintenance"
               />
-              <div class="body">
-                <div class="date">April 28, 2026</div>
-                <h5>How to Maintain Your Lamborghini</h5>
-                <p>Essential tips to keep your Italian supercar in pristine condition.</p>
-                <router-link to="#" class="read-more">
-                  Read More <i class="fas fa-arrow-right ms-1"></i>
-                </router-link>
-              </div>
+
+              <span class="category">Maintenance</span>
             </div>
-          </div>
+
+            <div class="blog-body">
+              <div class="date">
+                April 28, 2026
+              </div>
+
+              <h5>How to Maintain Your Lamborghini</h5>
+
+              <p>
+                Essential tips to keep your Italian supercar in
+                pristine condition.
+              </p>
+
+              <router-link
+                to="#"
+                class="read-more"
+              >
+                Read More
+                <i class="fas fa-arrow-right"></i>
+              </router-link>
+            </div>
+          </article>
+
 
           <!-- Post 4 -->
-          <div class="col-6 col-md-6 col-lg-4">
-            <div class="blog-card">
+          <article class="blog-card">
+            <div class="image-wrapper">
               <img
                 src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600"
                 alt="Porsche"
               />
-              <div class="body">
-                <div class="date">April 15, 2026</div>
-                <h5>Porsche 911 Turbo S: A Legend Evolved</h5>
-                <p>We take the latest 992 generation for a spin on the Autobahn.</p>
-                <router-link to="#" class="read-more">
-                  Read More <i class="fas fa-arrow-right ms-1"></i>
-                </router-link>
-              </div>
+
+              <span class="category">Reviews</span>
             </div>
-          </div>
+
+            <div class="blog-body">
+              <div class="date">
+                April 15, 2026
+              </div>
+
+              <h5>Porsche 911 Turbo S: A Legend Evolved</h5>
+
+              <p>
+                We take the latest 992 generation for a spin on
+                the Autobahn.
+              </p>
+
+              <router-link
+                to="#"
+                class="read-more"
+              >
+                Read More
+                <i class="fas fa-arrow-right"></i>
+              </router-link>
+            </div>
+          </article>
+
 
           <!-- Post 5 -->
-          <div class="col-6 col-md-6 col-lg-4">
-            <div class="blog-card">
+          <article class="blog-card">
+            <div class="image-wrapper">
               <img
                 src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600"
                 alt="Mercedes"
               />
-              <div class="body">
-                <div class="date">April 2, 2026</div>
-                <h5>Mercedes-AMG GT 63 S Review</h5>
-                <p>A four-door coupe that redefines the meaning of "practical performance".</p>
-                <router-link to="#" class="read-more">
-                  Read More <i class="fas fa-arrow-right ms-1"></i>
-                </router-link>
-              </div>
+
+              <span class="category">Reviews</span>
             </div>
-          </div>
+
+            <div class="blog-body">
+              <div class="date">
+                April 2, 2026
+              </div>
+
+              <h5>Mercedes-AMG GT 63 S Review</h5>
+
+              <p>
+                A four-door coupe that redefines the meaning of
+                practical performance.
+              </p>
+
+              <router-link
+                to="#"
+                class="read-more"
+              >
+                Read More
+                <i class="fas fa-arrow-right"></i>
+              </router-link>
+            </div>
+          </article>
+
 
           <!-- Post 6 -->
-          <div class="col-6 col-md-6 col-lg-4">
-            <div class="blog-card">
+          <article class="blog-card">
+            <div class="image-wrapper">
               <img
                 src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600"
                 alt="Bentley"
               />
-              <div class="body">
-                <div class="date">March 20, 2026</div>
-                <h5>Bentley Continental GT: The Grand Tourer</h5>
-                <p>Luxury, speed, and craftsmanship combined in a single package.</p>
-                <router-link to="#" class="read-more">
-                  Read More <i class="fas fa-arrow-right ms-1"></i>
-                </router-link>
-              </div>
+
+              <span class="category">Luxury</span>
             </div>
-          </div>
+
+            <div class="blog-body">
+              <div class="date">
+                March 20, 2026
+              </div>
+
+              <h5>Bentley Continental GT: The Grand Tourer</h5>
+
+              <p>
+                Luxury, speed, and craftsmanship combined in a
+                single package.
+              </p>
+
+              <router-link
+                to="#"
+                class="read-more"
+              >
+                Read More
+                <i class="fas fa-arrow-right"></i>
+              </router-link>
+            </div>
+          </article>
+
         </div>
       </section>
     </main>
@@ -175,36 +313,43 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { API_BASE_URL } from '@/utils/config';
+import axios from "axios";
+import { API_BASE_URL } from "@/utils/config";
 
 export default {
-  name: 'BlogPage',
+  name: "BlogPage",
+
   data() {
     return {
       sidebarOpen: false,
     };
   },
+
   methods: {
     async handleLogout() {
       try {
-        await axios.post(`${API_BASE_URL}/logout`, {}, { withCredentials: true });
+        await axios.post(
+          `${API_BASE_URL}/logout`,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
       } catch (error) {
-        console.error('Logout error:', error);
+        console.error("Logout error:", error);
       }
-      this.$router.push('/login');
+
+      this.$router.push("/login");
     },
-  },
-  mounted() {
-    // If you have global listeners, import and call them here
-    // e.g., import { attachSearchListeners } from '@/utils/global';
-    // attachSearchListeners();
   },
 };
 </script>
 
 <style scoped>
-/* ── Page-specific styles (scoped to this component) ── */
+/* =========================================
+   GLOBAL
+========================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -213,202 +358,666 @@ export default {
 
 main {
   padding-top: 80px;
+  min-height: 100vh;
+  background: #f7f8fa;
 }
 
-/* ── Sidebar ── */
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
 .sidebar {
   position: fixed;
+
   left: -280px;
   top: 0;
   bottom: 0;
+
   width: 280px;
-  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+
+  background: linear-gradient(
+    180deg,
+    #1a1a2e 0%,
+    #16213e 100%
+  );
+
   transition: 0.3s ease-in-out;
+
   z-index: 1001;
+
   padding-top: 80px;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+  box-shadow:
+    2px 0 20px rgba(0, 0, 0, 0.15);
 }
+
 .sidebar.show {
   left: 0;
 }
+
 .sidebar-header {
-  padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 22px;
+
   margin-bottom: 20px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.1);
 }
+
 .sidebar-header h4 {
   color: #ffc107;
+
   margin: 0;
+
+  font-size: 22px;
+
+  font-weight: 800;
 }
+
 .sidebar-header p {
   color: rgba(255, 255, 255, 0.6);
+
   font-size: 12px;
-  margin: 5px 0 0;
+
+  margin: 6px 0 0;
 }
+
+.sidebar-menu {
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+}
+
 .sidebar .nav-item {
-  margin: 5px 0;
+  margin: 6px 0;
 }
+
 .sidebar .nav-link {
   color: white;
+
   text-decoration: none;
+
   display: flex;
+
   align-items: center;
-  padding: 12px 20px;
+
+  padding: 13px 20px;
+
   transition: all 0.3s;
+
   font-weight: 500;
-  border-radius: 8px;
-  margin: 0 10px;
+
+  border-radius: 10px;
+
+  margin: 0 12px;
 }
+
 .sidebar .nav-link i {
   width: 25px;
+
   margin-right: 15px;
-  font-size: 18px;
+
+  font-size: 17px;
 }
+
 .sidebar .nav-link:hover {
   background: #ffc107;
+
   color: #000;
+
   transform: translateX(5px);
 }
+
+.sidebar .nav-link.active {
+  background: #ffc107;
+
+  color: #000;
+}
+
 .sidebar .logout-btn {
-  margin-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 35px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.1);
+
   padding-top: 20px;
 }
+
 .sidebar .logout-btn .nav-link {
   color: #ff6b6b;
 }
+
 .sidebar .logout-btn .nav-link:hover {
   background: #ff6b6b;
+
   color: white;
 }
 
+
+/* =========================================
+   SIDEBAR TOGGLE
+========================================= */
+
 .sidebar-toggle {
   position: fixed;
+
   left: 20px;
   top: 80px;
+
   z-index: 1002;
+
   background: #ffc107;
+
   border: none;
+
   width: 45px;
   height: 45px;
+
   border-radius: 50%;
+
   cursor: pointer;
+
   transition: all 0.3s;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.2);
 }
+
 .sidebar-toggle:hover {
   background: #ffca2c;
+
   transform: scale(1.05);
 }
+
 .sidebar-toggle i {
   font-size: 20px;
+
   color: #000;
 }
 
+
+/* =========================================
+   OVERLAY
+========================================= */
+
 .overlay {
   position: fixed;
+
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+
   background: rgba(0, 0, 0, 0.5);
+
   z-index: 1000;
+
   display: none;
 }
+
 .overlay.show {
   display: block;
 }
 
-@media (max-width: 768px) {
-  .sidebar-toggle {
-    top: 70px;
-    left: 10px;
-    width: 40px;
-    height: 40px;
-  }
+
+/* =========================================
+   BLOG HERO
+========================================= */
+
+.blog-hero {
+  background: linear-gradient(
+    135deg,
+    #1a1a2e 0%,
+    #16213e 100%
+  );
+
+  color: white;
+
+  text-align: center;
+
+  padding: 65px 20px 60px;
 }
 
-/* ── Blog Hero ── */
-.blog-hero {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  padding: 60px 0 40px;
-  color: white;
-  text-align: center;
-}
-.blog-hero h1 {
-  font-size: 42px;
-  font-weight: 800;
-}
-.blog-hero h1 span {
-  color: #ffc107;
-}
-.blog-hero p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 18px;
-  max-width: 700px;
+.hero-container {
+  width: 100%;
+
+  max-width: 900px;
+
   margin: 0 auto;
 }
 
-/* ── Blog Cards ── */
-.blog-card {
-  background: white;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s;
-  height: 100%;
+.blog-hero h1 {
+  font-size: 44px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  margin-bottom: 14px;
 }
-.blog-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
-}
-.blog-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-.blog-card .body {
-  padding: 20px 22px 25px;
-}
-.blog-card .date {
-  color: #ffc107;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.blog-card h5 {
-  font-weight: 700;
-  margin: 8px 0 10px;
-}
-.blog-card p {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.6;
-}
-.blog-card .read-more {
-  color: #1a1a2e;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.blog-card .read-more:hover {
+
+.blog-hero h1 span {
   color: #ffc107;
 }
 
-/* ── Responsive ── */
-@media (max-width: 576px) {
-  .blog-card img {
-    height: 150px;
+.blog-hero p {
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 18px;
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   BLOG SECTION
+========================================= */
+
+.blog-section {
+  width: 100%;
+
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  padding: 70px 35px 90px;
+}
+
+
+/* =========================================
+   SECTION HEADING
+========================================= */
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 42px;
+}
+
+.section-heading h2 {
+  color: #1a1a2e;
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  margin-bottom: 10px;
+}
+
+.section-heading p {
+  color: #777;
+
+  font-size: 15px;
+
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   BLOG GRID
+========================================= */
+
+.blog-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 32px;
+}
+
+
+/* =========================================
+   BLOG CARD
+========================================= */
+
+.blog-card {
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  border: 1px solid #eeeeee;
+
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.06);
+
+  display: flex;
+
+  flex-direction: column;
+
+  height: 100%;
+
+  min-width: 0;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.11);
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.image-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  height: 230px;
+
+  overflow: hidden;
+
+  background: #eee;
+}
+
+.image-wrapper img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition:
+    transform 0.5s ease;
+}
+
+.blog-card:hover .image-wrapper img {
+  transform: scale(1.05);
+}
+
+
+/* =========================================
+   CATEGORY
+========================================= */
+
+.category {
+  position: absolute;
+
+  top: 16px;
+
+  left: 16px;
+
+  background: #ffc107;
+
+  color: #000;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+
+  padding: 7px 11px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   BLOG BODY
+========================================= */
+
+.blog-body {
+  padding: 24px 24px 26px;
+
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+.blog-body .date {
+  color: #d29d00;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 10px;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.blog-body h5 {
+  color: #1a1a2e;
+
+  font-size: 19px;
+
+  font-weight: 750;
+
+  line-height: 1.4;
+
+  margin: 0 0 12px;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.blog-body p {
+  color: #666;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  margin: 0;
+
+  flex: 1;
+}
+
+
+/* =========================================
+   READ MORE
+========================================= */
+
+.read-more {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 20px;
+
+  color: #1a1a2e;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  transition: all 0.3s ease;
+
+  align-self: flex-start;
+}
+
+.read-more i {
+  font-size: 12px;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.read-more:hover {
+  color: #d29d00;
+}
+
+.read-more:hover i {
+  transform: translateX(4px);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 992px) {
+
+  .blog-section {
+    padding-left: 28px;
+
+    padding-right: 28px;
   }
-  .blog-card .body {
-    padding: 14px 16px 18px;
+
+  .blog-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 26px;
   }
-  .blog-card h5 {
-    font-size: 16px;
+
+  .image-wrapper {
+    height: 220px;
   }
-  .blog-card p {
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+  main {
+    padding-top: 70px;
+  }
+
+  .sidebar-toggle {
+    top: 70px;
+
+    left: 12px;
+
+    width: 42px;
+
+    height: 42px;
+  }
+
+  .blog-hero {
+    padding: 50px 20px 45px;
+  }
+
+  .blog-hero h1 {
+    font-size: 34px;
+  }
+
+  .blog-hero p {
+    font-size: 15px;
+  }
+
+  .blog-section {
+    padding: 50px 20px 70px;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .section-heading h2 {
+    font-size: 25px;
+  }
+
+  .section-heading p {
+    font-size: 14px;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+
+    gap: 24px;
+  }
+
+  .image-wrapper {
+    height: 220px;
+  }
+
+  .blog-body {
+    padding: 22px 20px 24px;
+  }
+
+  .blog-body h5 {
+    font-size: 18px;
+  }
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 480px) {
+
+  .blog-section {
+    padding-left: 16px;
+
+    padding-right: 16px;
+  }
+
+  .blog-hero h1 {
+    font-size: 30px;
+  }
+
+  .image-wrapper {
+    height: 190px;
+  }
+
+  .blog-body {
+    padding: 20px 18px 22px;
+  }
+
+  .blog-body h5 {
+    font-size: 17px;
+  }
+
+  .blog-body p {
     font-size: 13px;
   }
 }
 </style>
+
+<!-- 460 lines -->

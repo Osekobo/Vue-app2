@@ -2,21 +2,21 @@
   <div id="app">
     <!-- Top Navbar (global) -->
     <Navbar />
-    
+
     <!-- Main content area – rendered by Vue Router -->
     <router-view />
-    
+
     <!-- Footer (global) -->
     <Footer />
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue';
-import Footer from '@/components/Footer.vue';
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Navbar,
     Footer,
@@ -89,16 +89,84 @@ footer .copyright {
 
 /* ── Utility / helper classes (if needed) ── */
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
+}
+
+#featuredGrid,
+#shopGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+#featuredGrid > *,
+#shopGrid > * {
+  min-width: 0;
+  margin: 0;
+}
+
+#featuredGrid .car-card,
+#shopGrid .shop-card {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+#featuredGrid .car-card .card-body,
+#shopGrid .shop-card .card-body {
+  padding: 20px;
+}
+
+.row
+  > [class*="col-"]
+  > :where(
+    .finance-card,
+    .contact-info-card,
+    .form-card,
+    .calc-box,
+    .blog-card,
+    .service-box,
+    .testimonial-card,
+    .dashboard-card,
+    .chart-card,
+    .stat-card
+  ) {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  #featuredGrid,
+  #shopGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 /* ── Responsive tweaks ── */
 @media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
   .top-navbar a {
     padding: 6px 10px;
     font-size: 13px;
+  }
+
+  #featuredGrid,
+  #shopGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  #featuredGrid .car-card .card-body,
+  #shopGrid .shop-card .card-body {
+    padding: 16px;
   }
 }
 </style>

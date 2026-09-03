@@ -1,67 +1,132 @@
 <template>
   <footer class="footer-premium">
-    <div class="container">
+    <div class="footer-container">
+
       <!-- Footer Top -->
       <div class="footer-top">
-        <div class="row g-4">
+        <div class="footer-grid">
+
           <!-- Brand -->
-          <div class="col-lg-3 col-md-6">
+          <div class="footer-column brand-column">
             <div class="footer-brand">
-              <span class="brand-text">O<span>Berlo</span></span>
+              <span class="brand-text">
+                O<span>Berlo</span>
+              </span>
+
               <p class="tagline">
-                Curating the world's finest luxury vehicles for discerning drivers since 2018.
+                Curating the world's finest luxury vehicles for discerning
+                drivers since 2018.
               </p>
+
+              <div class="brand-line"></div>
             </div>
           </div>
 
           <!-- Quick Links -->
-          <div class="col-lg-2 col-md-6">
+          <div class="footer-column">
             <h5>Quick Links</h5>
+
             <ul class="footer-links">
-              <li><router-link to="/"><i class="fas fa-chevron-right"></i> Home</router-link></li>
-              <li><router-link to="/shop"><i class="fas fa-chevron-right"></i> Shop</router-link></li>
-              <li><router-link to="/about"><i class="fas fa-chevron-right"></i> About Us</router-link></li>
-              <li><router-link to="/contact"><i class="fas fa-chevron-right"></i> Contact</router-link></li>
+              <li>
+                <router-link to="/">
+                  <i class="fas fa-chevron-right"></i>
+                  <span>Home</span>
+                </router-link>
+              </li>
+
+              <li>
+                <router-link to="/shop">
+                  <i class="fas fa-chevron-right"></i>
+                  <span>Shop</span>
+                </router-link>
+              </li>
+
+              <li>
+                <router-link to="/about">
+                  <i class="fas fa-chevron-right"></i>
+                  <span>About Us</span>
+                </router-link>
+              </li>
+
+              <li>
+                <router-link to="/contact">
+                  <i class="fas fa-chevron-right"></i>
+                  <span>Contact</span>
+                </router-link>
+              </li>
             </ul>
           </div>
 
           <!-- Services -->
-          <div class="col-lg-2 col-md-6">
+          <div class="footer-column">
             <h5>Services</h5>
+
             <ul class="footer-links">
-              <li><router-link to="/test-drive"><i class="fas fa-chevron-right"></i> Test Drive</router-link></li>
-              <li><router-link to="/financing"><i class="fas fa-chevron-right"></i> Financing</router-link></li>
-              <li><router-link to="/blog"><i class="fas fa-chevron-right"></i> Blog</router-link></li>
+              <li>
+                <router-link to="/test-drive">
+                  <i class="fas fa-chevron-right"></i>
+                  <span>Test Drive</span>
+                </router-link>
+              </li>
+
+              <li>
+                <router-link to="/financing">
+                  <i class="fas fa-chevron-right"></i>
+                  <span>Financing</span>
+                </router-link>
+              </li>
+
+              <li>
+                <router-link to="/blog">
+                  <i class="fas fa-chevron-right"></i>
+                  <span>Blog</span>
+                </router-link>
+              </li>
             </ul>
           </div>
 
           <!-- Contact -->
-          <div class="col-lg-2 col-md-6">
+          <div class="footer-column contact-column">
             <h5>Contact</h5>
+
             <div class="contact-item">
               <i class="fas fa-location-dot"></i>
-              <span>450 Park Avenue,<br />New York, NY 10022</span>
+              <span>
+                450 Park Avenue,<br />
+                New York, NY 10022
+              </span>
             </div>
+
             <div class="contact-item">
               <i class="fas fa-phone"></i>
-              <a href="tel:+18005550199">+1 (800) 555‑0199</a>
+              <a href="tel:+18005550199">
+                +1 (800) 555-0199
+              </a>
             </div>
+
             <div class="contact-item">
               <i class="fas fa-envelope"></i>
-              <a href="mailto:concierge@oberlo.com">concierge@oberlo.com</a>
+              <a href="mailto:concierge@oberlo.com">
+                concierge@oberlo.com
+              </a>
             </div>
+
             <div class="contact-item">
               <i class="fas fa-clock"></i>
-              <span>Mon–Sat: 9:00 AM – 7:00 PM</span>
+              <span>
+                Mon–Sat: 9:00 AM – 7:00 PM
+              </span>
             </div>
           </div>
 
-          <!-- Newsletter + Social -->
-          <div class="col-lg-3 col-md-12">
+          <!-- Newsletter -->
+          <div class="footer-column newsletter-column">
             <h5>Stay Updated</h5>
-            <p style="font-size:0.88rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">
+
+            <p class="newsletter-text">
               Subscribe to get the latest arrivals and exclusive offers.
             </p>
+
             <div class="newsletter-wrap">
               <input
                 type="email"
@@ -69,37 +134,84 @@
                 v-model="email"
                 @keydown.enter.prevent="subscribe"
               />
-              <button class="btn-subscribe" @click="subscribe">
-                <i class="fas fa-paper-plane"></i> Subscribe
+
+              <button
+                class="btn-subscribe"
+                type="button"
+                @click="subscribe"
+              >
+                <i class="fas fa-paper-plane"></i>
+                <span>Subscribe</span>
               </button>
             </div>
-            <div style="margin-top: 18px;">
+
+            <!-- Social Icons -->
+            <div class="social-section">
+              <span class="social-label">Follow us</span>
+
               <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="#" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="YouTube">
+                  <i class="fab fa-youtube"></i>
+                </a>
+
+                <a href="#" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+
+                <a href="#" aria-label="Twitter">
+                  <i class="fab fa-x-twitter"></i>
+                </a>
               </div>
             </div>
           </div>
+
         </div>
 
         <!-- Trust Badges -->
         <div class="trust-badges">
-          <span class="trust-badge"><i class="fas fa-shield-alt"></i> Secure Payments</span>
-          <span class="trust-badge"><i class="fas fa-truck"></i> Free Delivery</span>
-          <span class="trust-badge"><i class="fas fa-undo-alt"></i> 7-Day Returns</span>
-          <span class="trust-badge"><i class="fas fa-certificate"></i> Certified Vehicles</span>
-          <span class="trust-badge"><i class="fas fa-headset"></i> 24/7 Support</span>
+          <div class="trust-badge">
+            <i class="fas fa-shield-alt"></i>
+            <span>Secure Payments</span>
+          </div>
+
+          <div class="trust-badge">
+            <i class="fas fa-truck"></i>
+            <span>Free Delivery</span>
+          </div>
+
+          <div class="trust-badge">
+            <i class="fas fa-undo-alt"></i>
+            <span>7-Day Returns</span>
+          </div>
+
+          <div class="trust-badge">
+            <i class="fas fa-certificate"></i>
+            <span>Certified Vehicles</span>
+          </div>
+
+          <div class="trust-badge">
+            <i class="fas fa-headset"></i>
+            <span>24/7 Support</span>
+          </div>
         </div>
       </div>
 
       <!-- Footer Bottom -->
       <div class="footer-bottom">
         <div class="copyright">
-          &copy; 2025 <router-link to="/">OBerlo</router-link>. All rights reserved.
+          &copy; 2025
+          <router-link to="/">OBerlo</router-link>.
+          All rights reserved.
         </div>
+
         <div class="legal-links">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
@@ -107,25 +219,31 @@
           <a href="#">Sitemap</a>
         </div>
       </div>
+
     </div>
   </footer>
 </template>
 
 <script>
 export default {
-  name: 'Footer',
+  name: "Footer",
+
   data() {
     return {
-      email: '',
+      email: "",
     };
   },
+
   methods: {
     subscribe() {
       if (this.email.trim()) {
-        alert('✅ Thank you for subscribing! You\'ll receive our latest updates.');
-        this.email = '';
+        alert(
+          "✅ Thank you for subscribing! You'll receive our latest updates."
+        );
+
+        this.email = "";
       } else {
-        alert('Please enter a valid email address.');
+        alert("Please enter a valid email address.");
       }
     },
   },
@@ -133,382 +251,653 @@ export default {
 </script>
 
 <style scoped>
-/* ── PREMIUM FOOTER (scoped to this component) ── */
+/* ================================
+   PREMIUM FOOTER
+================================ */
+
 .footer-premium {
-  background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
-  color: rgba(255, 255, 255, 0.75);
-  padding-top: 60px;
+  width: 100%;
   margin-top: auto;
-  border-top: 1px solid rgba(255, 193, 7, 0.08);
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(255, 193, 7, 0.06),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #0d0d16 0%,
+      #141423 55%,
+      #10101b 100%
+    );
+  color: rgba(255, 255, 255, 0.72);
+  border-top: 1px solid rgba(255, 193, 7, 0.1);
 }
+
+/* ================================
+   CONTAINER
+================================ */
+
+.footer-container {
+  width: min(1380px, calc(100% - 60px));
+  margin: 0 auto;
+}
+
+/* ================================
+   FOOTER TOP
+================================ */
 
 .footer-top {
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 70px 0 38px;
 }
 
-.footer-premium .container {
-  max-width: 1280px;
-  padding: 0 1.5rem;
+/* ================================
+   GRID
+================================ */
+
+.footer-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(190px, 1.25fr)
+    minmax(130px, 0.8fr)
+    minmax(130px, 0.8fr)
+    minmax(190px, 1fr)
+    minmax(250px, 1.45fr);
+
+  gap: 42px;
 }
 
-/* Brand */
-.footer-brand .brand-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: #ffc107;
-  border-radius: 14px;
-  font-size: 22px;
-  font-weight: 800;
-  color: #000;
-  margin-bottom: 12px;
-  transition: transform 0.3s ease;
-}
-.footer-brand:hover .brand-icon {
-  transform: rotate(-6deg) scale(1.05);
-}
-.footer-brand .brand-text {
-  font-size: 28px;
-  font-weight: 800;
-  color: white;
-  letter-spacing: -0.5px;
-  display: block;
-}
-.footer-brand .brand-text span {
-  color: #ffc107;
-}
-.footer-brand .tagline {
-  font-size: 0.92rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 6px;
-  line-height: 1.6;
-  max-width: 300px;
+/* ================================
+   COLUMNS
+================================ */
+
+.footer-column {
+  min-width: 0;
 }
 
-/* Headings */
-.footer-premium h5 {
-  color: white;
-  font-weight: 700;
-  font-size: 1.05rem;
-  margin-bottom: 18px;
-  letter-spacing: 0.3px;
+.brand-column {
+  padding-right: 15px;
+}
+
+/* ================================
+   BRAND
+================================ */
+
+.footer-brand {
   position: relative;
 }
-.footer-premium h5::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 30px;
-  height: 2.5px;
-  background: #ffc107;
-  border-radius: 4px;
-}
-.footer-premium .text-center h5::after {
-  left: 50%;
-  transform: translateX(-50%);
+
+.brand-text {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 31px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
 }
 
-/* Links */
+.brand-text span {
+  color: #ffc107;
+}
+
+.tagline {
+  max-width: 300px;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.brand-line {
+  width: 42px;
+  height: 3px;
+  margin-top: 22px;
+  background: #ffc107;
+  border-radius: 20px;
+}
+
+/* ================================
+   HEADINGS
+================================ */
+
+.footer-premium h5 {
+  position: relative;
+  margin: 0 0 25px;
+  padding-bottom: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.footer-premium h5::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  height: 2px;
+  background: #ffc107;
+  border-radius: 10px;
+}
+
+/* ================================
+   LINKS
+================================ */
+
 .footer-links {
-  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   padding: 0;
   margin: 0;
+  list-style: none;
 }
+
 .footer-links li {
-  margin-bottom: 10px;
+  margin: 0;
 }
+
 .footer-links a {
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  font-size: 0.92rem;
-  transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+  color: rgba(255, 255, 255, 0.53);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
 }
+
 .footer-links a i {
-  font-size: 0.7rem;
+  width: 10px;
   color: #ffc107;
+  font-size: 0.62rem;
   opacity: 0;
-  transform: translateX(-6px);
-  transition: all 0.25s ease;
+  transform: translateX(-5px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
+
 .footer-links a:hover {
   color: #ffc107;
-  transform: translateX(6px);
+  transform: translateX(5px);
 }
+
 .footer-links a:hover i {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* Contact */
+/* ================================
+   CONTACT
+================================ */
+
+.contact-column {
+  padding-right: 5px;
+}
+
 .contact-item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 14px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.92rem;
+  gap: 11px;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.85rem;
+  line-height: 1.55;
 }
+
+.contact-item:last-child {
+  margin-bottom: 0;
+}
+
 .contact-item i {
-  color: #ffc107;
-  font-size: 1rem;
-  width: 20px;
-  margin-top: 3px;
   flex-shrink: 0;
+  width: 18px;
+  margin-top: 3px;
+  color: #ffc107;
+  font-size: 0.9rem;
+  text-align: center;
 }
+
 .contact-item a {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.52);
   text-decoration: none;
   transition: color 0.25s ease;
+  word-break: break-word;
 }
+
 .contact-item a:hover {
   color: #ffc107;
 }
 
-/* Newsletter */
+/* ================================
+   NEWSLETTER
+================================ */
+
+.newsletter-text {
+  max-width: 340px;
+  margin: 0 0 17px;
+  color: rgba(255, 255, 255, 0.43);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
 .newsletter-wrap {
   display: flex;
+  width: 100%;
   gap: 8px;
-  margin-top: 6px;
 }
+
 .newsletter-wrap input {
-  flex: 1;
-  padding: 12px 18px;
-  border-radius: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  font-size: 0.9rem;
-  outline: none;
-  transition: all 0.3s ease;
   min-width: 0;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 30px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.055);
+  color: #ffffff;
+  font-size: 0.82rem;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
+
 .newsletter-wrap input::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
+
 .newsletter-wrap input:focus {
-  border-color: rgba(255, 193, 7, 0.3);
+  border-color: rgba(255, 193, 7, 0.45);
   background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.04);
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.06);
 }
+
 .btn-subscribe {
-  padding: 12px 24px;
-  background: #ffc107;
-  color: #000;
-  border: none;
-  border-radius: 40px;
-  font-weight: 700;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  cursor: pointer;
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 7px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 30px;
+  background: #ffc107;
+  color: #000000;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
+
 .btn-subscribe:hover {
   background: #ffd54f;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.25);
+  box-shadow: 0 8px 22px rgba(255, 193, 7, 0.2);
 }
 
-/* Social */
+.btn-subscribe i {
+  font-size: 0.75rem;
+}
+
+/* ================================
+   SOCIAL
+================================ */
+
+.social-section {
+  margin-top: 24px;
+}
+
+.social-label {
+  display: block;
+  margin-bottom: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 .social-icons {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 9px;
 }
+
 .social-icons a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1.05rem;
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-.social-icons a:hover {
-  background: #ffc107;
-  color: #000;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.25);
-  border-color: #ffc107;
+  font-size: 0.9rem;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
 
-/* Trust Badges */
+.social-icons a:hover {
+  transform: translateY(-4px);
+  border-color: #ffc107;
+  background: #ffc107;
+  color: #000000;
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.2);
+}
+
+/* ================================
+   TRUST BADGES
+================================ */
+
 .trust-badges {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px 32px;
-  justify-content: center;
-  padding: 24px 0 8px;
-}
-.trust-badge {
-  display: flex;
   align-items: center;
-  gap: 10px;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-}
-.trust-badge i {
-  font-size: 1.4rem;
-  color: #ffc107;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 38px;
+  margin-top: 52px;
+  padding: 23px 0 7px;
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
 }
 
-/* Footer Bottom */
-.footer-bottom {
-  padding: 24px 0 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  display: flex;
-  justify-content: space-between;
+.trust-badge {
+  display: inline-flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  gap: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
-.footer-bottom .copyright {
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.35);
+
+.trust-badge i {
+  color: #ffc107;
+  font-size: 1rem;
 }
-.footer-bottom .copyright a {
+
+/* ================================
+   FOOTER BOTTOM
+================================ */
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 25px 0 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.32);
+  font-size: 0.78rem;
+}
+
+.copyright a {
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   transition: color 0.25s ease;
 }
-.footer-bottom .copyright a:hover {
+
+.copyright a:hover {
   color: #ffc107;
 }
-.footer-bottom .legal-links {
+
+.legal-links {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
   flex-wrap: wrap;
+  gap: 18px;
 }
-.footer-bottom .legal-links a {
-  color: rgba(255, 255, 255, 0.35);
+
+.legal-links a {
+  color: rgba(255, 255, 255, 0.3);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.76rem;
   transition: color 0.25s ease;
 }
-.footer-bottom .legal-links a:hover {
+
+.legal-links a:hover {
   color: #ffc107;
 }
 
-/* ── Responsive ── */
-@media (max-width: 991px) {
-  .footer-premium {
-    padding-top: 44px;
+/* ================================
+   LARGE TABLET
+================================ */
+
+@media (max-width: 1200px) {
+  .footer-container {
+    width: min(100% - 50px, 1100px);
   }
-  .footer-brand .tagline {
-    max-width: 100%;
+
+  .footer-grid {
+    grid-template-columns:
+      1.2fr
+      0.8fr
+      0.8fr
+      1fr;
+
+    gap: 38px 30px;
   }
-  .footer-premium h5 {
-    margin-top: 24px;
+
+  .newsletter-column {
+    grid-column: 1 / -1;
+    max-width: 600px;
   }
-  .footer-premium h5:first-of-type {
-    margin-top: 0;
+
+  .newsletter-text {
+    max-width: 500px;
   }
-  .trust-badges {
-    gap: 14px 24px;
-  }
-  .trust-badge {
-    font-size: 0.78rem;
+
+  .newsletter-wrap {
+    max-width: 600px;
   }
 }
 
-@media (max-width: 576px) {
-  .footer-premium {
-    padding-top: 32px;
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 991px) {
+  .footer-top {
+    padding: 55px 0 35px;
   }
-  .footer-premium .container {
-    padding: 0 1rem;
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 42px 45px;
   }
-  .footer-brand .brand-text {
-    font-size: 22px;
+
+  .brand-column {
+    grid-column: 1 / -1;
+    padding-right: 0;
   }
-  .footer-premium h5 {
-    font-size: 0.95rem;
-    margin-top: 20px;
+
+  .newsletter-column {
+    grid-column: 1 / -1;
+    max-width: none;
   }
-  .footer-premium h5::after {
-    width: 24px;
-  }
-  .footer-links a {
-    font-size: 0.85rem;
-  }
-  .contact-item {
-    font-size: 0.85rem;
-    gap: 10px;
-  }
+
   .newsletter-wrap {
+    max-width: 600px;
+  }
+
+  .trust-badges {
+    margin-top: 42px;
+    gap: 15px 28px;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 767px) {
+  .footer-container {
+    width: min(100% - 34px, 600px);
+  }
+
+  .footer-top {
+    padding: 45px 0 30px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .brand-column,
+  .newsletter-column {
+    grid-column: auto;
+  }
+
+  .brand-text {
+    font-size: 28px;
+  }
+
+  .tagline {
+    max-width: 100%;
+  }
+
+  .footer-premium h5 {
+    margin-bottom: 20px;
+  }
+
+  .newsletter-wrap {
+    max-width: none;
     flex-direction: column;
   }
+
   .newsletter-wrap input {
-    padding: 14px 18px;
-    width: 100%;
+    padding: 13px 17px;
   }
+
   .btn-subscribe {
     width: 100%;
-    justify-content: center;
-    padding: 14px;
+    padding: 13px;
   }
-  .social-icons {
-    justify-content: center;
+
+  .social-section {
+    margin-top: 22px;
   }
-  .social-icons a {
-    width: 40px;
-    height: 40px;
-    font-size: 0.95rem;
-  }
+
   .trust-badges {
-    gap: 12px 16px;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 38px;
+    padding-left: 5px;
   }
+
+  .footer-bottom {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+    padding: 22px 0 27px;
+  }
+
+  .legal-links {
+    justify-content: center;
+    gap: 12px 18px;
+  }
+}
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 480px) {
+  .footer-container {
+    width: min(100% - 28px, 400px);
+  }
+
+  .footer-top {
+    padding-top: 38px;
+  }
+
+  .brand-text {
+    font-size: 25px;
+  }
+
+  .tagline {
+    font-size: 0.84rem;
+  }
+
+  .footer-premium h5 {
+    font-size: 0.94rem;
+  }
+
+  .footer-links a {
+    font-size: 0.84rem;
+  }
+
+  .contact-item {
+    font-size: 0.82rem;
+  }
+
+  .social-icons a {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+
   .trust-badge {
     font-size: 0.75rem;
   }
+
   .trust-badge i {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-    padding: 20px 0 24px;
+
+  .copyright {
+    font-size: 0.74rem;
   }
-  .footer-bottom .copyright {
-    font-size: 0.8rem;
-  }
-  .footer-bottom .legal-links {
-    justify-content: center;
-    gap: 14px;
-  }
-  .footer-bottom .legal-links a {
-    font-size: 0.78rem;
+
+  .legal-links a {
+    font-size: 0.72rem;
   }
 }
 
-@media (max-width: 380px) {
-  .footer-brand .brand-text {
-    font-size: 20px;
+/* ================================
+   VERY SMALL SCREENS
+================================ */
+
+@media (max-width: 360px) {
+  .footer-container {
+    width: calc(100% - 24px);
   }
-  .footer-premium h5 {
-    font-size: 0.9rem;
+
+  .footer-grid {
+    gap: 30px;
   }
-  .contact-item {
+
+  .brand-text {
+    font-size: 23px;
+  }
+
+  .newsletter-text {
     font-size: 0.8rem;
+  }
+
+  .contact-item {
+    gap: 9px;
   }
 }
 </style>
+
+<!-- 580 lines -->
