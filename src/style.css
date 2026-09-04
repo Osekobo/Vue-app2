@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-ink: #1a1a2e;
+  --color-muted: #5f6368;
+  --color-border: #e3e5e8;
+  --color-surface: #ffffff;
+  --color-page: #f7f8fa;
+  --color-accent: #d79b00;
+  --space-section: clamp(3.5rem, 7vw, 5.5rem);
+  --space-card: clamp(1.25rem, 2vw, 2rem);
+  --layout-gutter: clamp(1rem, 3vw, 1.5rem);
+  --content-width: 1200px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-ink);
+  background: var(--color-page);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(215, 155, 0, 0.55);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(100% - (var(--layout-gutter) * 2), var(--content-width));
+  max-width: none;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.container.py-5 {
+  padding-top: var(--space-section) !important;
+  padding-bottom: var(--space-section) !important;
+}
+
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1.5rem;
+}
+
+.card,
+.finance-card,
+.contact-info-card,
+.form-card,
+.calc-box,
+.blog-card,
+.service-box,
+.testimonial-card,
+.dashboard-card,
+.chart-card,
+.stat-card,
+.about-icon-box {
+  overflow-wrap: anywhere;
+}
+
+.form-control,
+.form-select,
+.form-control-custom,
+.form-select-custom {
+  min-height: 44px;
+}
+
+textarea.form-control,
+textarea.form-control-custom {
+  min-height: 120px;
+}
+
+@media (max-width: 767px) {
+  .row {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 1rem;
+  }
+
+  .container.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

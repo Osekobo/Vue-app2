@@ -1,8 +1,18 @@
-FROM ubuntu:22.04
-RUN apt-get update
-RUN apt-get install -y nginx
-COPY . /var/www/html/
-CMD service nginx start && tail -F /var/log/nginx/error.log
+FROM node:22-alpine AS build
 
-# Compare Vehicles
-# Virtual Showroom / 360° View
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+FROM nginx:1.27-alpine
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
