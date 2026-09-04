@@ -60,11 +60,7 @@
         </li>
 
         <li class="nav-item logout-btn">
-          <a
-            class="nav-link"
-            href="#"
-            @click.prevent="handleLogout"
-          >
+          <a class="nav-link" href="#" @click.prevent="handleLogout">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
           </a>
@@ -74,35 +70,29 @@
 
     <!-- MAIN CONTENT -->
     <main>
-
       <!-- Blog Hero -->
       <section class="blog-hero">
         <div class="hero-container">
-          <h1>
-            Our <span>Blog</span>
-          </h1>
+          <h1>Our <span>Blog</span></h1>
 
           <p>
-            Insights, news, and stories from the world of luxury
-            automobiles.
+            Insights, news, and stories from the world of luxury automobiles.
           </p>
         </div>
       </section>
 
       <!-- Blog Posts -->
       <section class="blog-section">
-
         <div class="section-heading">
           <h2>Latest From OBerlo</h2>
 
           <p>
-            Discover the latest automotive news, reviews, guides,
-            and stories from the world of luxury cars.
+            Discover the latest automotive news, reviews, guides, and stories
+            from the world of luxury cars.
           </p>
         </div>
 
         <div class="blog-grid">
-
           <!-- Post 1 -->
           <article class="blog-card">
             <div class="image-wrapper">
@@ -115,27 +105,21 @@
             </div>
 
             <div class="blog-body">
-              <div class="date">
-                May 15, 2026
-              </div>
+              <div class="date">May 15, 2026</div>
 
               <h5>Top 5 Supercars of 2026</h5>
 
               <p>
-                From hybrid hypercars to naturally aspirated V12s,
-                here's our definitive list.
+                From hybrid hypercars to naturally aspirated V12s, here's our
+                definitive list.
               </p>
 
-              <router-link
-                to="#"
-                class="read-more"
-              >
+              <router-link to="/blog/top-5-supercars-2026" class="read-more">
                 Read More
                 <i class="fas fa-arrow-right"></i>
               </router-link>
             </div>
           </article>
-
 
           <!-- Post 2 -->
           <article class="blog-card">
@@ -149,27 +133,21 @@
             </div>
 
             <div class="blog-body">
-              <div class="date">
-                May 8, 2026
-              </div>
+              <div class="date">May 8, 2026</div>
 
               <h5>Electric vs. Petrol: The Great Debate</h5>
 
               <p>
-                We compare performance, range, and the visceral
-                experience of both.
+                We compare performance, range, and the visceral experience of
+                both.
               </p>
 
-              <router-link
-                to="#"
-                class="read-more"
-              >
+              <router-link to="/blog/electric-vs-petrol" class="read-more">
                 Read More
                 <i class="fas fa-arrow-right"></i>
               </router-link>
             </div>
           </article>
-
 
           <!-- Post 3 -->
           <article class="blog-card">
@@ -183,19 +161,17 @@
             </div>
 
             <div class="blog-body">
-              <div class="date">
-                April 28, 2026
-              </div>
+              <div class="date">April 28, 2026</div>
 
               <h5>How to Maintain Your Lamborghini</h5>
 
               <p>
-                Essential tips to keep your Italian supercar in
-                pristine condition.
+                Essential tips to keep your Italian supercar in pristine
+                condition.
               </p>
 
               <router-link
-                to="#"
+                to="/blog/maintain-your-lamborghini"
                 class="read-more"
               >
                 Read More
@@ -203,7 +179,6 @@
               </router-link>
             </div>
           </article>
-
 
           <!-- Post 4 -->
           <article class="blog-card">
@@ -217,19 +192,16 @@
             </div>
 
             <div class="blog-body">
-              <div class="date">
-                April 15, 2026
-              </div>
+              <div class="date">April 15, 2026</div>
 
               <h5>Porsche 911 Turbo S: A Legend Evolved</h5>
 
               <p>
-                We take the latest 992 generation for a spin on
-                the Autobahn.
+                We take the latest 992 generation for a spin on the Autobahn.
               </p>
 
               <router-link
-                to="#"
+                to="/blog/porsche-911-turbo-s-review"
                 class="read-more"
               >
                 Read More
@@ -237,7 +209,6 @@
               </router-link>
             </div>
           </article>
-
 
           <!-- Post 5 -->
           <article class="blog-card">
@@ -251,19 +222,17 @@
             </div>
 
             <div class="blog-body">
-              <div class="date">
-                April 2, 2026
-              </div>
+              <div class="date">April 2, 2026</div>
 
               <h5>Mercedes-AMG GT 63 S Review</h5>
 
               <p>
-                A four-door coupe that redefines the meaning of
-                practical performance.
+                A four-door coupe that redefines the meaning of practical
+                performance.
               </p>
 
               <router-link
-                to="#"
+                to="/blog/mercedes-amg-gt-63-s-review"
                 class="read-more"
               >
                 Read More
@@ -271,7 +240,6 @@
               </router-link>
             </div>
           </article>
-
 
           <!-- Post 6 -->
           <article class="blog-card">
@@ -285,27 +253,20 @@
             </div>
 
             <div class="blog-body">
-              <div class="date">
-                March 20, 2026
-              </div>
+              <div class="date">March 20, 2026</div>
 
               <h5>Bentley Continental GT: The Grand Tourer</h5>
 
               <p>
-                Luxury, speed, and craftsmanship combined in a
-                single package.
+                Luxury, speed, and craftsmanship combined in a single package.
               </p>
 
-              <router-link
-                to="#"
-                class="read-more"
-              >
+              <router-link to="/blog/bentley-continental-gt" class="read-more">
                 Read More
                 <i class="fas fa-arrow-right"></i>
               </router-link>
             </div>
           </article>
-
         </div>
       </section>
     </main>
@@ -333,691 +294,20 @@ export default {
           {},
           {
             withCredentials: true,
-          }
+          },
         );
       } catch (error) {
         console.error("Logout error:", error);
       }
 
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("user");
       this.$router.push("/login");
     },
   },
 };
 </script>
 
-<style scoped>
-/* =========================================
-   GLOBAL
-========================================= */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-main {
-  padding-top: 80px;
-  min-height: 100vh;
-  background: #f7f8fa;
-}
-
-
-/* =========================================
-   SIDEBAR
-========================================= */
-
-.sidebar {
-  position: fixed;
-
-  left: -280px;
-  top: 0;
-  bottom: 0;
-
-  width: 280px;
-
-  background: linear-gradient(
-    180deg,
-    #1a1a2e 0%,
-    #16213e 100%
-  );
-
-  transition: 0.3s ease-in-out;
-
-  z-index: 1001;
-
-  padding-top: 80px;
-
-  box-shadow:
-    2px 0 20px rgba(0, 0, 0, 0.15);
-}
-
-.sidebar.show {
-  left: 0;
-}
-
-.sidebar-header {
-  padding: 24px 22px;
-
-  margin-bottom: 20px;
-
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-header h4 {
-  color: #ffc107;
-
-  margin: 0;
-
-  font-size: 22px;
-
-  font-weight: 800;
-}
-
-.sidebar-header p {
-  color: rgba(255, 255, 255, 0.6);
-
-  font-size: 12px;
-
-  margin: 6px 0 0;
-}
-
-.sidebar-menu {
-  list-style: none;
-
-  padding: 0;
-
-  margin: 0;
-}
-
-.sidebar .nav-item {
-  margin: 6px 0;
-}
-
-.sidebar .nav-link {
-  color: white;
-
-  text-decoration: none;
-
-  display: flex;
-
-  align-items: center;
-
-  padding: 13px 20px;
-
-  transition: all 0.3s;
-
-  font-weight: 500;
-
-  border-radius: 10px;
-
-  margin: 0 12px;
-}
-
-.sidebar .nav-link i {
-  width: 25px;
-
-  margin-right: 15px;
-
-  font-size: 17px;
-}
-
-.sidebar .nav-link:hover {
-  background: #ffc107;
-
-  color: #000;
-
-  transform: translateX(5px);
-}
-
-.sidebar .nav-link.active {
-  background: #ffc107;
-
-  color: #000;
-}
-
-.sidebar .logout-btn {
-  margin-top: 35px;
-
-  border-top:
-    1px solid rgba(255, 255, 255, 0.1);
-
-  padding-top: 20px;
-}
-
-.sidebar .logout-btn .nav-link {
-  color: #ff6b6b;
-}
-
-.sidebar .logout-btn .nav-link:hover {
-  background: #ff6b6b;
-
-  color: white;
-}
-
-
-/* =========================================
-   SIDEBAR TOGGLE
-========================================= */
-
-.sidebar-toggle {
-  position: fixed;
-
-  left: 20px;
-  top: 80px;
-
-  z-index: 1002;
-
-  background: #ffc107;
-
-  border: none;
-
-  width: 45px;
-  height: 45px;
-
-  border-radius: 50%;
-
-  cursor: pointer;
-
-  transition: all 0.3s;
-
-  box-shadow:
-    0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.sidebar-toggle:hover {
-  background: #ffca2c;
-
-  transform: scale(1.05);
-}
-
-.sidebar-toggle i {
-  font-size: 20px;
-
-  color: #000;
-}
-
-
-/* =========================================
-   OVERLAY
-========================================= */
-
-.overlay {
-  position: fixed;
-
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  background: rgba(0, 0, 0, 0.5);
-
-  z-index: 1000;
-
-  display: none;
-}
-
-.overlay.show {
-  display: block;
-}
-
-
-/* =========================================
-   BLOG HERO
-========================================= */
-
-.blog-hero {
-  background: linear-gradient(
-    135deg,
-    #1a1a2e 0%,
-    #16213e 100%
-  );
-
-  color: white;
-
-  text-align: center;
-
-  padding: 65px 20px 60px;
-}
-
-.hero-container {
-  width: 100%;
-
-  max-width: 900px;
-
-  margin: 0 auto;
-}
-
-.blog-hero h1 {
-  font-size: 44px;
-
-  font-weight: 800;
-
-  line-height: 1.2;
-
-  margin-bottom: 14px;
-}
-
-.blog-hero h1 span {
-  color: #ffc107;
-}
-
-.blog-hero p {
-  color: rgba(255, 255, 255, 0.72);
-
-  font-size: 18px;
-
-  max-width: 700px;
-
-  margin: 0 auto;
-
-  line-height: 1.7;
-}
-
-
-/* =========================================
-   BLOG SECTION
-========================================= */
-
-.blog-section {
-  width: 100%;
-
-  max-width: 1250px;
-
-  margin: 0 auto;
-
-  padding: 70px 35px 90px;
-}
-
-
-/* =========================================
-   SECTION HEADING
-========================================= */
-
-.section-heading {
-  text-align: center;
-
-  margin-bottom: 42px;
-}
-
-.section-heading h2 {
-  color: #1a1a2e;
-
-  font-size: 30px;
-
-  font-weight: 800;
-
-  margin-bottom: 10px;
-}
-
-.section-heading p {
-  color: #777;
-
-  font-size: 15px;
-
-  max-width: 650px;
-
-  margin: 0 auto;
-
-  line-height: 1.7;
-}
-
-
-/* =========================================
-   BLOG GRID
-========================================= */
-
-.blog-grid {
-  width: 100%;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 32px;
-}
-
-
-/* =========================================
-   BLOG CARD
-========================================= */
-
-.blog-card {
-  background: #ffffff;
-
-  border-radius: 20px;
-
-  overflow: hidden;
-
-  border: 1px solid #eeeeee;
-
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.06);
-
-  display: flex;
-
-  flex-direction: column;
-
-  height: 100%;
-
-  min-width: 0;
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.blog-card:hover {
-  transform: translateY(-8px);
-
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.11);
-}
-
-
-/* =========================================
-   IMAGE
-========================================= */
-
-.image-wrapper {
-  position: relative;
-
-  width: 100%;
-
-  height: 230px;
-
-  overflow: hidden;
-
-  background: #eee;
-}
-
-.image-wrapper img {
-  width: 100%;
-
-  height: 100%;
-
-  object-fit: cover;
-
-  display: block;
-
-  transition:
-    transform 0.5s ease;
-}
-
-.blog-card:hover .image-wrapper img {
-  transform: scale(1.05);
-}
-
-
-/* =========================================
-   CATEGORY
-========================================= */
-
-.category {
-  position: absolute;
-
-  top: 16px;
-
-  left: 16px;
-
-  background: #ffc107;
-
-  color: #000;
-
-  font-size: 11px;
-
-  font-weight: 800;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.7px;
-
-  padding: 7px 11px;
-
-  border-radius: 20px;
-
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-
-/* =========================================
-   BLOG BODY
-========================================= */
-
-.blog-body {
-  padding: 24px 24px 26px;
-
-  flex: 1;
-
-  display: flex;
-
-  flex-direction: column;
-}
-
-
-/* =========================================
-   DATE
-========================================= */
-
-.blog-body .date {
-  color: #d29d00;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  text-transform: uppercase;
-
-  letter-spacing: 1px;
-
-  margin-bottom: 10px;
-}
-
-
-/* =========================================
-   TITLE
-========================================= */
-
-.blog-body h5 {
-  color: #1a1a2e;
-
-  font-size: 19px;
-
-  font-weight: 750;
-
-  line-height: 1.4;
-
-  margin: 0 0 12px;
-}
-
-
-/* =========================================
-   DESCRIPTION
-========================================= */
-
-.blog-body p {
-  color: #666;
-
-  font-size: 14px;
-
-  line-height: 1.7;
-
-  margin: 0;
-
-  flex: 1;
-}
-
-
-/* =========================================
-   READ MORE
-========================================= */
-
-.read-more {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  margin-top: 20px;
-
-  color: #1a1a2e;
-
-  text-decoration: none;
-
-  font-size: 14px;
-
-  font-weight: 700;
-
-  transition: all 0.3s ease;
-
-  align-self: flex-start;
-}
-
-.read-more i {
-  font-size: 12px;
-
-  transition:
-    transform 0.3s ease;
-}
-
-.read-more:hover {
-  color: #d29d00;
-}
-
-.read-more:hover i {
-  transform: translateX(4px);
-}
-
-
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 992px) {
-
-  .blog-section {
-    padding-left: 28px;
-
-    padding-right: 28px;
-  }
-
-  .blog-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
-    gap: 26px;
-  }
-
-  .image-wrapper {
-    height: 220px;
-  }
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 767px) {
-
-  main {
-    padding-top: 70px;
-  }
-
-  .sidebar-toggle {
-    top: 70px;
-
-    left: 12px;
-
-    width: 42px;
-
-    height: 42px;
-  }
-
-  .blog-hero {
-    padding: 50px 20px 45px;
-  }
-
-  .blog-hero h1 {
-    font-size: 34px;
-  }
-
-  .blog-hero p {
-    font-size: 15px;
-  }
-
-  .blog-section {
-    padding: 50px 20px 70px;
-  }
-
-  .section-heading {
-    margin-bottom: 30px;
-  }
-
-  .section-heading h2 {
-    font-size: 25px;
-  }
-
-  .section-heading p {
-    font-size: 14px;
-  }
-
-  .blog-grid {
-    grid-template-columns: 1fr;
-
-    gap: 24px;
-  }
-
-  .image-wrapper {
-    height: 220px;
-  }
-
-  .blog-body {
-    padding: 22px 20px 24px;
-  }
-
-  .blog-body h5 {
-    font-size: 18px;
-  }
-}
-
-
-/* =========================================
-   SMALL PHONES
-========================================= */
-
-@media (max-width: 480px) {
-
-  .blog-section {
-    padding-left: 16px;
-
-    padding-right: 16px;
-  }
-
-  .blog-hero h1 {
-    font-size: 30px;
-  }
-
-  .image-wrapper {
-    height: 190px;
-  }
-
-  .blog-body {
-    padding: 20px 18px 22px;
-  }
-
-  .blog-body h5 {
-    font-size: 17px;
-  }
-
-  .blog-body p {
-    font-size: 13px;
-  }
-}
-</style>
+<style scoped src="../styles/pages/BlogPage.css"></style>
 
 <!-- 460 lines -->

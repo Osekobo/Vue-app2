@@ -1,87 +1,10 @@
 <template>
   <div class="dashboard-page">
-
-    <!-- Sidebar Toggle -->
-    <button
-      class="sidebar-toggle"
-      type="button"
-      aria-label="Open sidebar"
-      @click="sidebarOpen = true"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Overlay -->
-    <div
-      class="overlay"
-      :class="{ show: sidebarOpen }"
-      @click="sidebarOpen = false"
-    ></div>
-
-    <!-- Sidebar -->
-    <nav class="sidebar" :class="{ show: sidebarOpen }">
-
-      <div class="sidebar-header">
-        <div class="sidebar-logo">O<span>Berlo</span></div>
-        <p>Car Yard Management System</p>
-      </div>
-
-      <ul class="sidebar-menu">
-
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </router-link>
-        </li>
-
-        <li class="nav-item">
-          <router-link class="nav-link" to="/dashboard">
-            <i class="fas fa-chart-line"></i>
-            <span>Dashboard</span>
-          </router-link>
-        </li>
-
-        <li class="nav-item">
-          <router-link class="nav-link" to="/products">
-            <i class="fas fa-car"></i>
-            <span>Inventory</span>
-          </router-link>
-        </li>
-
-        <li class="nav-item">
-          <router-link class="nav-link" to="/purchases">
-            <i class="fas fa-truck"></i>
-            <span>Purchase Orders</span>
-          </router-link>
-        </li>
-
-        <li class="nav-item">
-          <router-link class="nav-link" to="/sales">
-            <i class="fas fa-dollar-sign"></i>
-            <span>Vehicle Sales</span>
-          </router-link>
-        </li>
-
-        <li class="nav-item logout-btn">
-          <a
-            class="nav-link"
-            href="#"
-            @click.prevent="handleLogout"
-          >
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
-          </a>
-        </li>
-
-      </ul>
-    </nav>
+    <AdminNavbar />
 
     <!-- Main Content -->
     <main class="dashboard-main">
-
       <div class="dashboard-container">
-
         <!-- Page Header -->
         <div class="dashboard-header">
           <div>
@@ -115,10 +38,8 @@
 
         <!-- Dashboard Data -->
         <div v-else>
-
           <!-- Statistics -->
           <section class="stats-grid">
-
             <!-- Total Vehicles -->
             <div class="stat-card">
               <div class="stat-icon">
@@ -128,9 +49,7 @@
               <div class="stat-content">
                 <span class="stat-label">Total Vehicles</span>
                 <h2>{{ rpp.length }}</h2>
-                <span class="stat-description">
-                  Vehicles in inventory
-                </span>
+                <span class="stat-description"> Vehicles in inventory </span>
               </div>
             </div>
 
@@ -143,9 +62,7 @@
               <div class="stat-content">
                 <span class="stat-label">Total Sales</span>
                 <h2>{{ spp.length }}</h2>
-                <span class="stat-description">
-                  Vehicle sales records
-                </span>
+                <span class="stat-description"> Vehicle sales records </span>
               </div>
             </div>
 
@@ -158,9 +75,7 @@
               <div class="stat-content">
                 <span class="stat-label">Total Profit</span>
                 <h2>KSh {{ totalProfit }}</h2>
-                <span class="stat-description">
-                  Overall generated profit
-                </span>
+                <span class="stat-description"> Overall generated profit </span>
               </div>
             </div>
 
@@ -173,17 +88,13 @@
               <div class="stat-content">
                 <span class="stat-label">Vehicles Sold</span>
                 <h2>{{ totalItemsSold }}</h2>
-                <span class="stat-description">
-                  Total units sold
-                </span>
+                <span class="stat-description"> Total units sold </span>
               </div>
             </div>
-
           </section>
 
           <!-- Charts -->
           <section class="charts-grid">
-
             <!-- Remaining Stock -->
             <div class="chart-card">
               <div class="chart-header">
@@ -271,14 +182,11 @@
                 <canvas id="profit-day-chart"></canvas>
               </div>
             </div>
-
           </section>
 
           <!-- Sales Table -->
           <section class="sales-section">
-
             <div class="chart-card table-card">
-
               <div class="chart-header table-header">
                 <div>
                   <h5>
@@ -289,15 +197,11 @@
                   <p>Detailed breakdown of vehicle sales</p>
                 </div>
 
-                <div class="table-count">
-                  {{ spp.length }} Records
-                </div>
+                <div class="table-count">{{ spp.length }} Records</div>
               </div>
 
               <div class="table-wrapper">
-
                 <table class="custom-table">
-
                   <thead>
                     <tr>
                       <th>Vehicle</th>
@@ -307,11 +211,7 @@
                   </thead>
 
                   <tbody>
-
-                    <tr
-                      v-for="row in spp"
-                      :key="row.product_id"
-                    >
+                    <tr v-for="row in spp" :key="row.product_id">
                       <td>
                         <div class="vehicle-name">
                           <div class="vehicle-icon">
@@ -339,26 +239,20 @@
                           <i class="fas fa-chart-column"></i>
                           <h6>No sales data available</h6>
                           <p>
-                            Sales information will appear here once vehicles
-                            are sold.
+                            Sales information will appear here once vehicles are
+                            sold.
                           </p>
                         </div>
                       </td>
                     </tr>
-
                   </tbody>
-
                 </table>
-
               </div>
             </div>
-
           </section>
-
         </div>
       </div>
     </main>
-
   </div>
 </template>
 
@@ -366,9 +260,14 @@
 import axios from "axios";
 import { API_BASE_URL } from "@/utils/config";
 import Chart from "chart.js/auto";
+import AdminNavbar from "@/components/AdminNavbar.vue";
 
 export default {
   name: "DashboardPage",
+
+  components: {
+    AdminNavbar,
+  },
 
   data() {
     return {
@@ -414,40 +313,21 @@ export default {
 
   methods: {
     formatNumber(num) {
-      return num
-        ? Number(num).toLocaleString()
-        : "0";
+      return num ? Number(num).toLocaleString() : "0";
     },
 
     async fetchDashboardData() {
       this.loading = true;
 
       try {
-        const [
-          sppRes,
-          rppRes,
-          pppRes,
-          ppdRes,
-        ] = await Promise.all([
-          axios.get(
-            `${API_BASE_URL}/dashboard/spp`,
-            { withCredentials: true }
-          ),
+        const [sppRes, rppRes, pppRes, ppdRes] = await Promise.all([
+          axios.get(`${API_BASE_URL}/dashboard/spp`, { withCredentials: true }),
 
-          axios.get(
-            `${API_BASE_URL}/dashboard/rpp`,
-            { withCredentials: true }
-          ),
+          axios.get(`${API_BASE_URL}/dashboard/rpp`, { withCredentials: true }),
 
-          axios.get(
-            `${API_BASE_URL}/dashboard/ppp`,
-            { withCredentials: true }
-          ),
+          axios.get(`${API_BASE_URL}/dashboard/ppp`, { withCredentials: true }),
 
-          axios.get(
-            `${API_BASE_URL}/dashboard/ppd`,
-            { withCredentials: true }
-          ),
+          axios.get(`${API_BASE_URL}/dashboard/ppd`, { withCredentials: true }),
         ]);
 
         this.spp = sppRes.data || [];
@@ -460,19 +340,12 @@ export default {
         await this.$nextTick();
 
         this.createCharts();
-
       } catch (error) {
-        console.error(
-          "Error fetching dashboard:",
-          error
-        );
+        console.error("Error fetching dashboard:", error);
 
         this.loading = false;
 
-        if (
-          error.response &&
-          error.response.status === 401
-        ) {
+        if (error.response && error.response.status === 401) {
           alert("Please login first");
           this.$router.push("/login");
         }
@@ -484,13 +357,11 @@ export default {
        * Destroy previous charts
        * before creating new ones.
        */
-      Object.values(this.chartInstances).forEach(
-        (chart) => {
-          if (chart) {
-            chart.destroy();
-          }
+      Object.values(this.chartInstances).forEach((chart) => {
+        if (chart) {
+          chart.destroy();
         }
-      );
+      });
 
       /*
        * Common chart settings
@@ -539,59 +410,50 @@ export default {
        * Remaining Stock Chart
        */
       if (this.rpp.length > 0) {
-        const ctx =
-          document.getElementById(
-            "remaining-chart"
-          );
+        const ctx = document.getElementById("remaining-chart");
 
         if (ctx) {
-          this.chartInstances.remaining =
-            new Chart(ctx, {
-              type: "bar",
+          this.chartInstances.remaining = new Chart(ctx, {
+            type: "bar",
 
-              data: {
-                labels: this.rpp.map(
-                  (x) => x.product_name
-                ),
+            data: {
+              labels: this.rpp.map((x) => x.product_name),
 
-                datasets: [
-                  {
-                    label: "Remaining Quantity",
+              datasets: [
+                {
+                  label: "Remaining Quantity",
 
-                    data: this.rpp.map(
-                      (x) => x.remaining_quantity
-                    ),
+                  data: this.rpp.map((x) => x.remaining_quantity),
 
-                    backgroundColor:
-                      "rgba(255, 193, 7, 0.75)",
+                  backgroundColor: "rgba(255, 193, 7, 0.75)",
 
-                    borderColor: "#ffc107",
+                  borderColor: "#ffc107",
 
-                    borderWidth: 1,
+                  borderWidth: 1,
 
-                    borderRadius: 6,
-                  },
-                ],
-              },
+                  borderRadius: 6,
+                },
+              ],
+            },
 
-              options: {
-                ...commonOptions,
+            options: {
+              ...commonOptions,
 
-                scales: {
-                  ...commonOptions.scales,
+              scales: {
+                ...commonOptions.scales,
 
-                  y: {
-                    ...commonOptions.scales.y,
+                y: {
+                  ...commonOptions.scales.y,
 
-                    title: {
-                      display: true,
-                      text: "Quantity",
-                      color: "#555",
-                    },
+                  title: {
+                    display: true,
+                    text: "Quantity",
+                    color: "#555",
                   },
                 },
               },
-            });
+            },
+          });
         }
       }
 
@@ -599,43 +461,34 @@ export default {
        * Sold Quantity Chart
        */
       if (this.spp.length > 0) {
-        const ctx =
-          document.getElementById(
-            "sold-chart"
-          );
+        const ctx = document.getElementById("sold-chart");
 
         if (ctx) {
-          this.chartInstances.sold =
-            new Chart(ctx, {
-              type: "bar",
+          this.chartInstances.sold = new Chart(ctx, {
+            type: "bar",
 
-              data: {
-                labels: this.spp.map(
-                  (x) => x.product_name
-                ),
+            data: {
+              labels: this.spp.map((x) => x.product_name),
 
-                datasets: [
-                  {
-                    label: "Quantity Sold",
+              datasets: [
+                {
+                  label: "Quantity Sold",
 
-                    data: this.spp.map(
-                      (x) => x.total_quantity_sold
-                    ),
+                  data: this.spp.map((x) => x.total_quantity_sold),
 
-                    backgroundColor:
-                      "rgba(75, 192, 192, 0.7)",
+                  backgroundColor: "rgba(75, 192, 192, 0.7)",
 
-                    borderColor: "#4bc0c0",
+                  borderColor: "#4bc0c0",
 
-                    borderWidth: 1,
+                  borderWidth: 1,
 
-                    borderRadius: 6,
-                  },
-                ],
-              },
+                  borderRadius: 6,
+                },
+              ],
+            },
 
-              options: commonOptions,
-            });
+            options: commonOptions,
+          });
         }
       }
 
@@ -643,43 +496,34 @@ export default {
        * Profit Per Product Chart
        */
       if (this.ppp.length > 0) {
-        const ctx =
-          document.getElementById(
-            "profit-product-chart"
-          );
+        const ctx = document.getElementById("profit-product-chart");
 
         if (ctx) {
-          this.chartInstances.profitProduct =
-            new Chart(ctx, {
-              type: "bar",
+          this.chartInstances.profitProduct = new Chart(ctx, {
+            type: "bar",
 
-              data: {
-                labels: this.ppp.map(
-                  (x) => x.product_name
-                ),
+            data: {
+              labels: this.ppp.map((x) => x.product_name),
 
-                datasets: [
-                  {
-                    label: "Profit (KSh)",
+              datasets: [
+                {
+                  label: "Profit (KSh)",
 
-                    data: this.ppp.map(
-                      (x) => x.total_profit
-                    ),
+                  data: this.ppp.map((x) => x.total_profit),
 
-                    backgroundColor:
-                      "rgba(153, 102, 255, 0.7)",
+                  backgroundColor: "rgba(153, 102, 255, 0.7)",
 
-                    borderColor: "#9966ff",
+                  borderColor: "#9966ff",
 
-                    borderWidth: 1,
+                  borderWidth: 1,
 
-                    borderRadius: 6,
-                  },
-                ],
-              },
+                  borderRadius: 6,
+                },
+              ],
+            },
 
-              options: commonOptions,
-            });
+            options: commonOptions,
+          });
         }
       }
 
@@ -687,52 +531,42 @@ export default {
        * Profit Per Day Chart
        */
       if (this.ppd.length > 0) {
-        const ctx =
-          document.getElementById(
-            "profit-day-chart"
-          );
+        const ctx = document.getElementById("profit-day-chart");
 
         if (ctx) {
-          this.chartInstances.profitDay =
-            new Chart(ctx, {
-              type: "line",
+          this.chartInstances.profitDay = new Chart(ctx, {
+            type: "line",
 
-              data: {
-                labels: this.ppd.map(
-                  (x) => x.date
-                ),
+            data: {
+              labels: this.ppd.map((x) => x.date),
 
-                datasets: [
-                  {
-                    label: "Profit Per Day (KSh)",
+              datasets: [
+                {
+                  label: "Profit Per Day (KSh)",
 
-                    data: this.ppd.map(
-                      (x) => x.total_profit
-                    ),
+                  data: this.ppd.map((x) => x.total_profit),
 
-                    borderColor: "#ffc107",
+                  borderColor: "#ffc107",
 
-                    backgroundColor:
-                      "rgba(255, 193, 7, 0.12)",
+                  backgroundColor: "rgba(255, 193, 7, 0.12)",
 
-                    borderWidth: 3,
+                  borderWidth: 3,
 
-                    fill: true,
+                  fill: true,
 
-                    tension: 0.35,
+                  tension: 0.35,
 
-                    pointRadius: 4,
+                  pointRadius: 4,
 
-                    pointHoverRadius: 6,
+                  pointHoverRadius: 6,
 
-                    pointBackgroundColor:
-                      "#ffc107",
-                  },
-                ],
-              },
+                  pointBackgroundColor: "#ffc107",
+                },
+              ],
+            },
 
-              options: commonOptions,
-            });
+            options: commonOptions,
+          });
         }
       }
     },
@@ -744,15 +578,14 @@ export default {
           {},
           {
             withCredentials: true,
-          }
+          },
         );
       } catch (error) {
-        console.error(
-          "Logout error:",
-          error
-        );
+        console.error("Logout error:", error);
       }
 
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("user");
       this.$router.push("/login");
     },
   },
@@ -762,9 +595,7 @@ export default {
   },
 
   beforeUnmount() {
-    Object.values(
-      this.chartInstances
-    ).forEach((chart) => {
+    Object.values(this.chartInstances).forEach((chart) => {
       if (chart) {
         chart.destroy();
       }
@@ -773,986 +604,6 @@ export default {
 };
 </script>
 
-<style scoped>
-/* ========================================
-   GLOBAL
-======================================== */
-
-.dashboard-page {
-  min-height: 100vh;
-  background: #f5f6fa;
-  color: #1a1a2e;
-}
-
-.dashboard-page * {
-  box-sizing: border-box;
-}
-
-/* ========================================
-   SIDEBAR
-======================================== */
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: -290px;
-
-  width: 280px;
-
-  padding-top: 25px;
-
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(255, 193, 7, 0.08),
-      transparent 30%
-    ),
-    linear-gradient(
-      180deg,
-      #171727 0%,
-      #11111f 100%
-    );
-
-  box-shadow:
-    8px 0 30px rgba(0, 0, 0, 0.2);
-
-  transition:
-    left 0.3s ease;
-
-  z-index: 1001;
-}
-
-.sidebar.show {
-  left: 0;
-}
-
-/* Sidebar Header */
-
-.sidebar-header {
-  padding: 18px 24px 25px;
-  margin-bottom: 18px;
-
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.07);
-}
-
-.sidebar-logo {
-  color: #ffffff;
-  font-size: 27px;
-  font-weight: 800;
-  letter-spacing: -0.8px;
-}
-
-.sidebar-logo span {
-  color: #ffc107;
-}
-
-.sidebar-header p {
-  margin: 7px 0 0;
-
-  color: rgba(255, 255, 255, 0.42);
-
-  font-size: 0.72rem;
-  line-height: 1.5;
-}
-
-/* Sidebar Menu */
-
-.sidebar-menu {
-  padding: 0 12px;
-  margin: 0;
-  list-style: none;
-}
-
-.sidebar .nav-item {
-  margin-bottom: 5px;
-}
-
-.sidebar .nav-link {
-  display: flex;
-  align-items: center;
-
-  min-height: 48px;
-
-  padding: 0 15px;
-
-  border-radius: 10px;
-
-  color: rgba(255, 255, 255, 0.65);
-
-  text-decoration: none;
-
-  font-size: 0.9rem;
-  font-weight: 500;
-
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
-}
-
-.sidebar .nav-link i {
-  width: 25px;
-  margin-right: 13px;
-
-  color: #ffc107;
-
-  font-size: 16px;
-  text-align: center;
-}
-
-.sidebar .nav-link:hover,
-.sidebar .nav-link.router-link-active {
-  background: rgba(255, 193, 7, 0.12);
-  color: #ffffff;
-
-  transform: translateX(4px);
-}
-
-.sidebar .nav-link.router-link-active {
-  border-left: 3px solid #ffc107;
-}
-
-/* Logout */
-
-.sidebar .logout-btn {
-  margin-top: 28px;
-  padding-top: 18px;
-
-  border-top:
-    1px solid rgba(255, 255, 255, 0.07);
-}
-
-.sidebar .logout-btn .nav-link {
-  color: #ff7777;
-}
-
-.sidebar .logout-btn .nav-link i {
-  color: #ff7777;
-}
-
-.sidebar .logout-btn .nav-link:hover {
-  background: rgba(255, 107, 107, 0.12);
-  color: #ff7777;
-}
-
-/* ========================================
-   SIDEBAR TOGGLE
-======================================== */
-
-.sidebar-toggle {
-  position: fixed;
-
-  top: 85px;
-  left: 22px;
-
-  width: 46px;
-  height: 46px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-  border-radius: 50%;
-
-  background: #ffc107;
-  color: #111111;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.15);
-
-  z-index: 999;
-
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease;
-}
-
-.sidebar-toggle:hover {
-  background: #ffd54f;
-  transform: translateY(-2px) scale(1.04);
-}
-
-.sidebar-toggle i {
-  font-size: 18px;
-}
-
-/* ========================================
-   OVERLAY
-======================================== */
-
-.overlay {
-  position: fixed;
-  inset: 0;
-
-  display: none;
-
-  background: rgba(5, 5, 10, 0.6);
-
-  backdrop-filter: blur(2px);
-
-  z-index: 1000;
-}
-
-.overlay.show {
-  display: block;
-}
-
-/* ========================================
-   MAIN
-======================================== */
-
-.dashboard-main {
-  width: 100%;
-  padding: 110px 0 70px;
-}
-
-.dashboard-container {
-  width: min(1380px, calc(100% - 70px));
-  margin: 0 auto;
-}
-
-/* ========================================
-   HEADER
-======================================== */
-
-.dashboard-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  gap: 25px;
-
-  margin-bottom: 38px;
-}
-
-.header-label {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: #b18a00;
-
-  font-size: 0.72rem;
-  font-weight: 700;
-
-  letter-spacing: 1.8px;
-}
-
-.dashboard-header h1 {
-  display: flex;
-  align-items: center;
-
-  margin: 0;
-
-  color: #171727;
-
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.dashboard-header h1 i {
-  margin-right: 12px;
-
-  color: #ffc107;
-
-  font-size: 1.6rem;
-}
-
-.dashboard-header p {
-  margin: 8px 0 0;
-
-  color: #8a8b95;
-
-  font-size: 0.88rem;
-}
-
-.header-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 9px 14px;
-
-  border: 1px solid #e8e9ed;
-  border-radius: 30px;
-
-  background: #ffffff;
-
-  color: #70717b;
-
-  font-size: 0.76rem;
-  font-weight: 600;
-
-  box-shadow:
-    0 4px 15px rgba(0, 0, 0, 0.03);
-}
-
-.header-badge i {
-  color: #35b86b;
-  font-size: 0.55rem;
-}
-
-/* ========================================
-   STATISTICS
-======================================== */
-
-.stats-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-
-  gap: 24px;
-
-  margin-bottom: 30px;
-}
-
-.stat-card {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-
-  min-height: 150px;
-
-  padding: 24px;
-
-  overflow: hidden;
-
-  border:
-    1px solid rgba(0, 0, 0, 0.035);
-
-  border-radius: 17px;
-
-  background: #ffffff;
-
-  box-shadow:
-    0 8px 30px rgba(25, 25, 50, 0.055);
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.stat-card::after {
-  content: "";
-
-  position: absolute;
-
-  right: -25px;
-  bottom: -35px;
-
-  width: 100px;
-  height: 100px;
-
-  border-radius: 50%;
-
-  background: rgba(255, 193, 7, 0.06);
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-
-  box-shadow:
-    0 14px 35px rgba(25, 25, 50, 0.09);
-}
-
-.stat-icon {
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 53px;
-  height: 53px;
-
-  margin-right: 17px;
-
-  border-radius: 14px;
-
-  background: rgba(255, 193, 7, 0.12);
-
-  color: #d69f00;
-
-  font-size: 1.25rem;
-}
-
-.stat-content {
-  min-width: 0;
-}
-
-.stat-label {
-  display: block;
-
-  margin-bottom: 5px;
-
-  color: #888994;
-
-  font-size: 0.76rem;
-  font-weight: 600;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.5px;
-}
-
-.stat-content h2 {
-  margin: 0;
-
-  color: #181827;
-
-  font-size: 1.55rem;
-  font-weight: 800;
-
-  line-height: 1.2;
-
-  word-break: break-word;
-}
-
-.stat-description {
-  display: block;
-
-  margin-top: 6px;
-
-  color: #a1a2aa;
-
-  font-size: 0.7rem;
-}
-
-/* ========================================
-   CHART GRID
-======================================== */
-
-.charts-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 25px;
-
-  margin-bottom: 25px;
-}
-
-/* ========================================
-   CHART CARD
-======================================== */
-
-.chart-card {
-  min-width: 0;
-
-  padding: 24px;
-
-  border:
-    1px solid rgba(0, 0, 0, 0.035);
-
-  border-radius: 17px;
-
-  background: #ffffff;
-
-  box-shadow:
-    0 8px 30px rgba(25, 25, 50, 0.045);
-}
-
-.chart-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  gap: 15px;
-
-  margin-bottom: 20px;
-}
-
-.chart-header h5 {
-  display: flex;
-  align-items: center;
-
-  margin: 0;
-
-  color: #1a1a2e;
-
-  font-size: 0.96rem;
-  font-weight: 750;
-}
-
-.chart-header h5 i {
-  margin-right: 9px;
-
-  color: #d6a000;
-
-  font-size: 0.9rem;
-}
-
-.chart-header p {
-  margin: 6px 0 0;
-
-  color: #999aa3;
-
-  font-size: 0.74rem;
-}
-
-.chart-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 37px;
-  height: 37px;
-
-  flex-shrink: 0;
-
-  border-radius: 10px;
-
-  background: #fff8df;
-
-  color: #c49500;
-
-  font-size: 0.85rem;
-}
-
-.chart-container {
-  position: relative;
-
-  width: 100%;
-  height: 280px;
-}
-
-/* ========================================
-   TABLE
-======================================== */
-
-.sales-section {
-  width: 100%;
-}
-
-.table-card {
-  padding-bottom: 10px;
-}
-
-.table-header {
-  align-items: center;
-
-  padding-bottom: 5px;
-}
-
-.table-count {
-  padding: 7px 12px;
-
-  border-radius: 20px;
-
-  background: #fff8df;
-
-  color: #b88a00;
-
-  font-size: 0.72rem;
-  font-weight: 700;
-
-  white-space: nowrap;
-}
-
-.table-wrapper {
-  width: 100%;
-
-  overflow-x: auto;
-}
-
-.custom-table {
-  width: 100%;
-
-  border-collapse: separate;
-  border-spacing: 0;
-
-  min-width: 650px;
-}
-
-.custom-table thead th {
-  padding: 15px 16px;
-
-  border-bottom:
-    1px solid #eeeeF1;
-
-  background: #fafafd;
-
-  color: #777985;
-
-  font-size: 0.72rem;
-  font-weight: 700;
-
-  text-align: left;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.5px;
-}
-
-.custom-table thead th:first-child {
-  border-top-left-radius: 10px;
-}
-
-.custom-table thead th:last-child {
-  border-top-right-radius: 10px;
-}
-
-.custom-table tbody td {
-  padding: 17px 16px;
-
-  border-bottom:
-    1px solid #f0f0f3;
-
-  color: #292938;
-
-  font-size: 0.85rem;
-}
-
-.custom-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.custom-table tbody tr {
-  transition: background 0.2s ease;
-}
-
-.custom-table tbody tr:hover {
-  background: #fffdf4;
-}
-
-/* Vehicle */
-
-.vehicle-name {
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  font-weight: 600;
-}
-
-.vehicle-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 36px;
-  height: 36px;
-
-  border-radius: 9px;
-
-  background: #fff8df;
-
-  color: #c59500;
-
-  font-size: 0.85rem;
-}
-
-/* Quantity */
-
-.quantity-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 35px;
-
-  padding: 5px 9px;
-
-  border-radius: 7px;
-
-  background: #f2f4f7;
-
-  color: #555662;
-
-  font-size: 0.76rem;
-  font-weight: 700;
-}
-
-/* Sales Amount */
-
-.sales-amount {
-  font-weight: 700 !important;
-  color: #1c1c2c !important;
-}
-
-/* Empty State */
-
-.empty-state {
-  display: flex;
-
-  align-items: center;
-  flex-direction: column;
-
-  padding: 45px 20px;
-
-  text-align: center;
-}
-
-.empty-state i {
-  margin-bottom: 13px;
-
-  color: #d0d0d5;
-
-  font-size: 2rem;
-}
-
-.empty-state h6 {
-  margin: 0;
-
-  color: #555660;
-
-  font-size: 0.9rem;
-}
-
-.empty-state p {
-  margin: 5px 0 0;
-
-  color: #999aa3;
-
-  font-size: 0.76rem;
-}
-
-/* ========================================
-   LOADING
-======================================== */
-
-.loading-state {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  flex-direction: column;
-
-  min-height: 450px;
-
-  text-align: center;
-}
-
-.loading-spinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 65px;
-  height: 65px;
-
-  margin-bottom: 18px;
-
-  border-radius: 50%;
-
-  background: #fff8df;
-}
-
-.loading-spinner .spinner-border {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-
-.loading-state h5 {
-  margin: 0;
-
-  color: #333341;
-
-  font-size: 1rem;
-}
-
-.loading-state p {
-  margin: 7px 0 0;
-
-  color: #999aa3;
-
-  font-size: 0.8rem;
-}
-
-/* ========================================
-   LARGE TABLET
-======================================== */
-
-@media (max-width: 1200px) {
-  .dashboard-container {
-    width: min(100% - 50px, 1050px);
-  }
-
-  .stats-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-  .charts-grid {
-    gap: 20px;
-  }
-}
-
-/* ========================================
-   TABLET
-======================================== */
-
-@media (max-width: 900px) {
-  .dashboard-main {
-    padding-top: 100px;
-  }
-
-  .dashboard-container {
-    width: min(100% - 40px, 750px);
-  }
-
-  .charts-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .chart-container {
-    height: 300px;
-  }
-
-  .dashboard-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width: 600px) {
-  .dashboard-main {
-    padding: 95px 0 45px;
-  }
-
-  .dashboard-container {
-    width: calc(100% - 28px);
-  }
-
-  .sidebar-toggle {
-    top: 72px;
-    left: 14px;
-
-    width: 42px;
-    height: 42px;
-  }
-
-  .dashboard-header {
-    margin-bottom: 28px;
-  }
-
-  .dashboard-header h1 {
-    font-size: 1.65rem;
-  }
-
-  .dashboard-header h1 i {
-    font-size: 1.35rem;
-  }
-
-  .dashboard-header p {
-    font-size: 0.8rem;
-    line-height: 1.5;
-  }
-
-  .header-badge {
-    align-self: flex-start;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-
-    gap: 15px;
-
-    margin-bottom: 20px;
-  }
-
-  .stat-card {
-    min-height: 125px;
-
-    padding: 20px;
-  }
-
-  .stat-content h2 {
-    font-size: 1.4rem;
-  }
-
-  .charts-grid {
-    gap: 17px;
-    margin-bottom: 17px;
-  }
-
-  .chart-card {
-    padding: 18px;
-    border-radius: 14px;
-  }
-
-  .chart-header h5 {
-    font-size: 0.88rem;
-  }
-
-  .chart-header p {
-    font-size: 0.7rem;
-  }
-
-  .chart-container {
-    height: 230px;
-  }
-
-  .table-card {
-    padding: 18px;
-  }
-
-  .table-count {
-    font-size: 0.65rem;
-  }
-}
-
-/* ========================================
-   SMALL MOBILE
-======================================== */
-
-@media (max-width: 400px) {
-  .dashboard-container {
-    width: calc(100% - 22px);
-  }
-
-  .dashboard-header h1 {
-    font-size: 1.45rem;
-  }
-
-  .stat-card {
-    padding: 17px;
-  }
-
-  .stat-icon {
-    width: 45px;
-    height: 45px;
-
-    margin-right: 12px;
-
-    font-size: 1rem;
-  }
-
-  .stat-label {
-    font-size: 0.68rem;
-  }
-
-  .stat-content h2 {
-    font-size: 1.2rem;
-  }
-
-  .chart-container {
-    height: 210px;
-  }
-
-  .chart-header {
-    margin-bottom: 14px;
-  }
-
-  .chart-icon {
-    width: 32px;
-    height: 32px;
-  }
-}
-</style>
+<style scoped src="../styles/pages/DashboardPage.css"></style>
 
 <!-- 580 lines -->
