@@ -5,10 +5,25 @@ Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe" -Verb RunAs
 
 
 
-// docker build -t vue-frontend .
-// docker stop vue_frontend
-// docker rm vue_frontend
-// docker run -d --name vue_frontend -p 8080:80 vue-frontend
+docker stop vue_frontend
+docker rm vue_frontend
+docker run -d --name vue_frontend -p 8080:80 vue-frontend
+
+
+PC
+ │
+ ├─ edit code
+ ├─ git add .
+ ├─ git commit
+ └─ git push
+        │
+        ▼
+DigitalOcean
+ │
+ ├─ git pull
+ ├─ docker build -t vue-frontend .
+ └─ restart frontend container
+
 
 https://www.youtube.com/watch?v=pTFZFxd4hOI&t=2s
 https://www.youtube.com/watch?v=pg19Z8LL06w
