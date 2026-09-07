@@ -18,7 +18,7 @@ import BlogPostPage from "@/views/BlogPostPage.vue";
 const routes = [
   { path: "/", component: HomePage },
   { path: "/about", component: AboutPage, meta: { requiresAuth: true } },
-  { path: "/shop", component: ShopPage },
+  { path: "/shop", component: ShopPage, meta: { requiresAuth: true } },
   { path: "/contact", component: ContactPage, meta: { requiresAuth: true } },
   { path: "/login", component: LoginPage, meta: { hideNavbar: true } },
   { path: "/register", component: RegisterPage, meta: { hideNavbar: true } },

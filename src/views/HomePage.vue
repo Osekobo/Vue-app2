@@ -520,10 +520,6 @@ export default {
         this.featuredCars = response.data.slice(0, 6);
       } catch (error) {
         console.error("Error fetching products:", error);
-
-        if (error.response?.status === 401) {
-          this.$router.push("/login");
-        }
       }
     },
 
